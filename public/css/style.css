@@ -6,6 +6,7 @@
 /* LOGIN SCREEN */
 body{
     background-color:#C0BEC3;
+    font-family: 'Dosis', sans-serif;
 
 }
 #login_screen{
@@ -53,6 +54,7 @@ nav{
     width:18vw;
     background-color:#233751;
     position:fixed;
+    z-index:100;
 }
 
 .profile{
@@ -79,6 +81,8 @@ nav{
     display:none;
     word-wrap:break-word;
     width:18vw;
+    white-space: initial;
+    padding:10px;
 }
 
 .main-panel{
@@ -86,7 +90,7 @@ nav{
     background-color:white;
     height:100%;
     padding-top:75px;
-    margin-left:18vw;
+    padding-left:20vw;
     width:100%;
     position:absolute;
 }
