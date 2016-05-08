@@ -3,6 +3,10 @@ $(document).ready(function() {
 	$("#find_resources_btn").click(openFindResources);
 	$("#see_analysis_btn").click(openSeeAnalysis);
 	$("#survival_kit_btn").click(openSurvivalKit);
+	$("#my_profile_btn").click(openProfile);
+	$("#navbar_profile_btn").click(openProfile);
+	$("#navbar_help_btn").click(openHelp);
+	$("#seek_help_btn").click(openHelp);
 })
 
 function openSafetyZones() {
@@ -31,6 +35,20 @@ function openSurvivalKit(){
 	$("#survival_kit").show("slide", { direction: "left" }, 500);
 	$("#survival_kit_btn").find(".side_description").slideDown();
 	$("#survival_kit_btn").addClass("active-side-btn");
+}
+
+function openProfile(){
+	closeCurrent();
+	$("#my_profile").show("slide", { direction: "left" }, 500);
+	$("#my_profile_btn").find(".side_description").slideDown();
+	$("#my_profile_btn").addClass("active-side-btn");
+}
+
+function openHelp(){
+	closeCurrent();
+	$("#seek_help").show("slide", { direction: "left" }, 500);
+	$("#seek_help_btn").find(".side_description").slideDown();
+	$("#seek_help_btn").addClass("active-side-btn");
 }
 
 function closeCurrent(){
