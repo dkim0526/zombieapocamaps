@@ -3,8 +3,31 @@
 	src: url('KaushanScript-Regular.ttf');
 }
 
-#zombie_image{
-	background-image: url('../img/zombie1.jpg')
+/* LOGIN SCREEN */
+body{
+    background-color:#C0BEC3;
+
+}
+#login_screen{
+    background: url('../img/zombie1.jpg') no-repeat center center fixed;
+    background-size: 100%;
+    padding:50px;
+    margin-top:50px;
+}
+
+.navbar-title{
+    color:white;
+    margin-left:40%;
+    font-size:20pt;
+    font-family: 'Kaushan Script', cursive;
+}
+
+#main-title{
+    color: white;
+    font-family: 'Kaushan Script', cursive;
+    margin-top:10vh;
+    margin-bottom:20px;
+    font-size:30pt;
 }
 
 .login{
@@ -12,8 +35,63 @@
     height: 300px;
     text-align: center;
     margin-left: 37%;
-    margin-top: 15%;
+    margin-top: 40px;
     padding-top: 2%;
     background-color: #08E8DE;
     border-radius: 15px;
 }
+
+
+/* NAVIGATION STUFF */
+nav{
+    background-color:black;
+}
+
+#sidebar_nav{
+    padding-top: 75px;
+    min-height:100%;
+    width:18vw;
+    background-color:#233751;
+    position:fixed;
+}
+
+.profile{
+    height:100px;
+    width:100px;
+    border-radius: 110px;
+}
+.profile_name{
+    color:white;
+}
+
+.btn-sidebar{
+    width:100%;
+    padding:10px;
+    color:white;
+    font-size:14pt;
+}
+
+.btn-sidebar:hover, .active-side-btn{
+    background-color:#8C9FA3;
+    color:black;
+}
+.side_description{
+    display:none;
+    word-wrap:break-word;
+    width:18vw;
+}
+
+.main-panel{
+    display:none;
+    background-color:white;
+    height:100%;
+    padding-top:75px;
+    margin-left:18vw;
+    width:100%;
+    position:absolute;
+}
+
+
+
+
+  #map { position:absolute; top:0; bottom:0; width:100%; }
