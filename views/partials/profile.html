@@ -1,68 +1,82 @@
 <div id="my_profile" class="main-panel container-fluid">
 	<h1>My Profile</h1>
 	<div class="btn-group" role="group" id="profile_tabs">
-		<button id="profile_skill_btn" type="button" class="btn btn-default">My Skills</button>
-		<button id="profile_inventory_btn" type="button" class="btn btn-default">My Inventory</button>
-  		<button id="profile_group_btn" type="button" class="btn btn-default">My Groups</button>
-  		<button id="profile_locations_btn" type="button" class="btn btn-default">My Locations</button>
+		<button id="profile_skill_btn" type="button" class="btn btn-profile">My Skills</button>
+		<button id="profile_inventory_btn" type="button" class="btn btn-profile">My Inventory</button>
+  		<button id="profile_group_btn" type="button" class="btn btn-profile">My Groups</button>
+  		<button id="profile_locations_btn" type="button" class="btn btn-profile">My Locations</button>
 	</div>
 
 	<br/>
 
 	<div id="profile_information" class="profile_panel">
-		<div class="skillbar clearfix pull-left" data-percent="0%" id="hunting_bar">
+		<div class="skillbar clearfix pull-left" data-percent="50%" id="hunting_bar">
 			<div class="skillbar-title" style="background: #d35400;"><span>
 				<i class="glyphicon glyphicon-search" aria-hidden="true"></i>
 				&nbsp;Hunting
 			</span></div>
 			<div class="skillbar-bar" style="background: #e67e22;"></div>
-			<div class="skill-bar-percent" id="hunting_percent">0%</div>
+			<div class="skill-bar-percent" id="hunting_percent">50%</div>
 		</div> <!-- End Skill Bar -->
-		<input id="hunting_skill" type="number" name="hunting" min="1" max="100" value="0" class="skill_input pull-left">
+		<input id="hunting_skill" type="number" name="hunting" min="1" max="100" value="50" class="skill_input pull-left">
 
-		<div class="skillbar clearfix  pull-left" data-percent="0%" id="building_bar">
+		<div class="skillbar clearfix  pull-left" data-percent="50%" id="building_bar">
 			<div class="skillbar-title" style="background: #2980b9;"><span>
 				<i class="glyphicon glyphicon-home" aria-hidden="true"></i>
 				&nbsp;Building
 			</span></div>
 			<div class="skillbar-bar" style="background: #3498db;"></div>
-			<div class="skill-bar-percent" id="building_percent">0%</div>
+			<div class="skill-bar-percent" id="building_percent">50%</div>
 		</div> <!-- End Skill Bar -->
-		<input id="building_skill" type="number" name="building" min="1" max="100" value="0" class="skill_input pull-left">
+		<input id="building_skill" type="number" name="building" min="1" max="100" value="50" class="skill_input pull-left">
 
-		<div class="skillbar clearfix  pull-left" data-percent="0%" id="foraging_bar" >
+		<div class="skillbar clearfix  pull-left" data-percent="50%" id="foraging_bar" >
 			<div class="skillbar-title" style="background: #2c3e50;"><span>
 				<i class="glyphicon glyphicon-leaf" aria-hidden="true"></i>
 				&nbsp;Foraging
 			</span></div>
 			<div class="skillbar-bar" style="background: #2c3e50;"></div>
-			<div class="skill-bar-percent" id="foraging_percent" >0%</div>
+			<div class="skill-bar-percent" id="foraging_percent" >50%</div>
 		</div> <!-- End Skill Bar -->
-		<input id="foraging_skill" type="number" name="foraging" min="1" max="100" value="0" class="skill_input pull-left">
+		<input id="foraging_skill" type="number" name="foraging" min="1" max="100" value="50" class="skill_input pull-left">
 
-		<div class="skillbar clearfix  pull-left" data-percent="0%" id="camoflauging_bar">
+		<div class="skillbar clearfix  pull-left" data-percent="50%" id="camoflauging_bar">
 			<div class="skillbar-title" style="background: #46465e;"><span>
 				<i class="glyphicon glyphicon-tree-conifer" aria-hidden="true"></i>
 				&nbsp;Camoflauging
 			</span></div>
 			<div class="skillbar-bar" style="background: #5a68a5;"></div>
-			<div class="skill-bar-percent" id="camoflauging_percent">0%</div>
+			<div class="skill-bar-percent" id="camoflauging_percent">50%</div>
 		</div> <!-- End Skill Bar -->
-		<input id="camoflauging_skill" type="number" name="camoflauging" min="1" max="100" value="0" class="skill_input pull-left">
+		<input id="camoflauging_skill" type="number" name="camoflauging" min="1" max="100" value="50" class="skill_input pull-left">
 
-		<div class="skillbar clearfix  pull-left" data-percent="0%" id="running_bar" >
+		<div class="skillbar clearfix  pull-left" data-percent="50%" id="running_bar" >
 			<div class="skillbar-title" style="background: #333333;"><span>
 				<i class="glyphicon glyphicon-road" aria-hidden="true"></i>
 				&nbsp;Running
 			</span></div>
 			<div class="skillbar-bar" style="background: #525252;"></div>
-			<div class="skill-bar-percent" id="running_percent" >0%</div>
+			<div class="skill-bar-percent" id="running_percent" >50%</div>
 		</div> <!-- End Skill Bar -->
-		<input id="running_skill" type="number" name="running" min="1" max="100" value="0" class="skill_input pull-left">
+		<input id="running_skill" type="number" name="running" min="1" max="100" value="50" class="skill_input pull-left">
 	</div>
 
 
 	<div id="profile_inventory" class="profile_panel">
+		<div>
+			<h5>Time before restock needed:</h5>
+			<h3 id="restock_counter">0 Days</h3>
+		</div>
+		<br/>
+		<h2>My Inventory:</h2>
+		<ul id="inventory-list" class="list-unstyled">
+			<li  class="inventory_item"><input type="number" name="weapon_count" min="1" max="20" value="0" class="inventory_counter"> Guns</li>
+			<li class="inventory_item"><input type="number" name="weapon_count" min="1" max="20" value="0" class="inventory_counter"> Knives</li>
+			<li class="inventory_item"><input type="number" name="weapon_count" min="1" max="20" value="0" class="inventory_counter"> Medicine Left</li>
+			<li class="inventory_item"><input type="number" name="weapon_count" min="1" max="20" value="0" class="inventory_counter"> Meals Left</li>
+			<li class="inventory_item"><input type="number" name="weapon_count" min="1" max="20" value="0" class="inventory_counter"> Water Bottles</li>
+			<li class="inventory_item"><input type="number" name="weapon_count" min="1" max="20" value="0" class="inventory_counter"> Alcohol Left</li>
+		</ul>
 	</div>
 
 	<div id="profile_groups" class="profile_panel">
@@ -76,7 +90,17 @@
 		      <div id="profile_map"></div>
 		    </div>
 		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDIs9DIeZYyke4NWDQ85SBeIvELwMBJLQM&callback=initMap"></script>
+		<div class="modal fade" id="location_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">What will you use this location for?</h4>
 
+		           <input type="text"/>
+		           <a class="btn btn-success">Submit</a>
+		      </div>
+		    </div>
+		  </div>
 	</div>
 </div>
 

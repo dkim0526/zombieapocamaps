@@ -49,16 +49,18 @@ function initMap() {
     placeMarkerAndPanTo(e.latLng, map);
   });
 
+/*
   var marker = new google.maps.Marker({
       position: ucsd_ltlng,
       map:  window.map,
       title: 'UCSD'
   });
+*/
 }
 
 
 function placeMarkerAndPanTo(latLng, map) {
-  $("#photo_modal").modal("toggle");
+  $("#location_modal").modal("toggle");
    window.marker = new google.maps.Marker({
         position: latLng,
         map: map
@@ -69,7 +71,6 @@ function placeMarkerAndPanTo(latLng, map) {
 function updateSkillPercent(event){
 	var name = event.target.id.split("_")[0];
 	var value = $("#" + event.target.id).val();
-	console.log($("#" + name + "_bar").attr('data-percent'));
 	$("#" + name + "_bar").attr('data-percent', value + "%");
 	$("#" + name + "_percent").html(value + "%");
 	$("#" + name + "_bar").find('.skillbar-bar').animate({

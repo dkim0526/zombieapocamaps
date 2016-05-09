@@ -29,44 +29,6 @@ function openSurvivalKit(){
 
 function openProfile(){
 	openTab($("#my_profile"), $("#my_profile_btn"));
-	$('.skillbar').each(function(){
-		$(this).find('.skillbar-bar').animate({
-			width:$(this).attr('data-percent')
-		},100)});
-
-
-}
-
-
-function initMap() {
-  // Create center marker at UCSD
-  var ucsd_ltlng = {lat:32.8849813, lng:-117.2413856};
-
-  // Create a map object and specify the DOM element for display.
-  window.map = new google.maps.Map(document.getElementById('profile_map'), {
-    center: ucsd_ltlng,
-    zoom: 15
-  });
-
-   map.addListener('click', function(e) {
-    placeMarkerAndPanTo(e.latLng, map);
-  });
-
-  var marker = new google.maps.Marker({
-      position: ucsd_ltlng,
-      map:  window.map,
-      title: 'UCSD'
-  });
-}
-
-
-function placeMarkerAndPanTo(latLng, map) {
-  $("#photo_modal").modal("toggle");
-   window.marker = new google.maps.Marker({
-        position: latLng,
-        map: map
-      });
-  map.panTo(latLng);
 }
 
 function openHelp(){
@@ -82,16 +44,4 @@ function openTab(panel, button){
 		button.find(".side_description").slideDown();
 		button.addClass("active-side-btn");
 	}
-}
-
-
-function updateSkillPercent(event){
-	var name = event.target.id.split("_")[0];
-	var value = $("#" + event.target.id).val();
-	console.log($("#" + name + "_bar").attr('data-percent'));
-	$("#" + name + "_bar").attr('data-percent', value + "%");
-	$("#" + name + "_percent").html(value + "%");
-	$("#" + name + "_bar").find('.skillbar-bar').animate({
-		width:$("#" + name + "_bar").attr('data-percent')// + value / 100
-	},500);
 }
