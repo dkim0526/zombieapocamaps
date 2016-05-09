@@ -16,19 +16,8 @@ body{
     margin-top:50px;
 }
 
-.navbar-title{
-    color:white;
-    margin-left:40%;
-    font-size:20pt;
-    font-family: 'Kaushan Script', cursive;
-}
-
 #main-title{
-    color: white;
-    font-family: 'Kaushan Script', cursive;
     margin-top:10vh;
-    margin-bottom:20px;
-    font-size:30pt;
 }
 
 .login{
@@ -42,6 +31,21 @@ body{
     border-radius: 15px;
 }
 
+#main-title, .navbar-title{
+    color:white;
+    font-family: 'Kaushan Script', cursive;
+    font-size:30pt;
+}
+
+.navbar-title{
+    margin-left:40%;
+    margin-top:10%;
+}
+
+.dropdown-toggle {
+    color:white;
+}
+
 
 /* NAVIGATION STUFF */
 nav{
@@ -49,7 +53,7 @@ nav{
 }
 
 #sidebar_nav{
-    padding-top: 75px;
+    padding-top: 90px;
     min-height:100%;
     width:18vw;
     background-color:#233751;
@@ -83,6 +87,7 @@ nav{
     width:18vw;
     white-space: initial;
     padding:10px;
+    margin-right:10px;
 }
 
 .main-panel{
@@ -96,6 +101,96 @@ nav{
 }
 
 
+
+/* PROFILE STYLING */
+.profile_panel{
+    display:none;
+    width:100%;
+    height:100%;
+}
+
+#profile_tabs{
+    margin-bottom:10px;
+}
+
+.skillbar {
+    position:relative;
+    display:block;
+    margin-bottom:15px;
+    width:70%;
+    background:#eee;
+    height:35px;
+    border-radius:3px;
+    display:inline-block;
+    -moz-border-radius:3px;
+    -webkit-border-radius:3px;
+    -webkit-transition:0.4s linear;
+    -moz-transition:0.4s linear;
+    -ms-transition:0.4s linear;
+    -o-transition:0.4s linear;
+    transition:0.4s linear;
+    -webkit-transition-property:width, background-color;
+    -moz-transition-property:width, background-color;
+    -ms-transition-property:width, background-color;
+    -o-transition-property:width, background-color;
+    transition-property:width, background-color;
+}
+
+.skillbar-title {
+    position:absolute;
+    top:0;
+    left:0;
+    width:130px;
+    font-weight:bold;
+    font-size:13px;
+    color:#ffffff;
+    background:#6adcfa;
+    -webkit-border-top-left-radius:3px;
+    -webkit-border-bottom-left-radius:4px;
+    -moz-border-radius-topleft:3px;
+    -moz-border-radius-bottomleft:3px;
+    border-top-left-radius:3px;
+    border-bottom-left-radius:3px;
+}
+
+.skillbar-title span {
+    display:block;
+    background:rgba(0, 0, 0, 0.1);
+    padding:0 20px;
+    height:35px;
+    line-height:35px;
+    -webkit-border-top-left-radius:3px;
+    -webkit-border-bottom-left-radius:3px;
+    -moz-border-radius-topleft:3px;
+    -moz-border-radius-bottomleft:3px;
+    border-top-left-radius:3px;
+    border-bottom-left-radius:3px;
+}
+
+.skillbar-bar {
+    height:35px;
+    width:0px;
+    background:#6adcfa;
+    border-radius:3px;
+    -moz-border-radius:3px;
+    -webkit-border-radius:3px;
+}
+
+.skill-bar-percent {
+    position:absolute;
+    right:10px;
+    top:0;
+    font-size:11px;
+    height:35px;
+    line-height:35px;
+    color:#ffffff;
+    color:rgba(0, 0, 0, 0.4);
+}
+
+.skill_input{
+    display:inline;
+    margin-left:20px;
+}
 
 
   #map { position:absolute; top:0; bottom:0; width:100%; }

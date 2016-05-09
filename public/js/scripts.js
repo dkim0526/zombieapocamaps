@@ -7,52 +7,91 @@ $(document).ready(function() {
 	$("#navbar_profile_btn").click(openProfile);
 	$("#navbar_help_btn").click(openHelp);
 	$("#seek_help_btn").click(openHelp);
+
+	$(".skill_input").change(updateSkillPercent);
 })
 
 function openSafetyZones() {
-	closeCurrent();
-	$("#safety_zone").show("slide", { direction: "left" }, 500);
-	$("#safety_zone_btn").find(".side_description").slideDown();
-	$("#safety_zone_btn").addClass("active-side-btn");
+	openTab($("#safety_zone"), $("#safety_zone_btn"));
 }
 
 function openFindResources(){
-	closeCurrent();
-	$("#find_resources").show("slide", { direction: "left" }, 500);
-	$("#find_resources_btn").find(".side_description").slideDown();
-	$("#find_resources_btn").addClass("active-side-btn");
+	openTab($("#find_resources"), $("#find_resources_btn"));
 }
 
 function openSeeAnalysis(){
-	closeCurrent();
-	$("#see_analysis").show("slide", { direction: "left" }, 500);
-	$("#see_analysis_btn").find(".side_description").slideDown();
-	$("#see_analysis_btn").addClass("active-side-btn");
+	openTab($("#see_analysis"), $("#see_analysis_btn"));
 }
 
 function openSurvivalKit(){
-	closeCurrent();
-	$("#survival_kit").show("slide", { direction: "left" }, 500);
-	$("#survival_kit_btn").find(".side_description").slideDown();
-	$("#survival_kit_btn").addClass("active-side-btn");
+	openTab($("#survival_kit"), $("#survival_kit_btn"));
 }
 
 function openProfile(){
-	closeCurrent();
-	$("#my_profile").show("slide", { direction: "left" }, 500);
-	$("#my_profile_btn").find(".side_description").slideDown();
-	$("#my_profile_btn").addClass("active-side-btn");
+	openTab($("#my_profile"), $("#my_profile_btn"));
+	$('.skillbar').each(function(){
+		$(this).find('.skillbar-bar').animate({
+			width:$(this).attr('data-percent')
+		},100)});
+
+
+}
+
+
+function initMap() {
+  // Create center marker at UCSD
+  var ucsd_ltlng = {lat:32.8849813, lng:-117.2413856};
+
+  // Create a map object and specify the DOM element for display.
+  window.map = new google.maps.Map(document.getElementById('profile_map'), {
+    center: ucsd_ltlng,
+    zoom: 15
+  });
+
+   map.addListener('click', function(e) {
+    placeMarkerAndPanTo(e.latLng, map);
+  });
+
+  var marker = new google.maps.Marker({
+      position: ucsd_ltlng,
+      map:  window.map,
+      title: 'UCSD'
+  });
+}
+
+
+function placeMarkerAndPanTo(latLng, map) {
+  $("#photo_modal").modal("toggle");
+   window.marker = new google.maps.Marker({
+        position: latLng,
+        map: map
+      });
+  map.panTo(latLng);
 }
 
 function openHelp(){
-	closeCurrent();
-	$("#seek_help").show("slide", { direction: "left" }, 500);
-	$("#seek_help_btn").find(".side_description").slideDown();
-	$("#seek_help_btn").addClass("active-side-btn");
+	openTab($("#seek_help"), $("#seek_help_btn"));
 }
 
-function closeCurrent(){
-	$(".btn-sidebar").removeClass("active-side-btn");
-	$(".main-panel").css("display", "none");
-	$(".side_description").slideUp();
+function openTab(panel, button){
+	if(!button.hasClass("active-side-btn")){
+		$(".btn-sidebar").removeClass("active-side-btn");
+		$(".main-panel").css("display", "none");
+		$(".side_description").slideUp();
+		panel.show("slide", { direction: "left" }, 500);
+		button.find(".side_description").slideDown();
+		button.addClass("active-side-btn");
+	}
+}
+
+
+function updateSkillPercent(event){
+	var name = event.target.id.split("_")[0];
+	var value = $("#" + event.target.id).val();
+	console.log($("#" + name + "_bar").attr('data-percent'));
+	$("#" + name + "_bar").attr('data-percent', value + "%");
+	$("#" + name + "_percent").html(value + "%");
+	$("#" + name + "_bar").find('.skillbar-bar').animate({
+		width:$("#" + name + "_bar").attr('data-percent')// + value / 100
+	},500);
 }
