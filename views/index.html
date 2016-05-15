@@ -8,14 +8,113 @@
     {{> facebook}}
     <div id="login_screen">
         <center>
-            <h1 id="main-title">Zombie Apocamaps</h1>
-            <br>
+            <h1 id="main-title">Zombie ApocaMaps</h1>
+            <strong><h2 id="subheader">A data visualization tool that will help you prepare for the Zombie Apocalypse</h2></strong>
+            <!-- <br>
             <iframe width="560" height="315" src="https://www.youtube.com/embed/2cymqAVPWuo" frameborder="0" allowfullscreen></iframe>
-            <br>
-            <div>
-                <a href="/auth/facebook"><img src="/img/facebook.png" width="250px"></a>
+            <br> -->
+            <div id="login-btn">
+                <!-- <a href="/auth/facebook"><img src="/img/facebook.png" width="250px"></a> -->
+                <a id="fb-login" href="/auth/facebook">Start Now</a>
+                <a id="learnmore" href="#learnmore">Learn More</a>
             </div>
         </center>
     </div>
+
+    <div id="learn">
+      <a id="learnmore"></a>
+      <div class="container-fluid">
+        <div class="row">
+          <div id="video" class="col-lg-6">
+            <br>
+            <iframe width="650" height="405" src="https://www.youtube.com/embed/2cymqAVPWuo" frameborder="0" allowfullscreen></iframe>
+            <br>
+          </div>
+          <div id="about" class="col-lg-6">
+            <h2 class="about-title">About <span class="about-brand">Zombie ApocaMaps</span></h2>
+            <h3 id="about-descrip">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.
+            </h3>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="preview">
+      <div class="container-fluid">
+        <h1 class="text-center how-prepared">How prepared are you?</h1>
+
+        <div id="safetyzones" class="row">
+          <div class="col-lg-6 screenshot">
+            <img src="https://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg" width="650" height="405">
+          </div>
+          <div class="col-lg-6 wording">
+            <h2 class="title">Search for <span class="keyword">Safety Zones</span></h2>
+            <h2 id="description">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.
+            </h2>
+          </div>
+        </div>
+
+        <div id="findresources" class="row">
+          <div class="col-lg-6 wording">
+            <h2 class="title">Find <span class="keyword">Nearby Resources</span></h2>
+            <h3 id="description">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.
+            </h3>
+          </div>
+          <div class="col-lg-6 screenshot">
+            <img src="https://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg" width="650" height="405">
+          </div>
+        </div>
+
+        <div id="connect" class="row">
+          <div class="col-lg-6 screenshot">
+            <img src="https://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg" width="650" height="405">
+          </div>
+          <div class="col-lg-6 wording">
+            <h2 class="title">Connect <span class="keyword">With Loved Ones </span></h2>
+            <h3 id="description">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.
+            </h3>
+          </div>
+        </div>
+
+        <div id="login-btn" class="text-center calltoaction">
+            <a id="fb-login" href="/auth/facebook">Prepare Now</a>
+        </div>
+
+      </div>
+    </div>
+
+    <footer class="text-center">
+      <p>Built by: Team A</p>
+    </footer>
+
+    <script>
+    $('a[href*=#]:not([href=#])').click(function() {
+        if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'')
+        || location.hostname == this.hostname) {
+
+            var target = $(this.hash);
+            target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+            if (target.length) {
+                $('html,body').animate({
+                    scrollTop: target.offset().top
+                }, 1000);
+                return false;
+            }
+        }
+});
+</script>
+
 </body>
 </html>

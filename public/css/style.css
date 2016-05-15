@@ -5,19 +5,20 @@
 
 /* LOGIN SCREEN */
 body{
-    background-color:#C0BEC3;
+    /*background-color:#C0BEC3;*/
     font-family: 'Dosis', sans-serif;
 
 }
 #login_screen{
     background: url('../img/zombie1.jpg') no-repeat center center fixed;
     background-size: 100%;
-    padding:50px;
-    margin-top:50px;
+    padding: 50px;
+		height: 600px;
+    /*margin-top:50px;*/
 }
 
 #main-title{
-    margin-top:10vh;
+    margin-top:15vh;
 }
 
 .login{
@@ -34,7 +35,12 @@ body{
 #main-title, .navbar-title{
     color:white;
     font-family: 'Kaushan Script', cursive;
-    font-size:30pt;
+    font-size:70pt;
+}
+
+#subheader{
+	color: white;
+	font-size: 20pt;
 }
 
 .navbar-title{
@@ -42,10 +48,129 @@ body{
     margin-top:10%;
 }
 
+#login-btn{
+	margin-top: 50px;
+}
+
+#login-btn #fb-login{
+	background-color: #acbd3b;
+  border: none;
+	border-radius: 10px;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 23px;
+	margin: 0px 15px 0px 15px;
+}
+
+#login-btn #learnmore{
+	border: 5px solid #acbd3b;
+	border-radius: 10px;
+	color: #acbd3b;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 23px;
+	margin: 0px 15px 0px 15px;
+}
+
+#learn{
+	padding-top: 100px;
+	padding-bottom: 100px;
+	background-color: #c1dad6;
+}
+
+#learn #video{
+	padding-left: 200px;
+}
+
+#learn #about h2{
+	padding-right: 200px;
+	padding-left: 50px;
+}
+
+#learn .about-title{
+	font-size: 30pt;
+}
+
+#learn .about-brand{
+	color: #acbd3b;
+}
+
+#learn h3{
+	padding-right: 200px;
+	padding-left: 50px;
+}
+
+#preview{
+	padding-top: 100px;
+	padding-bottom: 150px;
+	background-color: #e5e6d8;
+}
+
+#preview h1{
+	font-size: 50pt;
+}
+
+#preview #safetyzones,
+#preview #findresources,
+#preview #connect{
+	margin-top: 150px;
+}
+
+#preview #title{
+	font-size: 30pt;
+}
+
+#preview #description{
+	font-size: 20pt;
+}
+
+#preview .keyword{
+	color: #acbd3b;
+}
+
+#preview #safetyzones .screenshot,
+#preview #connect .screenshot{
+		padding-left: 200px;
+}
+
+#preview #safetyzones .wording,
+#preview #connect .wording{
+	width: 700px;
+}
+
+#preview #findresources .wording{
+	padding-left: 200px;
+	width: 700px;
+}
+
+#preview #findresources .screenshot{
+	padding-left: 200px;
+}
+
+.calltoaction{
+	padding-top: 100px;
+}
+
+footer{
+	display: block;
+	background-color: gray;
+	height: 100px;
+}
+
+footer p{
+	padding-top: 30px;
+	color: white;
+	font-size: 15pt;
+}
+
 .dropdown-toggle {
     color:white;
 }
-
 
 /* NAVIGATION STUFF */
 nav{
