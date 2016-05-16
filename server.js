@@ -78,7 +78,7 @@ app.use(session_middleware);
 passport.use(new FacebookStrategy({
     clientID: process.env.FACEBOOK_APP_ID,
     clientSecret: process.env.FACEBOOK_APP_SECRET,
-    callbackURL: "http://zombieapocamaps.herokuapp.com/auth/facebook/callback",
+    callbackURL: "http://localhost:3000/auth/facebook/callback",
     profileFields: ['id', 'name','picture.type(large)', 'emails', 'displayName', 'about', 'gender'],
     auth_type: "requthenticate"
 
@@ -100,7 +100,7 @@ passport.use(new FacebookStrategy({
           if(err)
             return handleError(err);
         });
-        
+
         return done(null, user);
       } else{
         user.facebookID = profile.id;
@@ -116,7 +116,7 @@ passport.use(new FacebookStrategy({
     });
   }
 ));
-   
+
 passport.serializeUser(function(user, done) {
     done(null, user);
 });
