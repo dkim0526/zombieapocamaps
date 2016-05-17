@@ -7,13 +7,12 @@
 body{
     /*background-color:#C0BEC3;*/
     font-family: 'Dosis', sans-serif;
-
 }
 #login_screen{
     background: url('../img/header.png') no-repeat center center scroll;
-    background-size: 80%;
+    background-size: 100vw auto;
     padding: 50px;
-		height: 600px;
+	height: 600px;
     /*margin-top:50px;*/
 }
 
@@ -35,8 +34,16 @@ body{
 #main-title, .navbar-title{
     color:white;
     font-family: 'Kaushan Script', cursive;
+}
+
+#main-title{
     font-size:70pt;
-		margin-top: 6%;
+    margin-top: 6%;
+}
+
+.navbar-title{
+    font-size:30pt;
+
 }
 
 #subheader{
@@ -362,3 +369,21 @@ nav{
 
 
 #map { position:absolute; top:0; bottom:0; width:100%; }
+
+.survival_interaction_tip{
+    background-color: #d5dcdd;
+    color:black;
+    padding:10px;
+    width:300px;
+}
+
+.survival_interaction_tip h3{
+    font-size:14pt;
+    margin:0;
+    margin-bottom:5px;
+    font-weight:bold;
+}
+
+.survival_interaction_tip p{
+    font-size:12pt;
+}

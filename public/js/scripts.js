@@ -8,6 +8,8 @@ $(document).ready(function() {
 	$("#navbar_help_btn").click(openHelp);
 	$("#seek_help_btn").click(openHelp);
 
+	openSurvivalKit();
+
 	$(".skill_input").change(updateSkillPercent);
 })
 
