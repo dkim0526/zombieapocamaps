@@ -22,6 +22,7 @@ function openGroups(){
 }
 function openLocations(){
 	openPanel($("#profile_locations"), $("#profile_locations_btn"));
+	setTimeout(initMap, 500);
 }
 
 function openPanel(panel, button){
@@ -40,7 +41,7 @@ function initMap() {
   var ucsd_ltlng = {lat:32.8849813, lng:-117.2413856};
 
   // Create a map object and specify the DOM element for display.
-  window.map = new google.maps.Map(document.getElementById('profile_map'), {
+  window.map = new google.maps.Map(document.getElementById('googleMaps'), {
     center: ucsd_ltlng,
     zoom: 15
   });
@@ -49,13 +50,13 @@ function initMap() {
     placeMarkerAndPanTo(e.latLng, map);
   });
 
-/*
+
   var marker = new google.maps.Marker({
       position: ucsd_ltlng,
       map:  window.map,
       title: 'UCSD'
   });
-*/
+
 }
 
 
