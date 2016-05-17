@@ -368,7 +368,7 @@ nav{
 }
 
 
-#map { position:absolute; top:0; bottom:0; width:100%; }
+#map { position:absolute; top:0; bottom:0; margin-left: -35px; width:100%; }
 
 .survival_interaction_tip{
     background-color: #d5dcdd;
