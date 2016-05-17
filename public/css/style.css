@@ -12,7 +12,7 @@ body{
     background: url('../img/header.png') no-repeat center center scroll;
     background-size: 100vw auto;
     padding: 50px;
-	height: 600px;
+		height: 600px;
     /*margin-top:50px;*/
 }
 
@@ -65,20 +65,20 @@ body{
   border: none;
 	border-radius: 10px;
   color: white;
-  padding: 15px 32px;
+  padding: 10px 27px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 23px;
 	margin: 0px 15px 0px 15px;
-	border: 5px solid #1e88ce;
+	border: 2px solid #1e88ce;
 }
 
 #login-btn #learnmore{
-	border: 5px solid #1e88ce;
+	border: 2px solid #1e88ce;
 	border-radius: 10px;
 	color: #1e88ce;
-	padding: 15px 32px;
+	padding: 10px 27px;
 	text-align: center;
 	text-decoration: none;
 	display: inline-block;
@@ -89,13 +89,14 @@ body{
 #login-btn #fb-login:hover,
 #login-btn #learnmore:hover{
 	background-color: #054572;
-	border: 5px solid #054572;
+	border: 2px solid #054572;
 	color: white;
 }
 
+}
 #learn{
-	padding-top: 100px;
-	padding-bottom: 100px;
+	padding-top: 200px;
+	padding-bottom: 200px;
 	background-color: #c1dad6;
 }
 
@@ -104,8 +105,7 @@ body{
 }
 
 #learn #about h2{
-	padding-right: 200px;
-	padding-left: 50px;
+	padding-left: 100px;
 }
 
 #learn .about-title{
@@ -118,23 +118,23 @@ body{
 
 #learn h3{
 	padding-right: 200px;
-	padding-left: 50px;
+	padding-left: 100px;
 }
 
 #preview{
-	padding-top: 100px;
-	padding-bottom: 150px;
+	padding-top: 50px;
+	padding-bottom: 100px;
 	background-color: ghostwhite;
 }
 
 #preview h1{
-	font-size: 50pt;
+	font-size: 40pt;
 }
 
 #preview #safetyzones,
 #preview #findresources,
 #preview #connect{
-	margin-top: 150px;
+	margin-top: 100px;
 }
 
 #preview #title{
@@ -156,12 +156,13 @@ body{
 
 #preview #safetyzones .wording,
 #preview #connect .wording{
-	width: 700px;
+	padding-left: 150px;
+	width: 600px;
 }
 
 #preview #findresources .wording{
 	padding-left: 200px;
-	width: 700px;
+	width: 600px;
 }
 
 #preview #findresources .screenshot{
@@ -173,12 +174,12 @@ body{
 }
 
 #login-btn h1{
-	font-size: 40pt;
+	font-size: 30pt;
 }
 
 footer{
 	display: block;
-	background-color: gray;
+	background-color: #04385d;
 	height: 100px;
 }
 
