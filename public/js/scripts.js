@@ -19,6 +19,10 @@ function openSafetyZones() {
 
 function openFindResources(){
 	openTab($("#find_resources"), $("#find_resources_btn"));
+	L.mapbox.accessToken = 'pk.eyJ1IjoiZGtpbTA1MjYiLCJhIjoiY2luczlhOWVmMTB1enVpa2pkc2l5YjR3NSJ9.abwiF1OwuKrew-Xev-y-aQ';
+	setTimeout(function(){
+	var map = L.mapbox.map('map', 'mapbox.streets')
+	.setView([40, -74.50], 9)}, 500);
 }
 
 function openSeeAnalysis(){
