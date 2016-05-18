@@ -22,7 +22,68 @@ function openFindResources(){
 	L.mapbox.accessToken = 'pk.eyJ1IjoiZGtpbTA1MjYiLCJhIjoiY2luczlhOWVmMTB1enVpa2pkc2l5YjR3NSJ9.abwiF1OwuKrew-Xev-y-aQ';
 	setTimeout(function(){
 	var map = L.mapbox.map('map', 'mapbox.streets')
-	.setView([40, -74.50], 9)}, 500);
+	.setView([32.8849813, -117.2413856], 15)
+
+	// Start with a fixed marker.
+	var fixedMarker = L.marker(new L.LatLng(32.8849813, -117.2413856), {
+	    icon: L.mapbox.marker.icon({
+	        'marker-color': 'ff8888'
+	    })
+	}).bindPopup('Mapbox DC').addTo(map);
+
+	// Store the fixedMarker coordinates in a variable.
+	var fc = fixedMarker.getLatLng();
+
+	// Create a featureLayer that will hold a marker and linestring.
+	var featureLayer = L.mapbox.featureLayer().addTo(map);
+
+	// When a user clicks on the map we want to
+	// create a new L.featureGroup that will contain a
+	// marker placed where the user selected the map and
+	// a linestring that draws itself between the fixedMarkers
+	// coordinates and the newly placed marker.
+	map.on('click', function(ev) {
+		
+	    // ev.latlng gives us the coordinates of
+	    // the spot clicked on the map.
+	    var c = ev.latlng;
+
+	    var geojson = [
+	      {
+	        "type": "Feature",
+	        "geometry": {
+	          "type": "Point",
+	          "coordinates": [c.lng, c.lat]
+	        },
+	        "properties": {
+	          "marker-color": "#ff8888"
+	        }
+	      }, {
+	        "type": "Feature",
+	        "geometry": {
+	          "type": "LineString",
+	          "coordinates": [
+	            [fc.lng, fc.lat],
+	            [c.lng, c.lat]
+	          ]
+	        },
+	        "properties": {
+	          "stroke": "#000",
+	          "stroke-opacity": 0.5,
+	          "stroke-width": 4
+	        }
+	      }
+	    ];
+
+	    featureLayer.setGeoJSON(geojson);
+
+	    // Finally, print the distance between these two points
+	    // on the screen using distanceTo().
+	    var container = document.getElementById('distance');
+	    container.innerHTML = (fc.distanceTo(c)).toFixed(0) + 'm';
+	})}, 500);
+
+
 }
 
 function openSeeAnalysis(){

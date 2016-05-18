@@ -499,3 +499,15 @@ nav{
     margin-left:460px;
     margin-top:300px;
 }
+
+pre.ui-distance {
+  position:relative;
+  bottom:10px;
+  left:10px;
+  padding:5px 10px;
+  background:rgba(0,0,0,0.5);
+  color:#fff;
+  font-size:11px;
+  line-height:18px;
+  border-radius:3px;
+}
