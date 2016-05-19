@@ -17,71 +17,38 @@ function openSafetyZones() {
 	openTab($("#safety_zone"), $("#safety_zone_btn"));
 }
 
+function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+directionsService.route({
+  origin: document.getElementById('start').value,
+  destination: document.getElementById('end').value,
+  travelMode: google.maps.TravelMode.DRIVING
+}, function(response, status) {
+  if (status === google.maps.DirectionsStatus.OK) {
+    directionsDisplay.setDirections(response);
+  } else {
+    window.alert('Directions request failed due to ' + status);
+  }
+});
+}
+
 function openFindResources(){
 	openTab($("#find_resources"), $("#find_resources_btn"));
-	L.mapbox.accessToken = 'pk.eyJ1IjoiZGtpbTA1MjYiLCJhIjoiY2luczlhOWVmMTB1enVpa2pkc2l5YjR3NSJ9.abwiF1OwuKrew-Xev-y-aQ';
+	
 	setTimeout(function(){
-	var map = L.mapbox.map('map', 'mapbox.streets')
-	.setView([32.8849813, -117.2413856], 15)
+        var directionsService = new google.maps.DirectionsService;
+        var directionsDisplay = new google.maps.DirectionsRenderer;
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 7,
+          center: {lat: 41.85, lng: -87.65}
+        });
+        directionsDisplay.setMap(map);
 
-	// Start with a fixed marker.
-	var fixedMarker = L.marker(new L.LatLng(32.8849813, -117.2413856), {
-	    icon: L.mapbox.marker.icon({
-	        'marker-color': 'ff8888'
-	    })
-	}).bindPopup('Mapbox DC').addTo(map);
-
-	// Store the fixedMarker coordinates in a variable.
-	var fc = fixedMarker.getLatLng();
-
-	// Create a featureLayer that will hold a marker and linestring.
-	var featureLayer = L.mapbox.featureLayer().addTo(map);
-
-	// When a user clicks on the map we want to
-	// create a new L.featureGroup that will contain a
-	// marker placed where the user selected the map and
-	// a linestring that draws itself between the fixedMarkers
-	// coordinates and the newly placed marker.
-	map.on('click', function(ev) {
-		
-	    // ev.latlng gives us the coordinates of
-	    // the spot clicked on the map.
-	    var c = ev.latlng;
-
-	    var geojson = [
-	      {
-	        "type": "Feature",
-	        "geometry": {
-	          "type": "Point",
-	          "coordinates": [c.lng, c.lat]
-	        },
-	        "properties": {
-	          "marker-color": "#ff8888"
-	        }
-	      }, {
-	        "type": "Feature",
-	        "geometry": {
-	          "type": "LineString",
-	          "coordinates": [
-	            [fc.lng, fc.lat],
-	            [c.lng, c.lat]
-	          ]
-	        },
-	        "properties": {
-	          "stroke": "#000",
-	          "stroke-opacity": 0.5,
-	          "stroke-width": 4
-	        }
-	      }
-	    ];
-
-	    featureLayer.setGeoJSON(geojson);
-
-	    // Finally, print the distance between these two points
-	    // on the screen using distanceTo().
-	    var container = document.getElementById('distance');
-	    container.innerHTML = (fc.distanceTo(c)).toFixed(0) + 'm';
-	})}, 500);
+        var onChangeHandler = function() {
+          calculateAndDisplayRoute(directionsService, directionsDisplay);
+        };
+        document.getElementById('start').addEventListener('change', onChangeHandler);
+        document.getElementById('end').addEventListener('change', onChangeHandler);
+	}, 500);
 
 
 }
