@@ -502,7 +502,7 @@ nav{
 
 #floating-panel {
     position: relative;
-    top: 10px;
+    top: 85px;
     left: 25%;
     z-index: 5;
     background-color: #fff;
