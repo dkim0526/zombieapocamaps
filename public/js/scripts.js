@@ -82,17 +82,16 @@ function openFindResources(){
 
         var userLocation = getLocation(map);
 
-        var addresses = ['2182 Avenida De La Playa La Jolla, CA 92037', '2236 Avenida De La Playa La Jolla, CA 92037'];
+        var addresses = ['2182 Avenida De La Playa La Jolla, CA 92037', '2236 Avenida De La Playa La Jolla, CA 92037', '4646 Convoy St San Diego, CA 92111'];
         for(var x = 0; x < addresses.length; x++) {
 	        $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address='+addresses[x]+'&sensor=false', null, function (data) {
 	            var p = data.results[0].geometry.location
 	            var latlng = new google.maps.LatLng(p.lat, p.lng);
 		        var marker = new google.maps.Marker({
 	                position: latlng,
-	                map: map,
-	                icon: 'https://maps.google.com/mapfiles/kml/shapes/library_maps.png'
+	                map: map
 	            });
-	            google.maps.event.addListener(marker, 'click', getRouteFromClick(map, marker));
+	            google.maps.event.addListener(marker, 'click', function(){getRouteFromClick(map, marker);});
 	        });
     	}
 	}, 200);
