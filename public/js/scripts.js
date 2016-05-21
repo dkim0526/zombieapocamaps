@@ -1,7 +1,6 @@
 $(document).ready(function() {
 	$("#safety_zone_btn").click(openSafetyZones);
 	$("#find_resources_btn").click(openFindResources);
-	$("#see_analysis_btn").click(openSeeAnalysis);
 	$("#survival_kit_btn").click(openSurvivalKit);
 	$("#my_profile_btn").click(openProfile);
 	$("#navbar_profile_btn").click(openProfile);
@@ -13,9 +12,7 @@ $(document).ready(function() {
 	$(".skill_input").change(updateSkillPercent);
 })
 
-function openSafetyZones() {
-	openTab($("#safety_zone"), $("#safety_zone_btn"));
-}
+
 
 /*function calculateAndDisplayRoute(directionsService, directionsDisplay) {
 directionsService.route({
@@ -53,7 +50,7 @@ function getLocation(map){
 			new google.maps.Marker({
 	            position: location,
 	            map: map
-	    	}); 
+	    	});
 		});
 	}
 }
@@ -70,10 +67,14 @@ function getRouteFromClick(map, marker){
 	}
 }
 
+function openSafetyZones() {
+	openTab($("#safety_zone"), $("#safety_zone_btn"), "Safe Zones");
+}
+
 function openFindResources(){
-	openTab($("#find_resources"), $("#find_resources_btn"));
-	
-	setTimeout(function(){     
+	openTab($("#find_resources"), $("#find_resources_btn"), "Find Resources");
+
+	setTimeout(function(){
         var map = new google.maps.Map(document.getElementById('map'), {
           zoom: 13,
           center: {lat: 41.85, lng: -87.65},
@@ -103,23 +104,19 @@ function openFindResources(){
 	}, 500);*/
 }
 
-function openSeeAnalysis(){
-	openTab($("#see_analysis"), $("#see_analysis_btn"));
-}
-
 function openSurvivalKit(){
-	openTab($("#survival_kit"), $("#survival_kit_btn"));
+	openTab($("#survival_kit"), $("#survival_kit_btn"), "Survival Guide");
 }
 
 function openProfile(){
-	openTab($("#my_profile"), $("#my_profile_btn"));
+	openTab($("#my_profile"), $("#my_profile_btn"), "My Profile");
 }
 
 function openHelp(){
-	openTab($("#seek_help"), $("#seek_help_btn"));
+	openTab($("#seek_help"), $("#seek_help_btn"), "Need Help?");
 }
 
-function openTab(panel, button){
+function openTab(panel, button, title){
 	if(!button.hasClass("active-side-btn")){
 		$(".btn-sidebar").removeClass("active-side-btn");
 		$(".main-panel").css("display", "none");
@@ -127,5 +124,6 @@ function openTab(panel, button){
 		panel.show("slide", { direction: "left" }, 500);
 		button.find(".side_description").slideDown();
 		button.addClass("active-side-btn");
+		$("#current_tab_title").html(title);
 	}
 }

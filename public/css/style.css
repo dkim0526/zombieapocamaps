@@ -7,7 +7,6 @@
 body{
     /*background-color:#C0BEC3;*/
     font-family: 'Dosis', sans-serif;
-    overflow:hidden;
 }
 #login_screen{
     background: url('../img/header.png') no-repeat center center scroll;
@@ -43,7 +42,7 @@ body{
 }
 
 .navbar-title{
-    font-size:30pt;
+    font-size:25pt;
 }
 
 #subheader{
@@ -53,7 +52,20 @@ body{
 
 .navbar-title{
     margin-left:40%;
-    margin-top:10%;
+}
+.navbar{
+    padding:3px;
+    padding-left:10px;
+    padding-right:40px;
+}
+
+.navbar-right{
+    padding-top:15px;
+}
+
+.navbar-right a{
+    font-size:12pt;
+    color:white;
 }
 
 #login-btn{
@@ -61,7 +73,7 @@ body{
 }
 
 #login-btn #fb-login{
-	background-color: #1e88ce;
+	background-color: #043B62;
   border: none;
 	border-radius: 10px;
   color: white;
@@ -71,13 +83,13 @@ body{
   display: inline-block;
   font-size: 23px;
 	margin: 0px 15px 0px 15px;
-	border: 2px solid #1e88ce;
+	border: 2px solid #043B62;
 }
 
 #login-btn #learnmore{
-	border: 2px solid #1e88ce;
+	border: 2px solid #043B62;
 	border-radius: 10px;
-	color: #1e88ce;
+	color: #043B62;
 	padding: 10px 27px;
 	text-align: center;
 	text-decoration: none;
@@ -117,7 +129,7 @@ body{
 }
 
 #learn .about-brand{
-	color: #1e88ce;
+	color: #043B62;
 }
 
 #learn h3{
@@ -150,7 +162,7 @@ body{
 }
 
 #preview .keyword{
-	color: #1e88ce;
+	color: #043B62;
 }
 
 #preview #safetyzones .screenshot,
@@ -199,14 +211,14 @@ footer p{
 
 /* NAVIGATION STUFF */
 nav{
-    background-color:black;
+    background-color:#233751;
 }
 
 #sidebar_nav{
-    padding-top: 90px;
+    padding-top: 38px;
     min-height:100%;
     width:18vw;
-    background-color:#233751;
+    background-color:#CDCDCF;
     position:fixed;
     z-index:100;
 }
@@ -217,14 +229,21 @@ nav{
     border-radius: 110px;
 }
 .profile_name{
-    color:white;
+    color:gray;
 }
 
 .btn-sidebar{
     width:100%;
     padding:10px;
-    color:white;
+    color:black;
     font-size:14pt;
+    border-radius:0;
+}
+
+#navbar_logo{
+    width:50px;
+    height:auto;
+    margin-top:-10px;
 }
 
 .btn-sidebar:hover, .active-side-btn{
@@ -244,7 +263,7 @@ nav{
     display:none;
     background-color:white;
     height:100%;
-    padding-top:75px;
+    padding-top:30px;
     padding-left:20vw;
     width:100%;
     position:absolute;
@@ -383,9 +402,9 @@ nav{
 }
 
 #survival_img{
-    position:absolute;
+    position:fixed;
     margin-left:18vw;
-    margin-top: 50px;
+    margin-top: 20px;
     width:82vw;
     height:90vh;
 }
@@ -393,12 +412,12 @@ nav{
 
 .survival_interaction_point{
     cursor:pointer;
-    position:absolute;
+    position:fixed;
 }
 
 .survival_interaction_tip{
     background-color: #d5dcdd;
-    position:absolute;
+    position:fixed;
     color:black;
     padding:10px;
     width:400px;
