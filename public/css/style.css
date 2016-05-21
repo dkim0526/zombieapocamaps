@@ -513,3 +513,8 @@ font-family: 'Roboto','sans-serif';
 line-height: 30px;
 padding-left: 10px;
 }
+
+#legend {
+    background: white;
+    padding: 10px;
+}
