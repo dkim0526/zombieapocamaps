@@ -7,6 +7,7 @@
 body{
     /*background-color:#C0BEC3;*/
     font-family: 'Dosis', sans-serif;
+    overflow:hidden;
 }
 #login_screen{
     background: url('../img/header.png') no-repeat center center scroll;
@@ -377,24 +378,40 @@ nav{
 
 
 #survival_kit{
-    background: url('../img/placeholder.png') no-repeat scroll;
-    background-size: 80vw 80vh;
-    background-position: 325px 100px;
+    background-color:#8C9FA3;
+    padding:0;
+}
+
+#survival_img{
+    position:absolute;
+    margin-left:18vw;
+    margin-top: 50px;
+    width:82vw;
+    height:90vh;
 }
 
 
 .survival_interaction_point{
     cursor:pointer;
+    position:absolute;
 }
 
 .survival_interaction_tip{
     background-color: #d5dcdd;
+    position:absolute;
     color:black;
     padding:10px;
     width:400px;
     display:none;
-    position:relative;
     z-index:100;
+}
+
+.survival_interaction_point:hover circle{
+    opacity:1;
+}
+
+.survival_interaction_point:hover + .survival_interaction_tip{
+    display:block;
 }
 
 .survival_interaction_tip h3{
@@ -411,91 +428,71 @@ nav{
 .survival_interaction_tip a{
     cursor:pointer;
 }
-#survival_title{
-    margin-top:20px;
-    margin-left:500px;
-    font-size:40pt;
-    color:white;
-    font-weight:bold;
-}
 
 #survival_point_supplies{
-    position:fixed;
-    left:1300px;
-    top:450px;
+    left:500px;
+    top:700px;
 }
 #survival_tip_supplies{
-    position:fixed;
-    left:1360px;
-    top:510px;
+    left:570px;
+    top:600px;
 }
 #survival_point_communication{
-    position:fixed;
-    margin-left:1000px;
+    margin-left:1600px;
+    margin-top:150px;
 }
 
 #survival_tip_communication{
-    position:fixed;
-     margin-left:1010px;
-     margin-top:50px;
+     margin-left:1200px;
+     margin-top:200px;
 }
 
 #survival_point_skills{
-    position:fixed;
-     margin-left:50px;
-     margin-top:450px;
+     margin-left:1650px;
+     margin-top:700px;
 }
 
 #survival_tip_skills{
-    position:fixed;
-    margin-left:110px;
-    margin-top:350px;
+    margin-left:1220px;
+    margin-top:580px;
 }
 
 #survival_point_safety{
-    position:fixed;
-    margin-left:100px;
-    margin-top:50px;
-}
-
-#survival_tip_safety{
-    position:fixed;
-    margin-left:150px;
-    margin-top:100px;
-}
-
-#survival_point_evacuation{
-    position:fixed;
-    margin-left:900px;
-    margin-top:500px;
-}
-
-#survival_tip_evacuation{
-    position:fixed;
-    margin-left:960px;
-    margin-top:450px;
-}
-
-#survival_point_resources{
-    position:fixed;
-    margin-left:1300px;
-    margin-top:400px;
-}
-
-#survival_tip_resources{
-    position:fixed;
-    margin-left:870px;
-    margin-top:350px;
-}
-
-#survival_point_help{
-    position:fixed;
-    margin-left:400px;
+    margin-left:1400px;
     margin-top:300px;
 }
 
+#survival_tip_safety{
+    margin-left:970px;
+    margin-top:200px;
+}
+
+#survival_point_evacuation{
+    margin-left:900px;
+    margin-top:750px;
+}
+
+#survival_tip_evacuation{
+    margin-left:960px;
+    margin-top:570px;
+}
+
+#survival_point_resources{
+    margin-left:970px;
+    margin-top:350px;
+}
+
+#survival_tip_resources{
+    margin-left: 570px;
+    margin-top:170px;
+}
+
+#survival_point_help{
+    margin-left:600px;
+    margin-top:500px;
+}
+
 #survival_tip_help{
-    position:fixed;
     margin-left:460px;
     margin-top:300px;
 }
