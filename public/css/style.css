@@ -190,7 +190,9 @@ body{
     height:700px;
     color:white;
     background: url('../img/footer.png') no-repeat center center scroll;
-    background-size: 100vw auto;
+    background-size: 100vw 100%;
+    margin-bottom:0;
+    padding-bottom:0;
 }
 
 #login-btn h1{
@@ -405,23 +407,27 @@ nav{
     padding:0;
 }
 
+#survival_wrapper{
+    position:relative;
+}
+
 #survival_img{
-    position:fixed;
+    position:absolute;
     margin-left:18vw;
     margin-top: 20px;
     width:82vw;
-    height:90vh;
+    height:95vh;
 }
 
 
 .survival_interaction_point{
     cursor:pointer;
-    position:fixed;
+    position:absolute;
 }
 
 .survival_interaction_tip{
     background-color: #d5dcdd;
-    position:fixed;
+    position:absolute;
     color:black;
     padding:10px;
     width:400px;
@@ -453,71 +459,71 @@ nav{
 }
 
 #survival_point_supplies{
-    left:500px;
-    top:700px;
+    left:27vw;
+    top:80vh;
 }
 #survival_tip_supplies{
-    left:570px;
-    top:600px;
+    left:32vw;
+    top:70vh
 }
 #survival_point_communication{
-    margin-left:1600px;
-    margin-top:150px;
+    left:85vw;
+    top:15vh;
 }
 
 #survival_tip_communication{
-     margin-left:1200px;
-     margin-top:200px;
+     right:15vw;
+     top:10vh
 }
 
 #survival_point_skills{
-     margin-left:1650px;
-     margin-top:700px;
+    left:92vw;
+    top:60vh;
 }
 
 #survival_tip_skills{
-    margin-left:1220px;
-    margin-top:580px;
+    right: 10vw;
+    top:55vh;
 }
 
 #survival_point_safety{
-    margin-left:1400px;
-    margin-top:300px;
+    left:75vw;
+    top:30vh;
 }
 
 #survival_tip_safety{
-    margin-left:970px;
-    margin-top:200px;
+    left:65vw;
+    top:37vh;
 }
 
 #survival_point_evacuation{
-    margin-left:900px;
-    margin-top:750px;
+    left:60vw;
+    top:80vh;
 }
 
 #survival_tip_evacuation{
-    margin-left:960px;
-    margin-top:570px;
+    top:57vh;
+    left:55vw;
 }
 
 #survival_point_resources{
-    margin-left:970px;
-    margin-top:350px;
+    left:52vw;
+    top:40vh;
 }
 
 #survival_tip_resources{
-    margin-left: 570px;
-    margin-top:170px;
+    left:30vw;
+    top:17vh;
 }
 
 #survival_point_help{
-    margin-left:600px;
-    margin-top:500px;
+    left:33vw;
+    top:55vh;
 }
 
 #survival_tip_help{
-    margin-left:460px;
-    margin-top:300px;
+    left:20vw;
+    top:33vh;
 }
 
 #floating-panel {
