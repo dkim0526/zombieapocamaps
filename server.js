@@ -15,6 +15,7 @@ var parser = {
     body: require("body-parser")
 };
 
+
 require("dotenv").load();
 
 app.use(passport.initialize());
@@ -32,6 +33,7 @@ var parser = {
     cookie: require("cookie-parser")
 };
 
+var conString = process.env.DATABASE_CONNECTION_URL;
 var FacebookStrategy = require('passport-facebook').Strategy;
 
 var local_database_uri  = 'mongodb://stallen:hello@ds011258.mlab.com:11258/heroku_q93csxz1';
@@ -147,6 +149,33 @@ io.use(function(socket, next) {
     session_middleware(socket.request, {}, next);
 });
 
+
+var query = 'SELECT INCOME."Area", CASE WHEN INCOME."Median Household Income" BETWEEN \'$40000.00\' AND \'$49000.00\' THEN 40000 WHEN INCOME."Median Household Income" BETWEEN \'$50000.00\' AND \'$59000.00\' THEN 50000 WHEN INCOME."Median Household Income" BETWEEN \'$60000.00\' AND \'$69000.00\' THEN 60000 WHEN INCOME."Median Household Income" BETWEEN \'$70000.00\' AND \'$79000.00\' THEN 70000 WHEN INCOME."Median Household Income" BETWEEN \'$80000.00\' AND \'$89000.00\' THEN 80000 WHEN INCOME."Median Household Income" BETWEEN \'$90000.00\' AND \'$99000.00\' THEN 90000 WHEN INCOME."Median Household Income" BETWEEN \'$100000.00\' AND \'$109000.00\' THEN 100000 WHEN INCOME."Median Household Income" BETWEEN \'$110000.00\' AND \'$119000.00\' THEN 110000 WHEN INCOME."Median Household Income" BETWEEN \'$120000.00\' AND \'$129000.00\' THEN 1200000 ELSE 150000 END AS "Avg Income",  HOME_VALUE."Median house value", POVERTY."Total population below poverty" AS "Poverty_Count", COUNT(CRIMES."zip") AS "Number_of_Crimes" FROM cogs121_16_raw.hhsa_san_diego_demographics_median_income_2012_norm AS INCOME INNER JOIN cogs121_16_raw.hhsa_san_diego_demographics_home_value_2012 AS HOME_VALUE ON INCOME."Area" = HOME_VALUE."Area" INNER JOIN cogs121_16_raw.hhsa_san_diego_demographics_poverty_2012 AS POVERTY ON POVERTY."Area" = INCOME."Area" LEFT OUTER JOIN cogs121_16_raw.arjis_crimes AS CRIMES ON LOWER(CRIMES."community") = LOWER(INCOME."Area") GROUP BY INCOME."Area", "Avg Income", HOME_VALUE."Median house value", POVERTY."Total population below poverty"';
+
+app.get('/delphidata', function (req, res) {
+  console.log("TEST");
+
+    var pg = require('pg');
+
+    pg.connect(conString, function(err, client, done) {
+        if(err) {
+            return console.error('error fetching client from pool', err);
+        }
+        console.log("TEST123");
+
+        client.query(query, function(err, result) {
+            done();
+
+
+            if(err) {
+              return console.error('error running query', err);
+            }
+            res.json(result.rows);
+        client.end();
+        });
+    });
+});
+console.log("TEST123456");
 // Start Server
 http.createServer(app).listen(app.get("port"), function() {
     console.log("Express server listening on port " + app.get("port"));

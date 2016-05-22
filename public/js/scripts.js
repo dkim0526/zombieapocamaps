@@ -9,7 +9,7 @@ $(document).ready(function() {
 
 	openSurvivalKit();
 
-	$(".skill_input").change(updateSkillPercent);
+	
 })
 
 var markers = [];
@@ -156,6 +156,7 @@ function openSurvivalKit(){
 
 function openProfile(){
 	openTab($("#my_profile"), $("#my_profile_btn"), "My Profile");
+  $(".skill_input").change(updateSkillPercent);
 }
 
 function openSafetyZones() {
