@@ -187,6 +187,10 @@ body{
 
 .calltoaction{
 	padding-top: 100px;
+    height:700px;
+    color:white;
+    background: url('../img/footer.png') no-repeat center center scroll;
+    background-size: 100vw auto;
 }
 
 #login-btn h1{
