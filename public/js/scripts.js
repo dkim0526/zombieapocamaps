@@ -162,9 +162,13 @@ function openProfile(){
   $(".skill_input").change(updateSkillPercent);
 }
 
+var firstClick = true;
 function openSafetyZones() {
   openTab($("#safety_zone"), $("#safety_zone_btn"), "Safe Zones");
-  displayChart();
+  if(firstClick){
+    displayChart();
+    firstClick = false;
+  }
 }
 function displayChart(){  
   var bubbleChart = new d3.svg.BubbleChart({
@@ -181,15 +185,15 @@ function displayChart(){
     //circleColor: use @default
     data: {
       items: [
-        {text: "Java", count: "236"},
-        {text: ".Net", count: "382"},
-        {text: "Php", count: "170"},
-        {text: "Ruby", count: "123"},
-        {text: "D", count: "12"},
-        {text: "Python", count: "170"},
-        {text: "C/C++", count: "382"},
-        {text: "Pascal", count: "10"},
-        {text: "Something", count: "170"},
+        {text: "Chula Vista", count: "236"},
+        {text: "Mira Mesa", count: "382"},
+        {text: "La Jolla", count: "170"},
+        {text: "Kearny Mesa", count: "123"},
+        {text: "Oceanside", count: "12"},
+        {text: "Carlsbad", count: "170"},
+        {text: "Del Mar", count: "382"},
+        {text: "Pacific Beach", count: "10"},
+        {text: "Poway", count: "170"},
       ],
       eval: function (item) {return item.count;},
       classed: function (item) {return item.text.split(" ").join("");}
