@@ -162,9 +162,13 @@ function openProfile(){
   $(".skill_input").change(updateSkillPercent);
 }
 
+var firstClick = true;
 function openSafetyZones() {
   openTab($("#safety_zone"), $("#safety_zone_btn"), "Safe Zones");
-  displayChart();
+  if(firstClick){
+    displayChart();
+    firstClick = false;
+  }
 }
 function displayChart(){  
   var bubbleChart = new d3.svg.BubbleChart({
