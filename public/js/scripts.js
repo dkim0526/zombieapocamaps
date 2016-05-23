@@ -130,14 +130,18 @@ function openFindResources(){
             icon: iconBase + 'info-i_maps.png'
           }
         };
-        
+
       var transitLayer = new google.maps.TransitLayer();
       transitLayer.setMap(map);
+      var bikeLayer = new google.maps.BicyclingLayer();
+      bikeLayer.setMap(map);
+      var trafficLayer = new google.maps.TrafficLayer();
+      trafficLayer.setMap(map);
 
         
-        var divLegend = document.createElement('div');
-		var legend = document.getElementById('find_resources').appendChild(divLegend);
-		legend.setAttribute("id", "legend");
+      var divLegend = document.createElement('div');
+		  var legend = document.getElementById('find_resources').appendChild(divLegend);
+		  legend.setAttribute("id", "legend");
 
         for (var key in icons) {
           var type = icons[key];
