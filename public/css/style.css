@@ -238,6 +238,10 @@ nav{
     color:gray;
 }
 
+#input_map_selection{
+    display:none;
+}
+
 .btn-sidebar{
     width:100%;
     padding:10px;
@@ -277,7 +281,9 @@ nav{
 
 
 
-/* PROFILE STYLING */
+
+
+/****************** PROFILE STYLING ******************/
 .profile_panel{
     display:none;
     width:100%;
@@ -387,14 +393,23 @@ nav{
 }
 
 .btn-profile{
-    background-color: #532220;
-    color:white;
+    background-color: darkgray;
+    color:black;
     font-size:14pt;
+    margin-bottom:-15px;
 }
 
 .btn-profile:hover, .active-profile-btn{
-    background-color: #D6A191;
+    background-color: #C3CC79;
     color:black;
+    font-weight:bold;
+}
+
+#connect_content{
+    background-color: white;
+    border:10px solid #D6A191;
+    padding:10px;
+    height:100%;
 }
 
 #skillmap .skills-wrapper {

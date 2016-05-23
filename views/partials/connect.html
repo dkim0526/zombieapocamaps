@@ -1,0 +1,106 @@
+<div id="my_profile" class="main-panel container-fluid">
+	<div class="btn-group" role="group" id="profile_tabs">
+		<button id="connect_killing_btn" type="button" class="btn btn-profile">Zombie Killing</button>
+		<button id="connect_resources_btn" type="button" class="btn btn-profile">Finding Resources</button>
+  		<button id="connect_health_btn" type="button" class="btn btn-profile">Maintaining Health</button>
+  		<button id="connect_building_btn" type="button" class="btn btn-profile">Building</button>
+  		<button id="connect_other_btn" type="button" class="btn btn-profile">Other</button>
+	</div>
+	<div id="connect_content">
+
+    <div class="container input_question" style="text-align:start">
+        <form id="question_form" action="/message" method="post">
+            <input type="hidden" value="{{users.displayName}}" name="author" form="answer_form"/>
+            <input type="hidden" value="{{users.picture}}" name="photo" form="answer_form"/>
+            <div class="profile pull-left">
+                <img class="profile profile_pic" src="{{users.picture}}" id="imgUrl" style=""/>
+                <p class="profile_name">{{users.displayName}}</p>
+            </div>
+
+            <textarea id="question_textarea" placeholder="Type question here..." name="question" form="question_form" required></textarea>
+            <br/>
+            <div id="new_question_options">
+                <label for="category_dropdown" id="new_question_subject_label">Subject:</label>
+                <a class="btn btn-default" id="input_location">+ Location</a>
+                <input type="submit" class="btn btn-custom pull-right post-question" value="Post">
+            </div>
+        </form>
+        <div id="input_map_selection">
+			<div id="googleMaps"></div>
+			<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDIs9DIeZYyke4NWDQ85SBeIvELwMBJLQM"></script>
+			<div class="modal fade" id="location_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			        <h4 class="modal-title" id="myModalLabel">What will you use this location for?</h4>
+
+			           <input type="text"/>
+			           <a class="btn btn-success">Submit</a>
+			      </div>
+			    </div>
+			  </div>
+		</div>
+    </div>
+
+    <div class="divider">
+         <div id="search_area" class="text-center">
+            <input placeholder="Enter keywords..." id="search_input_box"/>
+            <a class="btn btn-custom" id="search_button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a>
+        </div>
+    </div>
+
+    <ul class="list-unstyled" id="question_section">
+        {{#each questions}}
+            <li class="{{category}} container question">
+                <div class="profile pull-left profile_question">
+                    <img src="{{photo}}" class="profile_pic"/>
+                    <p>{{date}}</p>
+                </div>
+               <p style="color:gray;">{{author}} asked:</p>
+                <h4><span class="stylecategory">{{category}}</span> {{question}}</h4>
+                <div>
+                    <form class="input_answer" id="answer_form" method="post" action="/answer">
+
+                        <input value="{{id}}" name="questionid" type="hidden"/>
+                        <textarea style="width:80%" class="answer_textarea" placeholder="Type answer here..." name="answer" form="answer_form"></textarea>
+                        <input type="submit" class="btn btn-custom pull-right" value="Answer"/>
+                    </form>
+
+                </div>
+                <br/>
+
+                <div class="answer_section">
+                    <ul class="list-unstyled">
+                    {{#each this.answers}}
+                        <li class="answer">
+                            <div class="pull-right text-center">
+                                    <button style="margin-top:-40%;" type="submit" class="btn vote vote_up" id="up_{{id}}">
+                                        <span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="upv_{{id}}"></span>
+                                    </button>
+                                    <br/>
+                                    <label class="vote_number" id="vote_{{id}}">{{votes}}</label>
+                                    <br/>
+                                    <button style="margin-top:-20%;" class="btn vote vote_down" id="down_{{id}}"><span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="downv_{{id}}"></span></button>
+                            </div>
+                            <div class="profile pull-left">
+                                <img src="{{photo}}" class="profile_pic"/>
+                                <p>{{date}}</p>
+                            </div>
+                            <p style="color:gray;">{{author}} answered:</p>
+                            <h5 class="answer_text">{{answer}}</h5>
+                        </li>
+                    {{else}}No answers yet.
+                    {{/each}}
+                    </ul>
+                </div>
+            </li>
+
+        {{else}}<h4>No questions found</h4>
+        {{/each}}
+    </ul>
+</div>
+</div>
+
+</div>
+
+<script src="/js/connect.js"></script>
