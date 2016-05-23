@@ -131,6 +131,10 @@ function openFindResources(){
           }
         };
         
+      var transitLayer = new google.maps.TransitLayer();
+      transitLayer.setMap(map);
+
+        
         var divLegend = document.createElement('div');
 		var legend = document.getElementById('find_resources').appendChild(divLegend);
 		legend.setAttribute("id", "legend");
@@ -151,6 +155,7 @@ function openFindResources(){
         var addresses = ['2182 Avenida De La Playa La Jolla, CA 92037', '2236 Avenida De La Playa La Jolla, CA 92037', '4646 Convoy St San Diego, CA 92111'];
         geoCodeMarkers(addresses, map);
 	}, 200);
+
 }
 
 function openSurvivalKit(){
