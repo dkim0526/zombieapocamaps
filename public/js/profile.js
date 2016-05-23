@@ -9,10 +9,11 @@ $(document).ready(function() {
 	$("#profile_inventory_btn").click(openInventory);
 	$("#profile_group_btn").click(openGroups);
 	$("#profile_locations_btn").click(openLocations);
+	openSkills();
 })
 
 function openSkills(){
-	openPanel($("#profile_information"), $("#profile_skill_btn"));
+	openPanel($("#profile_skills"), $("#profile_skill_btn"));
 }
 function openInventory(){
 	openPanel($("#profile_inventory"), $("#profile_inventory_btn"));
@@ -42,7 +43,7 @@ function getLocation(map){
 			new google.maps.Marker({
 	            position: location,
 	            map: map
-	    	}); 
+	    	});
 		});
 	}
 }
@@ -63,7 +64,6 @@ function initMap() {
     placeMarkerAndPanTo(e.latLng, map);
   });
 }
-
 
 function placeMarkerAndPanTo(latLng, map) {
   $("#location_modal").modal("toggle");

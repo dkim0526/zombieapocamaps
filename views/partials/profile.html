@@ -2,8 +2,8 @@
 	<img class="profile" src="{{users.picture}}" id="imgUrl" style=""/>
 	    <h3 class="profile_name">{{users.displayName}}</h3>
 	<div class="btn-group" role="group" id="profile_tabs">
-		<button id="profile_skill_btn" type="button" class="btn btn-profile">My Skills</button>
-		<button id="profile_inventory_btn" type="button" class="btn btn-profile">My Inventory</button>
+		<button id="profile_skill_btn" type="button" class="btn btn-profile">My Role</button>
+		<button id="profile_inventory_btn" type="button" class="btn btn-profile">My Checklist</button>
   		<button id="profile_group_btn" type="button" class="btn btn-profile">My Groups</button>
   		<button id="profile_locations_btn" type="button" class="btn btn-profile">My Locations</button>
 	</div>
@@ -11,6 +11,8 @@
 	<br/>
 
 	<div id="profile_information" class="profile_panel">
+
+		<!--
 		<div class="skillbar clearfix pull-left" data-percent="50%" id="hunting_bar">
 			<div class="skillbar-title" style="background: #d35400;"><span>
 				<i class="glyphicon glyphicon-search" aria-hidden="true"></i>
@@ -18,7 +20,7 @@
 			</span></div>
 			<div class="skillbar-bar" style="background: #e67e22;"></div>
 			<div class="skill-bar-percent" id="hunting_percent">50%</div>
-		</div> <!-- End Skill Bar -->
+		</div>
 		<input id="hunting_skill" type="number" name="hunting" min="1" max="100" value="50" class="skill_input pull-left">
 
 		<div class="skillbar clearfix  pull-left" data-percent="50%" id="building_bar">
@@ -28,7 +30,7 @@
 			</span></div>
 			<div class="skillbar-bar" style="background: #3498db;"></div>
 			<div class="skill-bar-percent" id="building_percent">50%</div>
-		</div> <!-- End Skill Bar -->
+		</div>
 		<input id="building_skill" type="number" name="building" min="1" max="100" value="50" class="skill_input pull-left">
 
 		<div class="skillbar clearfix  pull-left" data-percent="50%" id="foraging_bar" >
@@ -38,7 +40,7 @@
 			</span></div>
 			<div class="skillbar-bar" style="background: #2c3e50;"></div>
 			<div class="skill-bar-percent" id="foraging_percent" >50%</div>
-		</div> <!-- End Skill Bar -->
+		</div>
 		<input id="foraging_skill" type="number" name="foraging" min="1" max="100" value="50" class="skill_input pull-left">
 
 		<div class="skillbar clearfix  pull-left" data-percent="50%" id="camoflauging_bar">
@@ -48,7 +50,7 @@
 			</span></div>
 			<div class="skillbar-bar" style="background: #5a68a5;"></div>
 			<div class="skill-bar-percent" id="camoflauging_percent">50%</div>
-		</div> <!-- End Skill Bar -->
+		</div>
 		<input id="camoflauging_skill" type="number" name="camoflauging" min="1" max="100" value="50" class="skill_input pull-left">
 
 		<div class="skillbar clearfix  pull-left" data-percent="50%" id="running_bar" >
@@ -58,10 +60,18 @@
 			</span></div>
 			<div class="skillbar-bar" style="background: #525252;"></div>
 			<div class="skill-bar-percent" id="running_percent" >50%</div>
-		</div> <!-- End Skill Bar -->
+		</div>
 		<input id="running_skill" type="number" name="running" min="1" max="100" value="50" class="skill_input pull-left">
+	-->
 	</div>
 
+	<div id="profile_skills" class="profile_panel">
+		<form>
+		<select name="role">
+			<option disabled selected> -- Select a Role -- </option>
+		</select>
+	</form>
+	</div>
 
 	<div id="profile_inventory" class="profile_panel">
 		<div>
@@ -69,7 +79,6 @@
 			<h3 id="restock_counter">0 Days</h3>
 		</div>
 		<br/>
-		<h2>My Inventory:</h2>
 		<ul id="inventory-list" class="list-unstyled">
 			<li  class="inventory_item"><input type="number" name="weapon_count" min="1" max="20" value="0" class="inventory_counter"> Guns</li>
 			<li class="inventory_item"><input type="number" name="weapon_count" min="1" max="20" value="0" class="inventory_counter"> Knives</li>
