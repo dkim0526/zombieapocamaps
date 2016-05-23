@@ -112,7 +112,6 @@ function openFindResources(){
           styles: [{"featureType":"administrative","stylers":[{"visibility":"off"}]},{"featureType":"poi","stylers":[{"visibility":"simplified"}]},{"featureType":"road","elementType":"labels","stylers":[{"visibility":"simplified"}]},{"featureType":"water","stylers":[{"visibility":"simplified"}]},{"featureType":"transit","stylers":[{"visibility":"simplified"}]},{"featureType":"landscape","stylers":[{"visibility":"simplified"}]},{"featureType":"road.highway","stylers":[{"visibility":"off"}]},{"featureType":"road.local","stylers":[{"visibility":"on"}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"visibility":"on"}]},{"featureType":"water","stylers":[{"color":"#84afa3"},{"lightness":52}]},{"stylers":[{"saturation":-17},{"gamma":0.36}]},{"featureType":"transit.line","elementType":"geometry","stylers":[{"color":"#3f518c"}]}]
         });
         var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
-        var legend = document.getElementById('legend');
         var icons = {
           food: {
             name: 'Food',
@@ -131,7 +130,10 @@ function openFindResources(){
             icon: iconBase + 'info-i_maps.png'
           }
         };
-		var legend = document.getElementById('legend');
+        
+        var divLegend = document.createElement('div');
+		var legend = document.getElementById('find_resources').appendChild(divLegend);
+		legend.setAttribute("id", "legend");
 
         for (var key in icons) {
           var type = icons[key];
@@ -139,6 +141,7 @@ function openFindResources(){
           var icon = type.icon;
           var div = document.createElement('div');
           div.name = name;
+          console.log(legend);
           div.addEventListener("click", function(){sortByResource(this.name, map);});
           div.innerHTML = '<img src="' + icon + '"> ' + name;
           legend.appendChild(div);
