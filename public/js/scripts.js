@@ -9,7 +9,7 @@ $(document).ready(function() {
 
 	openProfile();
 
-	$(".skill_input").change(updateSkillPercent);
+	
 })
 
 var markers = [];
@@ -112,7 +112,6 @@ function openFindResources(){
           styles: [{"featureType":"administrative","stylers":[{"visibility":"off"}]},{"featureType":"poi","stylers":[{"visibility":"simplified"}]},{"featureType":"road","elementType":"labels","stylers":[{"visibility":"simplified"}]},{"featureType":"water","stylers":[{"visibility":"simplified"}]},{"featureType":"transit","stylers":[{"visibility":"simplified"}]},{"featureType":"landscape","stylers":[{"visibility":"simplified"}]},{"featureType":"road.highway","stylers":[{"visibility":"off"}]},{"featureType":"road.local","stylers":[{"visibility":"on"}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"visibility":"on"}]},{"featureType":"water","stylers":[{"color":"#84afa3"},{"lightness":52}]},{"stylers":[{"saturation":-17},{"gamma":0.36}]},{"featureType":"transit.line","elementType":"geometry","stylers":[{"color":"#3f518c"}]}]
         });
         var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
-        var legend = document.getElementById('legend');
         var icons = {
           food: {
             name: 'Food',
@@ -131,7 +130,10 @@ function openFindResources(){
             icon: iconBase + 'info-i_maps.png'
           }
         };
-		var legend = document.getElementById('legend');
+        
+        var divLegend = document.createElement('div');
+		var legend = document.getElementById('find_resources').appendChild(divLegend);
+		legend.setAttribute("id", "legend");
 
         for (var key in icons) {
           var type = icons[key];
@@ -139,6 +141,7 @@ function openFindResources(){
           var icon = type.icon;
           var div = document.createElement('div');
           div.name = name;
+          console.log(legend);
           div.addEventListener("click", function(){sortByResource(this.name, map);});
           div.innerHTML = '<img src="' + icon + '"> ' + name;
           legend.appendChild(div);
@@ -156,10 +159,108 @@ function openSurvivalKit(){
 
 function openProfile(){
 	openTab($("#my_profile"), $("#my_profile_btn"), "My Profile");
+  $(".skill_input").change(updateSkillPercent);
 }
 
 function openSafetyZones() {
-	openTab($("#safety_zone"), $("#safety_zone_btn"), "Safe Zones");
+  openTab($("#safety_zone"), $("#safety_zone_btn"), "Safe Zones");
+  displayChart();
+}
+function displayChart(){  
+  var bubbleChart = new d3.svg.BubbleChart({
+    supportResponsive: true,
+    //container: => use @default
+    size: 600,
+    //viewBoxSize: => use @default
+    innerRadius: 600 / 3.5,
+    //outerRadius: => use @default
+    radiusMin: 50,
+    //radiusMax: use @default
+    //intersectDelta: use @default
+    //intersectInc: use @default
+    //circleColor: use @default
+    data: {
+      items: [
+        {text: "Java", count: "236"},
+        {text: ".Net", count: "382"},
+        {text: "Php", count: "170"},
+        {text: "Ruby", count: "123"},
+        {text: "D", count: "12"},
+        {text: "Python", count: "170"},
+        {text: "C/C++", count: "382"},
+        {text: "Pascal", count: "10"},
+        {text: "Something", count: "170"},
+      ],
+      eval: function (item) {return item.count;},
+      classed: function (item) {return item.text.split(" ").join("");}
+    },
+    plugins: [
+      {
+        name: "central-click",
+        options: {
+          text: "(See more detail)",
+          style: {
+            "font-size": "12px",
+            "font-style": "italic",
+            "font-family": "Source Sans Pro, sans-serif",
+            //"font-weight": "700",
+            "text-anchor": "middle",
+            "fill": "white"
+          },
+          attr: {dy: "65px"},
+          centralClick: function() {
+            alert("Here is more details!!");
+          }
+        }
+      },
+      {
+        name: "lines",
+        options: {
+          format: [
+            {// Line #0
+              textField: "count",
+              classed: {count: true},
+              style: {
+                "font-size": "28px",
+                "font-family": "Source Sans Pro, sans-serif",
+                "text-anchor": "middle",
+                fill: "white"
+              },
+              attr: {
+                dy: "0px",
+                x: function (d) {return d.cx;},
+                y: function (d) {return d.cy;}
+              }
+            },
+            {// Line #1
+              textField: "text",
+              classed: {text: true},
+              style: {
+                "font-size": "14px",
+                "font-family": "Source Sans Pro, sans-serif",
+                "text-anchor": "middle",
+                fill: "white"
+              },
+              attr: {
+                dy: "20px",
+                x: function (d) {return d.cx;},
+                y: function (d) {return d.cy;}
+              }
+            }
+          ],
+          centralFormat: [
+            {// Line #0
+              style: {"font-size": "50px"},
+              attr: {}
+            },
+            {// Line #1
+              style: {"font-size": "30px"},
+              attr: {dy: "40px"}
+            }
+          ]
+        }
+      }]
+  });
 }
 
 function openHelp(){

@@ -16,12 +16,13 @@
     "passport": "^0.3.2",
     "passport-facebook": "^2.1.0",
     "passport-twitter": "^1.0.4",
+    "pg": "^4.5.5",
     "socket.io": "^1.4.5"
   },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prestart": "start /b mongod --dbpath dbpath --logpath log/mongod.log",
+    "prestart": "mongod --dbpath dbpath --logpath log/mongod.log&",
     "start": "node server.js"
   },
   "repository": {
