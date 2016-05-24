@@ -1,4 +1,7 @@
 $(document).ready(function() {
+  var map;
+  var origin_autocomplete;
+  var destination_autocomplete;
 	$("#safety_zone_btn").click(openSafetyZones);
 	$("#find_resources_btn").click(openFindResources);
 	$("#survival_kit_btn").click(openSurvivalKit);
@@ -109,7 +112,7 @@ function openFindResources(){
         var origin_place_id = null;
         var destination_place_id = null;
         var travel_mode = google.maps.TravelMode.WALKING;
-        var map = new google.maps.Map(document.getElementById('map'), {
+        map = new google.maps.Map(document.getElementById('map'), {
           mapTypeControl: false,
           zoom: 13,
           center: {lat: 32.8849813, lng: -117.2413856},
@@ -149,20 +152,46 @@ function openFindResources(){
       var origin_input = document.getElementById('origin-input');
       var destination_input = document.getElementById('destination-input');
       var modes = document.getElementById('mode-selector');
+      if(origin_input)
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(origin_input);
+      if(destination_input){
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(destination_input);
+        destination_autocomplete =
+         new google.maps.places.Autocomplete(destination_input);
+        destination_autocomplete.bindTo('bounds', map);
+      }
+      if(origin_input){
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(modes);
+        origin_autocomplete = new google.maps.places.Autocomplete(origin_input);
+        origin_autocomplete.bindTo('bounds', map);
+      }
+      
 
-      map.controls[google.maps.ControlPosition.TOP_LEFT].push(origin_input);
-      map.controls[google.maps.ControlPosition.TOP_LEFT].push(destination_input);
-      map.controls[google.maps.ControlPosition.TOP_LEFT].push(modes);
+      
+      
 
-      var origin_autocomplete = new google.maps.places.Autocomplete(origin_input);
-      origin_autocomplete.bindTo('bounds', map);
-      var destination_autocomplete = new google.maps.places.Autocomplete(destination_input);
-      destination_autocomplete.bindTo('bounds', map);
-
+      // Sets a listener on a radio button to change the filter type on Places
+      // Autocomplete.
+      function setupClickListener(id, mode) {
+        var radioButton = document.getElementById(id);
+        if(radioButton){
+          radioButton.addEventListener('click', function() {
+            travel_mode = mode;
+          });
+        }
+      }
       setupClickListener('changemode-walking', google.maps.TravelMode.WALKING);
       setupClickListener('changemode-transit', google.maps.TravelMode.TRANSIT);
       setupClickListener('changemode-driving', google.maps.TravelMode.DRIVING);
 
+      function expandViewportToFitPlace(map, place) {
+        if (place.geometry.viewport) {
+          map.fitBounds(place.geometry.viewport);
+        } else {
+          map.setCenter(place.geometry.location);
+          map.setZoom(17);
+        }
+      }
 
       origin_autocomplete.addListener('place_changed', function() {
         var place = origin_autocomplete.getPlace();
@@ -170,8 +199,7 @@ function openFindResources(){
           window.alert("Autocomplete's returned place contains no geometry");
           return;
         }
-
-       expandViewportToFitPlace(map, place);
+        expandViewportToFitPlace(map, place);
 
         // If the place has a geometry, store its place ID and route if we have
         // the other place ID
@@ -181,22 +209,43 @@ function openFindResources(){
       });
 
       destination_autocomplete.addListener('place_changed', function() {
-      var place = destination_autocomplete.getPlace();
-      if (!place.geometry) {
-        window.alert("Autocomplete's returned place contains no geometry");
-        return;
-      }
-      expandViewportToFitPlace(map, place);
+        var place = destination_autocomplete.getPlace();
+        if (!place.geometry) {
+          window.alert("Autocomplete's returned place contains no geometry");
+          return;
+        }
+        expandViewportToFitPlace(map, place);
 
-      // If the place has a geometry, store its place ID and route if we have
-      // the other place ID
-      destination_place_id = place.place_id;
-      route(origin_place_id, destination_place_id, travel_mode,
-            directionsService, directionsDisplay);
-    });
+        // If the place has a geometry, store its place ID and route if we have
+        // the other place ID
+        destination_place_id = place.place_id;
+        route(origin_place_id, destination_place_id, travel_mode,
+              directionsService, directionsDisplay);
+
+      });
+
+      function route(origin_place_id, destination_place_id, travel_mode,
+                     directionsService, directionsDisplay) {
+        if (!origin_place_id || !destination_place_id) {
+          return;
+        }
+        directionsService.route({
+          origin: {'placeId': origin_place_id},
+          destination: {'placeId': destination_place_id},
+          travelMode: travel_mode
+        }, function(response, status) {
+          if (status === google.maps.DirectionsStatus.OK) {
+            directionsDisplay.setDirections(response);
+          } else {
+            window.alert('Directions request failed due to ' + status);
+          }
+        });
+      }
+
       var divLegend = document.createElement('div');
 		  var legend = document.getElementById('find_resources').appendChild(divLegend);
 		  legend.setAttribute("id", "legend");
+
 
         for (var key in icons) {
           var type = icons[key];
@@ -213,44 +262,9 @@ function openFindResources(){
         map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(legend);
         var addresses = ['2182 Avenida De La Playa La Jolla, CA 92037', '2236 Avenida De La Playa La Jolla, CA 92037', '4646 Convoy St San Diego, CA 92111'];
         geoCodeMarkers(addresses, map);
+        google.maps.event.addDomListener(window,'resize',openFindResources);
+        google.maps.event.addDomListener(window, 'load', openFindResources); 
 	}, 200);
-
-}
-
-// Sets a listener on a radio button to change the filter type on Places
-// Autocomplete.
-function setupClickListener(id, mode) {
-  var radioButton = document.getElementById(id);
-  radioButton.addEventListener('click', function() {
-    travel_mode = mode;
-  });
-}
-
-function expandViewportToFitPlace(map, place) {
-  if (place.geometry.viewport) {
-    map.fitBounds(place.geometry.viewport);
-  } else {
-    map.setCenter(place.geometry.location);
-    map.setZoom(17);
-  }
-}
-
-function route(origin_place_id, destination_place_id, travel_mode,
-               directionsService, directionsDisplay) {
-  if (!origin_place_id || !destination_place_id) {
-    return;
-  }
-  directionsService.route({
-    origin: {'placeId': origin_place_id},
-    destination: {'placeId': destination_place_id},
-    travelMode: travel_mode
-  }, function(response, status) {
-    if (status === google.maps.DirectionsStatus.OK) {
-      directionsDisplay.setDirections(response);
-    } else {
-      window.alert('Directions request failed due to ' + status);
-    }
-  });
 }
 
 function openSurvivalKit(){
