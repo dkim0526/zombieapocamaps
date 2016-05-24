@@ -37,8 +37,8 @@ function displayChart(){
     plugins: [
       {
         name: "central-click",
-        options: {
-          text: "(See more detail)",
+        options: { 
+          text: 'Crime Rate: 19',
           style: {
             "font-size": "12px",
             "font-style": "italic",
