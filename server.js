@@ -2,7 +2,6 @@
 const express = require("express");
 const app = express();
 const http = require("http");
-const io = require("socket.io")(http);
 const path = require("path");
 var session = require("express-session");
 const MongoStore = require("connect-mongo/es5")(session);
@@ -143,10 +142,6 @@ app.post("/home", router.user.send);
 app.use(function(err, req, res, next) {
   console.error(err.stack);
   res.status(500).send('Something broke!');
-});
-
-io.use(function(socket, next) {
-    session_middleware(socket.request, {}, next);
 });
 
 var health_query = 'SELECT HEALTH."CITY" as City, CASE WHEN HEALTH."ADDR" <> \'\' THEN HEALTH."ADDR" ELSE \'San Diego\' END AS ADDRESS FROM cogs121_16_raw.sandag_clinics_all_prj AS HEALTH';
