@@ -21,15 +21,15 @@ function displayChart(){
     //circleColor: use @default
     data: {
       items: [
-        {text: "Chula Vista", count: "236"},
-        {text: "Mira Mesa", count: "382"},
-        {text: "La Jolla", count: "170"},
-        {text: "Kearny Mesa", count: "123"},
-        {text: "Oceanside", count: "12"},
-        {text: "Carlsbad", count: "170"},
-        {text: "Del Mar", count: "382"},
-        {text: "Pacific Beach", count: "10"},
-        {text: "Poway", count: "170"},
+        {text: "Chula Vista", count: "18.5"},
+        {text: "Mira Mesa", count: "17.5"},
+        {text: "La Jolla", count: "19"},
+        {text: "Kearny Mesa", count: "18.6"},
+        {text: "Oceanside", count: "14"},
+        {text: "Carlsbad", count: "17"},
+        {text: "Del Mar", count: "19"},
+        {text: "Pacific Beach", count: "17.7"},
+        {text: "Poway", count: "19"},
       ],
       eval: function (item) {return item.count;},
       classed: function (item) {return item.text.split(" ").join("");}
