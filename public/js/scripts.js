@@ -89,20 +89,35 @@ function deleteMarkers() {
 }
 
 function sortByResource(name, map){
-	deleteMarkers();
-	var resultArray = [];
-	var test1 = ['San Diego, CA'];
-	var test2 = ['Los Angeles, CA'];
-	var test3 = ['Las Vegas, NV'];
-	var test4 = ['Sacramento, CA'];
-	switch(name){
-		case 'Food': resultArray = test1; console.log("In 1");break;
-		case 'Water': resultArray = test2; console.log("In 2");break;
-		case 'Transportation': resultArray = test3; console.log("In 3");break;
-		case 'Supplies': resultArray = test4; console.log("In 4");break;
-	}
+  deleteMarkers();
+  var resultArray = [];
+  var nameStr = '';
+  switch(name){
+    case 'Food and Water': nameStr = "food_water"; break;
+    case 'Health': nameStr = "health"; break;
+    case 'Supplies': nameStr = "supplies"; break;
+  }
 
-	geoCodeMarkers(resultArray, map);
+  getDataFromDelphi(nameStr, map);
+}
+
+function getDataFromDelphi(typeOfQuery, map){
+  var addresses = [];
+  d3.json("/delphidata_" + typeOfQuery, function(err, data){
+    addresses = makeAddressList(data);
+        geoCodeMarkers(addresses, map);
+    });
+}
+
+function makeAddressList(array){
+  var addressString = "";
+  var returnArray = [];
+  for(var i = 0; i < array.length; i++){
+    addressString = array[i]["address"] + ', ' + array[i]["city"] + ' CA';
+    returnArray.push(addressString);
+  }
+  console.log(returnArray);
+  return returnArray;
 }
 
 function openFindResources(){
@@ -120,16 +135,12 @@ function openFindResources(){
         });
         var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
         var icons = {
-          food: {
-            name: 'Food',
-            icon: iconBase + 'parking_lot_maps.png'
+          foodAndWater: {
+            name: 'Food and Water',
+            icon: iconBase + 'info-i_maps.png'
           },
-          water: {
-            name: 'Water',
-            icon: iconBase + 'library_maps.png'
-          },
-          transportation: {
-            name: 'Transportation',
+          health: {
+            name: 'Health',
             icon: iconBase + 'info-i_maps.png'
           },
           supplies: {
@@ -260,8 +271,9 @@ function openFindResources(){
         }
         var userLocation = getLocation(map);
         map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(legend);
-        var addresses = ['2182 Avenida De La Playa La Jolla, CA 92037', '2236 Avenida De La Playa La Jolla, CA 92037', '4646 Convoy St San Diego, CA 92111'];
-        geoCodeMarkers(addresses, map);
+        
+        getDataFromDelphi("health", map);
+        
         google.maps.event.addDomListener(window,'resize',openFindResources);
         google.maps.event.addDomListener(window, 'load', openFindResources); 
 	}, 200);
