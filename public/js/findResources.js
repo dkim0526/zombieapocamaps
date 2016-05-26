@@ -6,6 +6,7 @@ function createMarker(latlng, map, self){
 	var marker = new google.maps.Marker({
         position: latlng,
         map: map
+				// icon: //url
     });
     if(!self){
     	google.maps.event.addListener(marker, 'click', function(){getRouteFromClick(map, marker);});
@@ -136,11 +137,11 @@ function openFindResources(){
           center: {lat: 32.8849813, lng: -117.2413856},
           styles: [{"featureType":"administrative","stylers":[{"visibility":"off"}]},{"featureType":"poi","stylers":[{"visibility":"simplified"}]},{"featureType":"road","elementType":"labels","stylers":[{"visibility":"simplified"}]},{"featureType":"water","stylers":[{"visibility":"simplified"}]},{"featureType":"transit","stylers":[{"visibility":"simplified"}]},{"featureType":"landscape","stylers":[{"visibility":"simplified"}]},{"featureType":"road.highway","stylers":[{"visibility":"off"}]},{"featureType":"road.local","stylers":[{"visibility":"on"}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"visibility":"on"}]},{"featureType":"water","stylers":[{"color":"#84afa3"},{"lightness":52}]},{"stylers":[{"saturation":-17},{"gamma":0.36}]},{"featureType":"transit.line","elementType":"geometry","stylers":[{"color":"#3f518c"}]}]
         });
-        var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
+        // var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
         var icons = {
           foodAndWater: {
             name: 'Food and Water',
-            icon: iconBase + 'info-i_maps.png'
+            icon: '../img/foodwater.png'
           },
           health: {
             name: 'Health',
@@ -163,9 +164,11 @@ function openFindResources(){
       var directionsDisplay = new google.maps.DirectionsRenderer;
       directionsDisplay.setMap(map);
 
-      var origin_input = document.getElementById('origin-input');
-      var destination_input = document.getElementById('destination-input');
-      var modes = document.getElementById('mode-selector');
+
+
+			var origin_input = $('#origin-input').clone()[0];
+      var destination_input = $('#destination-input').clone()[0];
+      var modes = $('#mode-selector').clone()[0];
       if(origin_input)
         map.controls[google.maps.ControlPosition.TOP_LEFT].push(origin_input);
       if(destination_input){
