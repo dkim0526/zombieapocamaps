@@ -10,7 +10,7 @@ $(document).ready(function() {
 	$("#connect_health_btn").click(openHealth);
 	$("#connect_building_btn").click(openBuilding);
 	$("#connect_other_btn").click(openOther);
-	openSkills();
+	openKilling();
 })
 
 function openKilling(){
@@ -27,12 +27,13 @@ function openBuilding(){
 	setTimeout(initMap, 200);
 }
 function openOther(){
-	openPanel($("#connect_other_btn"), "#5E1818");
+	openPanel($("#connect_other_btn"), "#C3CC79");
 	setTimeout(initMap, 200);
 }
 function openPanel(button, color){
 	if(!button.hasClass("active-profile-btn")){
 		$("#profile_tabs button").removeClass("active-profile-btn");
+		$("#profile_tabs button").css("background-color", "darkgray");
 		button.addClass("active-profile-btn");
 		button.css("background-color", color);
 		$("#connect_content").css("border-color", color)
