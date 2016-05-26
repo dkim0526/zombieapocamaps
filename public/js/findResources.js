@@ -145,11 +145,11 @@ function openFindResources(){
           },
           health: {
             name: 'Health',
-            icon: iconBase + 'info-i_maps.png'
+            icon: '../img/clinic.png'
           },
           supplies: {
             name: 'Supplies',
-            icon: iconBase + 'info-i_maps.png'
+            icon: '../img/supplies.png'
           }
         };
 
@@ -164,11 +164,10 @@ function openFindResources(){
       var directionsDisplay = new google.maps.DirectionsRenderer;
       directionsDisplay.setMap(map);
 
-
-
 			var origin_input = $('#origin-input').clone()[0];
       var destination_input = $('#destination-input').clone()[0];
       var modes = $('#mode-selector').clone()[0];
+
       if(origin_input)
         map.controls[google.maps.ControlPosition.TOP_LEFT].push(origin_input);
       if(destination_input){
