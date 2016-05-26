@@ -2,7 +2,6 @@
 const express = require("express");
 const app = express();
 const http = require("http");
-const io = require("socket.io")(http);
 const path = require("path");
 var session = require("express-session");
 const MongoStore = require("connect-mongo/es5")(session);
@@ -24,7 +23,7 @@ var models = require("./models");
 var db = mongoose.connection;
 
 var router = {
-	index: require("./routes/index"),
+  index: require("./routes/index"),
   user: require("./routes/user")
  };
 
@@ -145,16 +144,13 @@ app.use(function(err, req, res, next) {
   res.status(500).send('Something broke!');
 });
 
-io.use(function(socket, next) {
-    session_middleware(socket.request, {}, next);
-});
+var health_query = 'SELECT HEALTH."CITY" as City, CASE WHEN HEALTH."ADDR" <> \'\' THEN HEALTH."ADDR" ELSE \'San Diego\' END AS ADDRESS FROM cogs121_16_raw.sandag_clinics_all_prj AS HEALTH';
+var food_water_query = 'SELECT CASE WHEN FOOD_WATER."ADDRESS" <> \'\' THEN FOOD_WATER."ADDRESS" ELSE \'San Diego\' END AS ADDRESS, FOOD_WATER."CITY" AS CITY FROM cogs121_16_raw.sandag_foodbeverage_business_prj AS FOOD_WATER';
+var supplies_query = 'SELECT CASE WHEN SUPPLIES."ADDRESS" <> \'\' THEN SUPPLIES."ADDRESS" ELSE \'San Diego\' END AS ADDRESS, SUPPLIES."CITY" AS CITY FROM cogs121_16_raw.sandag_foodgrocery_business_prj AS SUPPLIES'
 
-var query = 'SELECT INCOME."Area", CASE WHEN INCOME."Median Household Income" BETWEEN \'$40000.00\' AND \'$49000.00\' THEN 40000 WHEN INCOME."Median Household Income" BETWEEN \'$50000.00\' AND \'$59000.00\' THEN 50000 WHEN INCOME."Median Household Income" BETWEEN \'$60000.00\' AND \'$69000.00\' THEN 60000 WHEN INCOME."Median Household Income" BETWEEN \'$70000.00\' AND \'$79000.00\' THEN 70000 WHEN INCOME."Median Household Income" BETWEEN \'$80000.00\' AND \'$89000.00\' THEN 80000 WHEN INCOME."Median Household Income" BETWEEN \'$90000.00\' AND \'$99000.00\' THEN 90000 WHEN INCOME."Median Household Income" BETWEEN \'$100000.00\' AND \'$109000.00\' THEN 100000 WHEN INCOME."Median Household Income" BETWEEN \'$110000.00\' AND \'$119000.00\' THEN 110000 WHEN INCOME."Median Household Income" BETWEEN \'$120000.00\' AND \'$129000.00\' THEN 1200000 ELSE 150000 END AS "Avg Income",  HOME_VALUE."Median house value", POVERTY."Total population below poverty" AS "Poverty_Count", COUNT(CRIMES."zip") AS "Number_of_Crimes" FROM cogs121_16_raw.hhsa_san_diego_demographics_median_income_2012_norm AS INCOME INNER JOIN cogs121_16_raw.hhsa_san_diego_demographics_home_value_2012 AS HOME_VALUE ON INCOME."Area" = HOME_VALUE."Area" INNER JOIN cogs121_16_raw.hhsa_san_diego_demographics_poverty_2012 AS POVERTY ON POVERTY."Area" = INCOME."Area" LEFT OUTER JOIN cogs121_16_raw.arjis_crimes AS CRIMES ON LOWER(CRIMES."community") = LOWER(INCOME."Area") GROUP BY INCOME."Area", "Avg Income", HOME_VALUE."Median house value", POVERTY."Total population below poverty"';
+var pgVar = require('pg');
 
-app.get('/delphidata', function (req, res) {
-
-    var pg = require('pg');
-
+function processQuery(req, res, pg, query){
     pg.connect(conString, function(err, client, done) {
         if(err) {
             return console.error('error fetching client from pool', err);
@@ -162,15 +158,29 @@ app.get('/delphidata', function (req, res) {
         client.query(query, function(err, result) {
             done();
 
-
             if(err) {
               return console.error('error running query', err);
             }
+
             res.json(result.rows);
-        client.end();
+            client.end();
+
         });
     });
+}
+
+app.get('/delphidata_health', function (req, res) {    
+    processQuery(req, res, pgVar, health_query);
 });
+
+app.get('/delphidata_food_water', function (req, res) {    
+    processQuery(req, res, pgVar, food_water_query);
+});
+
+app.get('/delphidata_supplies', function (req, res) {    
+    processQuery(req, res, pgVar, supplies_query);
+});
+
 // Start Server
 http.createServer(app).listen(app.get("port"), function() {
     console.log("Express server listening on port " + app.get("port"));

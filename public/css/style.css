@@ -459,7 +459,6 @@ nav{
 }
 
 
-
 #survival_kit{
     background-color:#8C9FA3;
     padding:0;
@@ -592,17 +591,17 @@ nav{
 }
 
 #floating-panel {
-position: absolute;
-top: 85px;
-left: 25%;
-z-index: 5;
-background-color: #fff;
-padding: 5px;
-border: 1px solid #999;
-text-align: center;
-font-family: 'Roboto','sans-serif';
-line-height: 30px;
-padding-left: 10px;
+    position: absolute;
+    top: 85px;
+    left: 25%;
+    z-index: 5;
+    background-color: #fff;
+    padding: 5px;
+    border: 1px solid #999;
+    text-align: center;
+    font-family: 'Roboto','sans-serif';
+    line-height: 30px;
+    padding-left: 10px;
 }
 
 #legend {
@@ -612,6 +611,7 @@ padding-left: 10px;
     margin-bottom: 2%
 }
 
+<<<<<<< HEAD
 #resource_checklist{
     background-color:white;
 
@@ -621,4 +621,45 @@ padding-left: 10px;
     z-index:10;
     height:300px;
     width:400px;
+=======
+.controls {
+    margin-top: 10px;
+    border: 1px solid transparent;
+    border-radius: 2px 0 0 2px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    height: 32px;
+    outline: none;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+#origin-input,
+#destination-input {
+    background-color: #fff;
+    font-family: Roboto;
+    font-size: 15px;
+    font-weight: 300;
+    margin-left: 12px;
+    padding: 0 11px 0 13px;
+    text-overflow: ellipsis;
+    width: 200px;
+}
+
+#origin-input:focus,
+#destination-input:focus {
+    border-color: #4d90fe;
+}
+
+#mode-selector {
+    color: #fff;
+    background-color: #4d90fe;
+    margin-left: 12px;
+    padding: 5px 11px 0px 11px;
+}
+
+#mode-selector label {
+    font-family: Roboto;
+    font-size: 13px;
+    font-weight: 300;
+>>>>>>> 556b1b4b18fa6748e388fa81d3ed1d7690ffb8a3
 }
