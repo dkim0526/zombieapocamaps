@@ -1,6 +1,6 @@
 var markers = [];
 
-// Creates marker and puts it on the map based on lat and long. If 
+// Creates marker and puts it on the map based on lat and long. If
 // it is the user, do not add a click listener
 function createMarker(latlng, map, self){
 	var marker = new google.maps.Marker({
@@ -15,13 +15,20 @@ function createMarker(latlng, map, self){
 
 // This function translates the addresses into geocodes so that they can be placed on the map
 function geoCodeMarkers(addresses, map){
-	for(var x = 0; x < addresses.length; x++) {
-        $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address='+addresses[x]+'&sensor=false', null, function (data) {
-            var p = data.results[0].geometry.location
-            var latlng = new google.maps.LatLng(p.lat, p.lng);
-	        createMarker(latlng, map, false);
-        });
-	}
+  console.log("Loading " + addresses.length + " addresses...");
+  $.each(addresses, function(index, address){
+        setTimeout(function(){
+         $.getJSON('https://maps.googleapis.com/maps/api/geocode/json?address='+address.toString() + '&sensor=false', null, function (data) {
+            }).done(function(data){
+                 var p = data.results[0].geometry.location;
+                var latlng = new google.maps.LatLng(p.lat, p.lng);
+                createMarker(latlng, map, false);
+            });
+          if(index == this.length-1){
+            console.log("DONE!");
+          }
+       }, 1000 * parseInt(index / 10));
+  });
 }
 
 // Calculates the route between two points and displays it on the map.
@@ -262,10 +269,10 @@ function openFindResources(){
         }
         var userLocation = getUserLocation(map);
         map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(legend);
-        
+
         getDataFromDelphi("health", map);
-        
+
         google.maps.event.addDomListener(window,'resize',openFindResources);
-        google.maps.event.addDomListener(window, 'load', openFindResources); 
+        google.maps.event.addDomListener(window, 'load', openFindResources);
 	}, 200);
 }
