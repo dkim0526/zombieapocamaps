@@ -2,12 +2,74 @@ var firstClick = true;
 function openSafetyZones() {
   openTab($("#safety_zone"), $("#safety_zone_btn"), "Safe Zones");
   if(firstClick){
-    displayChart();
+    getData("safe_zones");
     firstClick = false;
   }
 }
-function displayChart(){  
-  var bubbleChart = new d3.svg.BubbleChart({
+
+function findRating(total){
+    var returnVal = 1;
+    if(total>=5072 && total < 66803)
+        returnVal =  1; 
+    if(total>=66803 && total < 128534)
+        returnVal =  2;
+    if(total>=128534 && total < 190265)
+        returnVal =  3; 
+    if(total>=190265 && total < 251996)
+        returnVal =  4;
+    if(total>=251996 && total < 313727)
+        returnVal =  5;
+    if(total>=313727 && total < 375458)
+        returnVal =  6;
+    if(total>=375458 && total < 437189)
+        returnVal =  7;
+    if(total>=437189 && total < 498920)
+        returnVal =  8;
+    if(total>=498920 && total < 560651)
+        returnVal =  9;
+    if(total >= 560651)
+        returnVal =  10;
+
+    return returnVal;
+}
+
+function makeJsonList(array){
+  var jsonObj = {
+    "cities": String,
+    "population": Number,
+    "zombies": Number,
+    "rating": Number
+  }
+  var returnArray = [];
+  for(var i = 0; i < array.length; i++){
+    jsonObj = {};
+    jsonObj.cities = array[i]["cities"];
+    jsonObj.population = array[i]["population_density"];
+    jsonObj.zombies = array[i]["zombie_count"];
+    jsonObj.rating = findRating(array[i]["rating"]);
+    returnArray.push(jsonObj);
+  }
+
+  return returnArray;
+}
+
+function getData(typeOfQuery){
+  var list = [];
+  d3.json("/delphidata_" + typeOfQuery, function(err, data){
+      list = makeJsonList(data);
+      displayChart(list);
+  });
+}
+
+function displayChart(delphidata){  
+  var jsonObj = {
+    "cities": String,
+    "population": Number,
+    "zombies": Number,
+    "rating": Number
+  }
+
+  var bubbleChart = new d3.svg.BubbleChart({ 
     supportResponsive: true,
     //container: => use @default
     size: 1200,
@@ -20,58 +82,15 @@ function displayChart(){
     //intersectInc: use @default
     //circleColor: use @default
     data: {
-      items: [
-        {text: "Chula Vista", count: "18.5"},
-        {text: "Mira Mesa", count: "17.5"},
-        {text: "La Jolla", count: "19"},
-        {text: "Kearny Mesa", count: "18.6"},
-        {text: "Oceanside", count: "14"},
-        {text: "Carlsbad", count: "17"},
-        {text: "Del Mar", count: "19"},
-        {text: "Kearny Mesa", count: "18.6"},
-        {text: "Oceanside", count: "14"},
-        {text: "Carlsbad", count: "17"},
-        {text: "Del Mar", count: "19"},
-        {text: "Chula Vista", count: "18.5"},
-        {text: "Mira Mesa", count: "17.5"},
-        {text: "La Jolla", count: "19"},
-        {text: "Kearny Mesa", count: "18.6"},
-        {text: "Oceanside", count: "14"},
-        {text: "Carlsbad", count: "17"},
-        {text: "Del Mar", count: "19"},
-        {text: "Kearny Mesa", count: "18.6"},
-        {text: "Oceanside", count: "14"},
-        {text: "Carlsbad", count: "17"},
-        {text: "Del Mar", count: "19"},{text: "Chula Vista", count: "18.5"},
-        {text: "Mira Mesa", count: "17.5"},
-        {text: "La Jolla", count: "19"},
-        {text: "Kearny Mesa", count: "18.6"},
-        {text: "Oceanside", count: "14"},
-        {text: "Carlsbad", count: "17"},
-        {text: "Del Mar", count: "19"},
-        {text: "Kearny Mesa", count: "18.6"},
-        {text: "Oceanside", count: "14"},
-        {text: "Carlsbad", count: "17"},
-        {text: "Del Mar", count: "19"},{text: "Chula Vista", count: "18.5"},
-        {text: "Mira Mesa", count: "17.5"},
-        {text: "La Jolla", count: "19"},
-        {text: "Kearny Mesa", count: "18.6"},
-        {text: "Oceanside", count: "14"},
-        {text: "Carlsbad", count: "17"},
-        {text: "Del Mar", count: "19"},
-        {text: "Kearny Mesa", count: "18.6"},
-        {text: "Oceanside", count: "14"},
-        {text: "Carlsbad", count: "17"},
-        {text: "Del Mar", count: "19"},
-      ],
-      eval: function (item) {return item.count;},
-      classed: function (item) {return item.text.split(" ").join("");}
+      items: delphidata,
+      eval: function (item) {return item.rating;},
+      classed: function (item) {return item.cities.split(" ").join("");}
     },
     plugins: [
       {
         name: "central-click",
         options: { 
-          text: 'Crime Rate: 19',
+          text: '',
           style: {
             "font-size": "12px",
             "font-style": "italic",
@@ -91,8 +110,8 @@ function displayChart(){
         options: {
           format: [
             {// Line #0
-              textField: "count",
-              classed: {count: true},
+              textField: "rating",
+              classed: {rating: true},
               style: {
                 "font-size": "28px",
                 "font-family": "Source Sans Pro, sans-serif",
@@ -106,8 +125,8 @@ function displayChart(){
               }
             },
             {// Line #1
-              textField: "text",
-              classed: {text: true},
+              textField: "cities",
+              classed: {cities: true},
               style: {
                 "font-size": "14px",
                 "font-family": "Source Sans Pro, sans-serif",
@@ -135,3 +154,48 @@ function displayChart(){
       }]
   });
 }
+
+/*
+    {text: "Chula Vista", count: "18.5"},
+        {text: "Mira Mesa", count: "17.5"},
+        {text: "La Jolla", count: "19"},
+        {text: "Kearny Mesa", count: "18.6"},
+        {text: "Oceanside", count: "14"},
+        {text: "Carlsbad", count: "17"},
+        {text: "Del Mar", count: "19"},
+        {text: "Kearny Mesa", count: "18.6"},
+        {text: "Oceanside", count: "14"},
+        {text: "Carlsbad", count: "17"},
+        {text: "Del Mar", count: "19"},
+        {text: "Chula Vista", count: "18.5"},
+        {text: "Mira Mesa", count: "17.5"},
+        {text: "La Jolla", count: "19"},
+        {text: "Kearny Mesa", count: "18.6"},
+        {text: "Oceanside", count: "14"},
+        {text: "Carlsbad", count: "17"},
+        {text: "Del Mar", count: "19"},
+        {text: "Kearny Mesa", count: "18.6"},
+        {text: "Oceanside", count: "14"},
+        {text: "Carlsbad", count: "17"},
+        {text: "Del Mar", count: "19"},{text: "Chula Vista", count: "18.5"},
+        {text: "Mira Mesa", count: "17.5"},
+        {text: "La Jolla", count: "19"},
+        {text: "Kearny Mesa", count: "18.6"},
+        {text: "Oceanside", count: "14"},
+        {text: "Carlsbad", count: "17"},
+        {text: "Del Mar", count: "19"},
+        {text: "Kearny Mesa", count: "18.6"},
+        {text: "Oceanside", count: "14"},
+        {text: "Carlsbad", count: "17"},
+        {text: "Del Mar", count: "19"},{text: "Chula Vista", count: "18.5"},
+        {text: "Mira Mesa", count: "17.5"},
+        {text: "La Jolla", count: "19"},
+        {text: "Kearny Mesa", count: "18.6"},
+        {text: "Oceanside", count: "14"},
+        {text: "Carlsbad", count: "17"},
+        {text: "Del Mar", count: "19"},
+        {text: "Kearny Mesa", count: "18.6"},
+        {text: "Oceanside", count: "14"},
+        {text: "Carlsbad", count: "17"},
+        {text: "Del Mar", count: "19"},
+*/
