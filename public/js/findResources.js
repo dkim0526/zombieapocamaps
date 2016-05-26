@@ -1,13 +1,24 @@
 var markers = [];
 
-// Creates marker and puts it on the map based on lat and long. If
-// it is the user, do not add a click listener
-function createMarker(latlng, map, self){
-	var marker = new google.maps.Marker({
-        position: latlng,
-        map: map
-				// icon: //url
-    });
+
+var icons = {
+  food_water: {
+    icon: '../img/foodwater.png'
+  },
+  health: {
+    icon: '../img/clinic.png'
+  },
+  supplies: {
+    icon: '../img/supplies.png'
+  }
+};
+
+function createMarker(latlng, map, feature, self) {
+  var marker = new google.maps.Marker({
+    position: latlng,
+    map: map,
+    icon: feature.icon
+  });
     if(!self){
     	google.maps.event.addListener(marker, 'click', function(){getRouteFromClick(map, marker);});
     	markers.push(marker);
@@ -15,7 +26,7 @@ function createMarker(latlng, map, self){
 }
 
 // This function translates the addresses into geocodes so that they can be placed on the map
-function geoCodeMarkers(addresses, map){
+function geoCodeMarkers(addresses, map, resource){
   console.log("Loading " + addresses.length + " addresses...");
   $.each(addresses, function(index, address){
         setTimeout(function(){
@@ -23,7 +34,7 @@ function geoCodeMarkers(addresses, map){
             }).done(function(data){
                  var p = data.results[0].geometry.location;
                 var latlng = new google.maps.LatLng(p.lat, p.lng);
-                createMarker(latlng, map, false);
+                createMarker(latlng, map, icons[resource], false);
             });
           if(index == this.length-1){
             console.log("DONE!");
@@ -108,7 +119,7 @@ function getDataFromDelphi(typeOfQuery, map){
   var addresses = [];
   d3.json("/delphidata_" + typeOfQuery, function(err, data){
     addresses = makeAddressList(data);
-        geoCodeMarkers(addresses, map);
+        geoCodeMarkers(addresses, map, typeOfQuery);
     });
 }
 
