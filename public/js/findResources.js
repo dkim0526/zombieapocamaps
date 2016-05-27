@@ -1,15 +1,18 @@
 var markers = [];
-
+var directionsDisplay = null;
 
 var icons = {
   food_water: {
     icon: '../img/foodwater.png'
   },
   health: {
-    icon: '../img/clinic.png'
+    icon: '../img/health.png'
   },
   supplies: {
     icon: '../img/supplies.png'
+  },
+  home: {
+    icon: '../img/home.png'
   }
 };
 
@@ -52,6 +55,7 @@ directionsService.route({
 }, function(response, status) {
   if (status === google.maps.DirectionsStatus.OK) {
     directionsDisplay.setDirections(response);
+    console.log('SETTING THEM DIRECTIONS THO')
   } else {
     window.alert('Directions request failed due to ' + status);
   }
@@ -64,15 +68,16 @@ function getUserLocation(map){
 		navigator.geolocation.getCurrentPosition(function(position){
 			var location = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 			map.setCenter(location);
-			createMarker(location, map, true);
+			createMarker(location, map, icons["home"], true);
 		});
 	}
 }
 
 // Adds click listener to markers and calculates route between user and clicked marker.
 function getRouteFromClick(map, marker){
+    // var directionsDisplay = new google.maps.DirectionsRenderer({suppressMarkers: true});
+    var dirDisplay = directionsDisplay || new google.maps.DirectionsRenderer({suppressMarkers: true});
     var directionsService = new google.maps.DirectionsService;
-    var directionsDisplay = new google.maps.DirectionsRenderer({suppressMarkers: true});
     directionsDisplay.setMap(map);
     if(navigator.geolocation){
 		navigator.geolocation.getCurrentPosition(function(position){
@@ -110,7 +115,6 @@ function sortByResource(name, map){
     case 'Health': nameStr = "health"; break;
     case 'Supplies': nameStr = "supplies"; break;
   }
-
   getDataFromDelphi(nameStr, map);
 }
 
@@ -148,7 +152,7 @@ function openFindResources(){
           center: {lat: 32.8849813, lng: -117.2413856},
           styles: [{"featureType":"administrative","stylers":[{"visibility":"off"}]},{"featureType":"poi","stylers":[{"visibility":"simplified"}]},{"featureType":"road","elementType":"labels","stylers":[{"visibility":"simplified"}]},{"featureType":"water","stylers":[{"visibility":"simplified"}]},{"featureType":"transit","stylers":[{"visibility":"simplified"}]},{"featureType":"landscape","stylers":[{"visibility":"simplified"}]},{"featureType":"road.highway","stylers":[{"visibility":"off"}]},{"featureType":"road.local","stylers":[{"visibility":"on"}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"visibility":"on"}]},{"featureType":"water","stylers":[{"color":"#84afa3"},{"lightness":52}]},{"stylers":[{"saturation":-17},{"gamma":0.36}]},{"featureType":"transit.line","elementType":"geometry","stylers":[{"color":"#3f518c"}]}]
         });
-        // var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
+
         var icons = {
           foodAndWater: {
             name: 'Food and Water',
@@ -156,7 +160,7 @@ function openFindResources(){
           },
           health: {
             name: 'Health',
-            icon: '../img/clinic.png'
+            icon: '../img/health.png'
           },
           supplies: {
             name: 'Supplies',
@@ -172,7 +176,7 @@ function openFindResources(){
       trafficLayer.setMap(map);
 
       var directionsService = new google.maps.DirectionsService;
-      var directionsDisplay = new google.maps.DirectionsRenderer;
+      directionsDisplay = new google.maps.DirectionsRenderer;
       directionsDisplay.setMap(map);
 
 			var origin_input = $('#origin-input').clone()[0];
@@ -283,7 +287,7 @@ function openFindResources(){
         var userLocation = getUserLocation(map);
         map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(legend);
 
-        getDataFromDelphi("health", map);
+        // getDataFromDelphi("health", map);
 
         google.maps.event.addDomListener(window,'resize',openFindResources);
         google.maps.event.addDomListener(window, 'load', openFindResources);

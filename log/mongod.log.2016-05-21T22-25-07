@@ -1,0 +1,28 @@
+2016-05-21T15:22:56.953-0700 I CONTROL  [initandlisten] MongoDB starting : pid=1200 port=27017 dbpath=dbpath 64-bit host=luckyducky
+2016-05-21T15:22:56.953-0700 I CONTROL  [initandlisten] targetMinOS: Windows Vista/Windows Server 2008
+2016-05-21T15:22:56.953-0700 I CONTROL  [initandlisten] db version v3.2.4
+2016-05-21T15:22:56.954-0700 I CONTROL  [initandlisten] git version: e2ee9ffcf9f5a94fad76802e28cc978718bb7a30
+2016-05-21T15:22:56.954-0700 I CONTROL  [initandlisten] allocator: tcmalloc
+2016-05-21T15:22:56.954-0700 I CONTROL  [initandlisten] modules: none
+2016-05-21T15:22:56.955-0700 I CONTROL  [initandlisten] build environment:
+2016-05-21T15:22:56.955-0700 I CONTROL  [initandlisten]     distarch: x86_64
+2016-05-21T15:22:56.955-0700 I CONTROL  [initandlisten]     target_arch: x86_64
+2016-05-21T15:22:56.956-0700 I CONTROL  [initandlisten] options: { storage: { dbPath: "dbpath" }, systemLog: { destination: "file", path: "log/mongod.log" } }
+2016-05-21T15:22:56.957-0700 I -        [initandlisten] Detected data files in dbpath created by the 'mmapv1' storage engine, so setting the active storage engine to 'mmapv1'.
+2016-05-21T15:22:56.957-0700 W -        [initandlisten] Detected unclean shutdown - dbpath\mongod.lock is not empty.
+2016-05-21T15:22:57.006-0700 I JOURNAL  [initandlisten] journal dir=dbpath\journal
+2016-05-21T15:22:57.029-0700 I JOURNAL  [initandlisten] recover begin
+2016-05-21T15:22:57.029-0700 I JOURNAL  [initandlisten] info no lsn file in journal/ directory
+2016-05-21T15:22:57.029-0700 I JOURNAL  [initandlisten] recover lsn: 0
+2016-05-21T15:22:57.029-0700 I JOURNAL  [initandlisten] recover dbpath\journal\j._0
+2016-05-21T15:22:57.031-0700 I JOURNAL  [initandlisten] recover applying initial journal section with sequence number 0
+2016-05-21T15:22:57.075-0700 I STORAGE  [initandlisten] recover create file dbpath\local.ns 16MB
+2016-05-21T15:22:57.545-0700 I STORAGE  [initandlisten] recover create file dbpath\local.0 64MB
+2016-05-21T15:22:58.618-0700 I JOURNAL  [initandlisten] recover cleaning up
+2016-05-21T15:22:58.625-0700 I JOURNAL  [initandlisten] removeJournalFiles
+2016-05-21T15:22:58.627-0700 I JOURNAL  [initandlisten] recover done
+2016-05-21T15:22:58.693-0700 I JOURNAL  [durability] Durability thread started
+2016-05-21T15:22:58.694-0700 I JOURNAL  [journal writer] Journal writer thread started
+2016-05-21T15:22:59.080-0700 I NETWORK  [HostnameCanonicalizationWorker] Starting hostname canonicalization worker
+2016-05-21T15:22:59.080-0700 I FTDC     [initandlisten] Initializing full-time diagnostic data capture with directory 'dbpath/diagnostic.data'
+2016-05-21T15:22:59.092-0700 I NETWORK  [initandlisten] waiting for connections on port 27017

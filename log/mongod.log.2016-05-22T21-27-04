@@ -1,0 +1,13 @@
+2016-05-21T16:05:45.592-0700 I CONTROL  [initandlisten] MongoDB starting : pid=9068 port=27017 dbpath=dbpath 64-bit host=luckyducky
+2016-05-21T16:05:45.592-0700 I CONTROL  [initandlisten] targetMinOS: Windows Vista/Windows Server 2008
+2016-05-21T16:05:45.593-0700 I CONTROL  [initandlisten] db version v3.2.4
+2016-05-21T16:05:45.593-0700 I CONTROL  [initandlisten] git version: e2ee9ffcf9f5a94fad76802e28cc978718bb7a30
+2016-05-21T16:05:45.593-0700 I CONTROL  [initandlisten] allocator: tcmalloc
+2016-05-21T16:05:45.593-0700 I CONTROL  [initandlisten] modules: none
+2016-05-21T16:05:45.594-0700 I CONTROL  [initandlisten] build environment:
+2016-05-21T16:05:45.594-0700 I CONTROL  [initandlisten]     distarch: x86_64
+2016-05-21T16:05:45.594-0700 I CONTROL  [initandlisten]     target_arch: x86_64
+2016-05-21T16:05:45.596-0700 I CONTROL  [initandlisten] options: { storage: { dbPath: "dbpath" }, systemLog: { destination: "file", path: "log/mongod.log" } }
+2016-05-21T16:05:45.597-0700 E NETWORK  [initandlisten] listen(): bind() failed errno:10048 Only one usage of each socket address (protocol/network address/port) is normally permitted. for socket: 0.0.0.0:27017
+2016-05-21T16:05:45.597-0700 E STORAGE  [initandlisten] Failed to set up sockets during startup.
+2016-05-21T16:05:45.597-0700 I CONTROL  [initandlisten] dbexit:  rc: 48
