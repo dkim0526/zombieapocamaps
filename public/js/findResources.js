@@ -176,7 +176,7 @@ function openFindResources(){
       trafficLayer.setMap(map);
 
       var directionsService = new google.maps.DirectionsService;
-      directionsDisplay = new google.maps.DirectionsRenderer;
+      directionsDisplay = new google.maps.DirectionsRenderer({suppressMarkers: true});
       directionsDisplay.setMap(map);
 
 			var origin_input = $('#origin-input').clone()[0];

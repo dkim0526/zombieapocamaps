@@ -6,26 +6,25 @@
 
 <body>
     {{> facebook}}
+
+    <!-- start of longin-screen -->
     <div id="login_screen">
         <center>
             <h1 id="main-title">Zombie ApocaMaps</h1>
             <strong><h2 id="subheader">A data visualization tool that will help you prepare for the Zombie Apocalypse</h2></strong>
-            <!-- <br>
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/2cymqAVPWuo" frameborder="0" allowfullscreen></iframe>
-            <br> -->
             <div id="login-btn">
-                <!-- <a href="/auth/facebook"><img src="/img/facebook.png" width="250px"></a> -->
                 <a id="fb-login" href="/auth/facebook"><b>Start Now</b></a>
-                <a id="learnmore" href="#video"><b>Learn More</b></a>
+                <a id="learnmore" href="#videotutorial"><b>Learn More</b></a>
             </div>
         </center>
-    </div>
+    </div> <!-- end of login-screen -->
 
+    <!--start of learn-->
     <div id="learn">
       <div class="container-fluid">
         <div class="row">
           <div id="video" class="col-lg-6">
-            <a id="video"></a>
+            <a id="videotutorial"></a>
             <br>
             <iframe width="500" height="305" src="https://www.youtube.com/embed/2cymqAVPWuo" frameborder="0" allowfullscreen></iframe>
             <br>
@@ -38,14 +37,16 @@
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.
             </h3>
           </div>
-        </div>
-      </div>
-    </div>
+        </div> <!-- end of row -->
+      </div> <!-- end of container fluid -->
+    </div> <!-- end of learn -->
 
+    <!-- start of preview -->
     <div id="preview">
       <div class="container-fluid">
         <h1 class="text-center how-prepared">How prepared are you?</h1>
 
+        <!-- start of safety zones -->
         <div id="safetyzones" class="row">
           <div class="col-lg-6 screenshot">
             <img src="https://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg" width="500" height="305">
@@ -58,8 +59,9 @@
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.
             </h2>
           </div>
-        </div>
+        </div> <!-- end of safety zones -->
 
+        <!-- start of find resources -->
         <div id="findresources" class="row">
           <div class="col-lg-6 wording">
             <h2 class="title">Find <span class="keyword">Nearby Resources</span></h2>
@@ -72,8 +74,9 @@
           <div class="col-lg-6 screenshot">
             <img src="https://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg" width="500" height="305">
           </div>
-        </div>
+        </div> <!-- end of find resources -->
 
+        <!-- start of connect -->
         <div id="connect" class="row">
           <div class="col-lg-6 screenshot">
             <img src="https://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg" width="500" height="305">
@@ -86,21 +89,23 @@
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.
             </h3>
           </div>
-        </div>
+        </div> <!-- end of connect -->
+      </div> <!-- end of container fluid -->
+    </div> <!-- end of preview -->
 
-        <div id="login-btn" class="text-center calltoaction">
-          <h1>Start preparing for the Zombie Apocalypse now!</h1>
-          <br>
-            <a id="fb-login" class="footer_button" href="/auth/facebook"><b>Start Now</b></a>
-        </div>
+    <!-- start of calltoaction -->
+    <div id="login-btn" class="text-center calltoaction">
+      <h1>Start preparing for the Zombie Apocalypse now!</h1>
+      <br>
+        <a id="fb-login" class="footer_button" href="/auth/facebook"><b>Start Now</b></a>
+    </div> <!-- end of calltoaction-->
 
-      </div>
-    </div>
-
+    <!-- start of footer-->
     <footer class="text-center">
       <p>Built by: Team A</p>
-    </footer>
+    </footer> <!-- end of footer-->
 
+    <!-- provides smooth scrolling -->
     <script>
     $('a[href*=#]:not([href=#])').click(function() {
         if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'')
@@ -115,8 +120,8 @@
                 return false;
             }
         }
-});
-</script>
+      });
+      </script>
 
 </body>
-</html>
+</html> <!--end -->
