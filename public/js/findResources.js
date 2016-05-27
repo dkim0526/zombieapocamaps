@@ -16,6 +16,20 @@ var icons = {
   }
 };
 
+function setMarkerLimit(array, limit){
+  var newArray = [limit];
+  if(array.length > limit){
+    for(var i = 0; i < limit; i++){
+      newArray.push(array[i]);
+    }
+
+    return newArray;
+  }
+  else{
+    return array;
+  }
+}
+
 function createMarker(latlng, map, feature, self) {
   var marker = new google.maps.Marker({
     position: latlng,
@@ -122,8 +136,9 @@ function sortByResource(name, map){
 function getDataFromDelphi(typeOfQuery, map){
   var addresses = [];
   d3.json("/delphidata_" + typeOfQuery, function(err, data){
-    addresses = makeAddressList(data);
-        geoCodeMarkers(addresses, map, typeOfQuery);
+        addresses = setMarkerLimit(data, 20);
+        addresses = makeAddressList(addresses);
+        setTimeout(geoCodeMarkers(addresses, map, typeOfQuery), 200);
     });
 }
 
@@ -135,7 +150,7 @@ function makeAddressList(array){
     addressString = array[i]["address"] + ', ' + array[i]["city"] + ' CA';
     returnArray.push(addressString);
   }
-  console.log(returnArray);
+
   return returnArray;
 }
 
@@ -176,7 +191,7 @@ function openFindResources(){
       trafficLayer.setMap(map);
 
       var directionsService = new google.maps.DirectionsService;
-      directionsDisplay = new google.maps.DirectionsRenderer;
+      directionsDisplay = new google.maps.DirectionsRenderer({suppressMarkers: true});
       directionsDisplay.setMap(map);
 
 			var origin_input = $('#origin-input').clone()[0];
