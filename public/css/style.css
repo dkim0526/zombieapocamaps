@@ -283,6 +283,31 @@ nav{
     width:100%;
     position:absolute;
 }
+#right-panel {
+    font-family: 'Roboto','sans-serif';
+    line-height: 30px;
+    padding-left: 10px;
+    z-index: 500;
+    background-color: white
+}
+
+#right-panel select, #right-panel input {
+    font-size: 15px;
+}
+
+#right-panel select {
+    width: 100%;
+}
+
+#right-panel i {
+    font-size: 12px;
+}
+#right-panel {
+    height: 50%;
+    float: right;
+    width: 390px;
+    overflow: auto;
+}
 
 /****************** PROFILE STYLING ******************/
 .profile_panel{

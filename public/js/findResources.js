@@ -69,7 +69,6 @@ directionsService.route({
 }, function(response, status) {
   if (status === google.maps.DirectionsStatus.OK) {
     directionsDisplay.setDirections(response);
-    console.log('SETTING THEM DIRECTIONS THO')
   } else {
     window.alert('Directions request failed due to ' + status);
   }
@@ -93,6 +92,9 @@ function getRouteFromClick(map, marker){
     var dirDisplay = directionsDisplay || new google.maps.DirectionsRenderer({suppressMarkers: true});
     var directionsService = new google.maps.DirectionsService;
     directionsDisplay.setMap(map);
+    var rightPanel = document.getElementById('right-panel');
+    directionsDisplay.setPanel(rightPanel);
+    map.controls[google.maps.ControlPosition.TOP_CENTER].push(rightPanel);
     if(navigator.geolocation){
 		navigator.geolocation.getCurrentPosition(function(position){
 			var location = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
