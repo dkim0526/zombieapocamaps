@@ -490,11 +490,10 @@ nav{
     margin-bottom: 2%;
 }
 
-#resource_checklist{
+#resource_tools{
     background-color:white;
-    bottom:0;
-    right:0;
     position:absolute;
+    margin-top:100px;
     z-index:10;
     height:300px;
     width:400px;
@@ -547,14 +546,22 @@ nav{
     margin-bottom: 2%;
 }
 
-#resource_checklist{
+#resource_tools{
     background-color:white;
     bottom:0;
     right:0;
+    height:100%;
     position:absolute;
     z-index:10;
-    height:300px;
-    width:400px;
+    width:200px;
+}
+.legend_filter{
+    margin-bottom:5px;
+    cursor:pointer;
+    font-size:14pt;
+}
+.legend_filter:hover{
+    font-weight:bold;
 }
 .controls {
     margin-top: 10px;
