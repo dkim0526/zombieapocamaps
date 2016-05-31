@@ -228,7 +228,7 @@ nav{
 #sidebar_nav{
     padding-top: 38px;
     min-height:100%;
-    width:18vw;
+    width:15vw;
     background-color:#CDCDCF;
     position:fixed;
     z-index:100;
@@ -279,7 +279,7 @@ nav{
     background-color:white;
     height:100%;
     padding-top:30px;
-    padding-left:20vw;
+    padding-left:15vw;
     width:100%;
     position:absolute;
 }
@@ -314,98 +314,12 @@ nav{
     display:none;
     width:100%;
     height:100%;
+    margin-left:15vw;
 }
 
 #profile_tabs{
     margin-bottom:10px;
 }
-
-/*.skillbar {
-    position:relative;
-    display:block;
-    margin-bottom:15px;
-    width:70%;
-    background:#eee;
-    height:35px;
-    border-radius:3px;
-    display:inline-block;
-    -moz-border-radius:3px;
-    -webkit-border-radius:3px;
-    -webkit-transition:0.4s linear;
-    -moz-transition:0.4s linear;
-    -ms-transition:0.4s linear;
-    -o-transition:0.4s linear;
-    transition:0.4s linear;
-    -webkit-transition-property:width, background-color;
-    -moz-transition-property:width, background-color;
-    -ms-transition-property:width, background-color;
-    -o-transition-property:width, background-color;
-    transition-property:width, background-color;
-}
-
-.skillbar-title {
-    position:absolute;
-    top:0;
-    left:0;
-    width:130px;
-    font-weight:bold;
-    font-size:13px;
-    color:#ffffff;
-    background:#6adcfa;
-    -webkit-border-top-left-radius:3px;
-    -webkit-border-bottom-left-radius:4px;
-    -moz-border-radius-topleft:3px;
-    -moz-border-radius-bottomleft:3px;
-    border-top-left-radius:3px;
-    border-bottom-left-radius:3px;
-}
-
-.skillbar-title span {
-    display:block;
-    background:rgba(0, 0, 0, 0.1);
-    padding:0 20px;
-    height:35px;
-    line-height:35px;
-    -webkit-border-top-left-radius:3px;
-    -webkit-border-bottom-left-radius:3px;
-    -moz-border-radius-topleft:3px;
-    -moz-border-radius-bottomleft:3px;
-    border-top-left-radius:3px;
-    border-bottom-left-radius:3px;
-}
-
-.skillbar-bar {
-    height:35px;
-    width:0px;
-    background:#6adcfa;
-    border-radius:3px;
-    -moz-border-radius:3px;
-    -webkit-border-radius:3px;
-}
-
-.skill-bar-percent {
-    position:absolute;
-    right:10px;
-    top:0;
-    font-size:11px;
-    height:35px;
-    line-height:35px;
-    color:#ffffff;
-    color:rgba(0, 0, 0, 0.4);
-}
-
-.skill_input{
-    display:inline;
-    margin-left:20px;
-}
-
-#googleMaps {
-    height: 80%;
-}
-
-#profile_map {
-    height: 100%;
-}*/
 
 .inventory_item{
     margin-bottom:10px;
@@ -437,53 +351,16 @@ nav{
     height:100%;
 }
 
-/*#skillmap .skills-wrapper {
-  margin-top: 10px;
-  overflow: auto;
-}
-#skillmap .skills-sunburst {
-  float: left;
-  width: 500px;
-  margin-left: -80px;
-}
-#skillmap .skills-sunburst svg {
-  font: 11px 'Source Sans Pro', sans-serif;
-  font-weight: 900;
-  cursor: pointer;
-}
-#skillmap .skills-chart {
-  float: right;
-  font-family: 'Source Sans Pro', sans-serif;
-  font-size: 15px;
-  margin: 80px 20px 0 0;
-}
-#skillmap .skills-chart .breadcumb-text {
-  font-size: 13px;
-  font-weight: 700;
-}
-#skillmap .skills-chart #skills-chart-line {
-  fill: none;
-  stroke-width: 3.5px;
-}
-#skillmap .skills-chart .axis path,
-#skillmap .skills-chart .axis line {
-  fill: none;
-}
-#skillmap .skills-chart .x-axis path,
-#skillmap .skills-chart .y-axis path {
-  stroke: #444;
-  stroke-width: 1px;
-  shape-rendering: geometricPrecision;
-}*/
 
 /****************** SURVIVAL GUIDE ******************/
 #map {
     position:absolute;
     top:15px;
     bottom:0;
-    margin-left: -35px;
     width:100%;
-}#legend {
+}
+
+#legend {
     background: white;
     padding: 10px;
     margin-left: 3%;
@@ -644,10 +521,10 @@ nav{
 
 #survival_img{
     position:absolute;
-    margin-left:18vw;
+    margin-left:15vw;
     margin-top: 20px;
-    width:82vw;
-    height:95vh;
+    width:65vw;
+    height:93vh;
 }
 
 
@@ -670,9 +547,6 @@ nav{
     opacity:1;
 }
 
-.survival_interaction_point:hover + .survival_interaction_tip{
-    display:block;
-}
 
 .survival_interaction_tip h3{
     font-size:14pt;
@@ -690,55 +564,55 @@ nav{
 }
 
 #survival_point_supplies{
-    left:27vw;
+    left:23vw;
     top:80vh;
 }
 #survival_tip_supplies{
-    left:32vw;
+    left:27vw;
     top:67vh
 }
 #survival_point_communication{
-    left:85vw;
+    left:68vw;
     top:15vh;
 }
 
 #survival_tip_communication{
-     right:15vw;
+     right:32vw;
      top:10vh
 }
 
 #survival_point_skills{
-    left:92vw;
+    left:74vw;
     top:60vh;
 }
 
 #survival_tip_skills{
-    right: 10vw;
+    right: 25vw;
     top:55vh;
 }
 
 #survival_point_safety{
-    left:75vw;
+    left:60vw;
     top:30vh;
 }
 
 #survival_tip_safety{
-    left:65vw;
+    left:45vw;
     top:37vh;
 }
 
 #survival_point_evacuation{
-    left:60vw;
-    top:80vh;
+    left:48vw;
+    top:82vh;
 }
 
 #survival_tip_evacuation{
-    top:57vh;
-    left:55vw;
+    top:59vh;
+    left:40vw;
 }
 
 #survival_point_resources{
-    left:52vw;
+    left:42vw;
     top:40vh;
 }
 
@@ -748,20 +622,28 @@ nav{
 }
 
 #survival_point_help{
-    left:33vw;
-    top:55vh;
+    left:30vw;
+    top:50vh;
 }
 
 #survival_tip_help{
     left:20vw;
-    top:33vh;
+    top:28vh;
 }
 
-#second_idea{
-    margin-top:100vh;
-    margin-left:20vw;
-    margin-right:20vw;
-    padding-bottom:20px;
+#survival_transcript{
+    background-color:white;
+    right:0;
+    height:95vh;
+    position:absolute;
+    z-index:10;
+    width:300px;
+    overflow:auto;
+}
+.survival_section{
+    background-color:transparent;
+    padding:10px;
+    cursor:pointer;
 }
 
 #floating-panel {

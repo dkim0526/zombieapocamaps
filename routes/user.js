@@ -30,7 +30,6 @@ exports.send = function(req, res) {
                   counter++;
               }
               messages = array2;
-              console.log("MESSAGES", messages);
               res.render("home", {users: user, questions: messages });
           }
         }

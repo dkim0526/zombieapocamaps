@@ -35,7 +35,6 @@ exports.send = function(req, res) {
 
 exports.answer = function(req, res) {
      var message =  mongoose.model('Question');
-     console.log(req.body);
      message.findOne({_id: req.body.questionid}, function(err, question){
         if(err){
             throw err;
@@ -54,7 +53,6 @@ exports.answer = function(req, res) {
                 }
             }
             answer.answer = req.body.answer[temp];
-            console.log(req.body.answer);
             answer.votes = 0;
             answer.date = date;
             question.answers.addToSet(answer);
