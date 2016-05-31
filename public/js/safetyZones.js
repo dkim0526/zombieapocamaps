@@ -64,7 +64,29 @@ function getData(typeOfQuery){
 
 var jsonObj;
 
-function displayChart(delphidata){  
+function displayChartArray(array){
+  var returnArray = [];
+  var json = {
+    "cities": String,
+    "population": String,
+    "zombies": String,
+    "rating": Number,
+    "ratingString": String
+  };
+  for(var i = 0; i < array.length; i++){
+    json = {};
+    json.cities = array[i]["cities"];
+    json.population = 'Population: ' + array[i]["population"];
+    json.zombies = 'Number of zombies: ' + array[i]["zombies"];
+    json.ratingString = "Safety Rating: " + array[i]["rating"];
+    json.rating = array[i]["rating"];
+    returnArray.push(json);
+  }
+  return returnArray;
+}
+
+function displayChart(delphidata){ 
+  delphidata = displayChartArray(delphidata);
   jsonObj = {
     "cities": String,
     "population": Number,
@@ -158,7 +180,7 @@ function displayChart(delphidata){
             },
             {// Line #0
               textField: "population",
-              classed: {pop: false},
+              classed: { pop: false},
               style: {
                 "font-size": "14px",
                 "font-family": "Source Sans Pro, sans-serif",
@@ -175,8 +197,8 @@ function displayChart(delphidata){
           ],
           centralFormat: [
             {// Line #0
-              textField: "rating",
-              classed: {rating: true},
+              textField: "ratingString",
+              classed: {ratingString: true},
               style: {
                 "font-size": "60px",
                 "font-family": "Source Sans Pro, sans-serif",
