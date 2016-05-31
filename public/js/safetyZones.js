@@ -101,7 +101,7 @@ function displayChart(delphidata){
                 "font-size": "28px",
                 "font-family": "Source Sans Pro, sans-serif",
                 "text-anchor": "middle",
-                fill: "white"
+                fill: "black"
               },
               attr: {
                 dy: "0px",
@@ -116,7 +116,7 @@ function displayChart(delphidata){
                 "font-size": "14px",
                 "font-family": "Source Sans Pro, sans-serif",
                 "text-anchor": "middle",
-                fill: "white"
+                fill: "black"
               },
               attr: {
                 dy: "40px",

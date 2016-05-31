@@ -21,8 +21,8 @@
    */
   d3.svg.BubbleChart = function (settings) {
     var self = this;
-    var defaultViewBoxSize = settings.size;
-    var defaultInnerRadius = settings.size / 5;
+    var defaultViewBoxSize = settings.size/0.9;
+    var defaultInnerRadius = settings.size / 10;
     var defaultOuterRadius = settings.size / 2;
     var defaultRadiusMin = settings.size / 10;
     self.options = {};
