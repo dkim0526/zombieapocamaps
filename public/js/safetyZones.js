@@ -206,7 +206,7 @@ function displayChart(delphidata){
                 fill: "white"
               },
               attr: {
-                dy: "60px",
+                dy: "0px",
                 x: function (d) {return d.cx;},
                 y: function (d) {return d.cy;}
               }
@@ -221,7 +221,7 @@ function displayChart(delphidata){
                 fill: "white"
               },
               attr: {
-                dy: "0px",
+                dy: "60px",
                 x: function (d) {return d.cx;},
                 y: function (d) {return d.cy;}
               }
