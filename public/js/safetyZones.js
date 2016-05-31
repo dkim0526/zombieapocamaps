@@ -62,8 +62,32 @@ function getData(typeOfQuery){
   });
 }
 
-function displayChart(delphidata){  
-  var jsonObj = {
+var jsonObj;
+
+function displayChartArray(array){
+  var returnArray = [];
+  var json = {
+    "cities": String,
+    "population": String,
+    "zombies": String,
+    "rating": Number,
+    "ratingString": String
+  };
+  for(var i = 0; i < array.length; i++){
+    json = {};
+    json.cities = array[i]["cities"];
+    json.population = 'Population: ' + array[i]["population"];
+    json.zombies = 'Number of zombies: ' + array[i]["zombies"];
+    json.ratingString = "Safety Rating: " + array[i]["rating"];
+    json.rating = array[i]["rating"];
+    returnArray.push(json);
+  }
+  return returnArray;
+}
+
+function displayChart(delphidata){ 
+  delphidata = displayChartArray(delphidata);
+  jsonObj = {
     "cities": String,
     "population": Number,
     "zombies": Number,
@@ -88,33 +112,95 @@ function displayChart(delphidata){
       classed: function (item) {return item.cities.split(" ").join("");}
     },
     plugins: [
-      {
-        name: "central-click",
-        options: { 
-          text: 'Crime Rate: 30',
-          style: {
-            "font-size": "12px",
-            "font-style": "italic",
-            "font-family": "Source Sans Pro, sans-serif",
-            //"font-weight": "700",
-            "text-anchor": "middle",
-            "fill": "white"
-          },
-          attr: {dy: "65px"},
-          centralClick: function() {
-            alert("Here is more details!!");
+        {
+          name: "central-click",
+          options: {
+            text: '',
+            style: {
+              "font-size": "28px",
+              "font-family": "Source Sans Pro, sans-serif",
+              "text-anchor": "middle",
+              fill: "black"
+            },
+            attr: {dy: "65px"},
+            centralClick: function() {
+              alert("Here is more details!!");    
+            }
           }
-        }
-      },
-      {
+        },
+        {
         name: "lines",
         options: {
           format: [
             {// Line #0
               textField: "rating",
-              classed: {rating: true},
+              classed: {rating: false},
               style: {
                 "font-size": "28px",
+                "font-family": "Source Sans Pro, sans-serif",
+                "text-anchor": "middle",
+                fill: "black"
+              },
+              attr: {
+                dy: "0px",
+                x: function (d) {return d.cx;},
+                y: function (d) {return d.cy;}
+              }
+            },
+            {// Line #1
+              textField: "cities",
+              classed: {cities: false},
+              style: {
+                "font-size": "14px",
+                "font-family": "Source Sans Pro, sans-serif",
+                "text-anchor": "middle",
+                fill: "black"
+              },
+              attr: {
+                dy: "40px",
+                x: function (d) {return d.cx;},
+                y: function (d) {return d.cy;}
+              }
+            },
+            {// Line #0
+              textField: "zombies",
+              classed: {zombies: false},
+              style: {
+                "font-size": "14px",
+                "font-family": "Source Sans Pro, sans-serif",
+                "text-anchor": "middle",
+                "visibility" : "hidden",
+                fill: "white"
+              },
+              attr: {
+                dy: "80px",
+                x: function (d) {return d.cx;},
+                y: function (d) {return d.cy;}
+              }
+            },
+            {// Line #0
+              textField: "population",
+              classed: { pop: false},
+              style: {
+                "font-size": "14px",
+                "font-family": "Source Sans Pro, sans-serif",
+                "text-anchor": "middle",
+                "visibility" : "hidden",
+                fill: "white"
+              },
+              attr: {
+                dy: "120px",
+                x: function (d) {return d.cx;},
+                y: function (d) {return d.cy;}
+              }
+            }
+          ],
+          centralFormat: [
+            {// Line #0
+              textField: "ratingString",
+              classed: {ratingString: true},
+              style: {
+                "font-size": "60px",
                 "font-family": "Source Sans Pro, sans-serif",
                 "text-anchor": "middle",
                 fill: "white"
@@ -125,30 +211,52 @@ function displayChart(delphidata){
                 y: function (d) {return d.cy;}
               }
             },
-            {// Line #1
+            {// Line #0
               textField: "cities",
               classed: {cities: true},
               style: {
-                "font-size": "14px",
+                "font-size": "60px",
                 "font-family": "Source Sans Pro, sans-serif",
                 "text-anchor": "middle",
                 fill: "white"
               },
               attr: {
-                dy: "20px",
+                dy: "60px",
                 x: function (d) {return d.cx;},
                 y: function (d) {return d.cy;}
               }
-            }
-          ],
-          centralFormat: [
-            {// Line #0
-              style: {"font-size": "50px"},
-              attr: {}
             },
-            {// Line #1
-              style: {"font-size": "30px"},
-              attr: {dy: "40px"}
+            {// Line #0
+              textField: "population",
+              classed: {pop: true},
+              style: {
+                "font-size": "60px",
+                "font-family": "Source Sans Pro, sans-serif",
+                "text-anchor": "middle",
+                "visibility" : "visible",
+                fill: "white"
+              },
+              attr: {
+                dy: "120px",
+                x: function (d) {return d.cx;},
+                y: function (d) {return d.cy;}
+              }
+            },
+            {// Line #0
+              textField: "zombies",
+              classed: {zombies: true},
+              style: {
+                "font-size": "60px",
+                "font-family": "Source Sans Pro, sans-serif",
+                "text-anchor": "middle",
+                "visibility" : "visible",
+                fill: "white"
+              },
+              attr: {
+                dy: "180px",
+                x: function (d) {return d.cx;},
+                y: function (d) {return d.cy;}
+              }
             }
           ]
         }
