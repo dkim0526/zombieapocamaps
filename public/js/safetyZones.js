@@ -196,6 +196,21 @@ function displayChart(delphidata){
             }
           ],
           centralFormat: [
+              {// Line #0
+              textField: "cities",
+              classed: {cities: true},
+              style: {
+                "font-size": "60px",
+                "font-family": "Source Sans Pro, sans-serif",
+                "text-anchor": "middle",
+                fill: "white"
+              },
+              attr: {
+                dy: "60px",
+                x: function (d) {return d.cx;},
+                y: function (d) {return d.cy;}
+              }
+            },
             {// Line #0
               textField: "ratingString",
               classed: {ratingString: true},
@@ -207,21 +222,6 @@ function displayChart(delphidata){
               },
               attr: {
                 dy: "0px",
-                x: function (d) {return d.cx;},
-                y: function (d) {return d.cy;}
-              }
-            },
-            {// Line #0
-              textField: "cities",
-              classed: {cities: true},
-              style: {
-                "font-size": "60px",
-                "font-family": "Source Sans Pro, sans-serif",
-                "text-anchor": "middle",
-                fill: "white"
-              },
-              attr: {
-                dy: "60px",
                 x: function (d) {return d.cx;},
                 y: function (d) {return d.cy;}
               }
