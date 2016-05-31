@@ -5,15 +5,14 @@
 
 /* LOGIN SCREEN */
 body{
-    /*background-color:#C0BEC3;*/
     font-family: 'Dosis', sans-serif;
 }
+
 #login_screen{
     background: url('../img/header.png') no-repeat center center scroll;
     background-size: 100vw auto;
     padding: 50px;
 		height: 480px;
-    /*margin-top:50px;*/
 }
 
 #mainscroll{
@@ -107,11 +106,6 @@ body{
 	color: white;
 }
 
-.footer_button{
-    box-shadow: 5px 5px 5px black;
-}
-
-
 }
 #learn{
 	padding-top: 200px;
@@ -192,7 +186,7 @@ body{
 }
 
 .calltoaction{
-	padding-top: 100px;
+		padding-top: 100px;
     height:700px;
     color:white;
     background: url('../img/footer.png') no-repeat center center scroll;
@@ -203,6 +197,7 @@ body{
 
 #login-btn h1{
 	font-size: 30pt;
+	margin-top: 200px;
 }
 
 footer{
@@ -212,14 +207,18 @@ footer{
 }
 
 footer p{
-	padding-top: 30px;
+	padding-top: 40px;
 	color: white;
 	font-size: 15pt;
 }
 
-.dropdown-toggle {
-    color:white;
+.footer_button{
+    box-shadow: 5px 5px 5px black;
 }
+
+/*.dropdown-toggle {
+    color:white;
+}*/
 
 /* NAVIGATION STUFF */
 nav{
@@ -284,10 +283,31 @@ nav{
     width:100%;
     position:absolute;
 }
+#right-panel {
+    font-family: 'Roboto','sans-serif';
+    line-height: 30px;
+    padding-left: 10px;
+    z-index: 500;
+    background-color: white
+}
 
+#right-panel select, #right-panel input {
+    font-size: 15px;
+}
 
+#right-panel select {
+    width: 100%;
+}
 
-
+#right-panel i {
+    font-size: 12px;
+}
+#right-panel {
+    height: 50%;
+    float: right;
+    width: 390px;
+    overflow: auto;
+}
 
 /****************** PROFILE STYLING ******************/
 .profile_panel{
@@ -300,7 +320,7 @@ nav{
     margin-bottom:10px;
 }
 
-.skillbar {
+/*.skillbar {
     position:relative;
     display:block;
     margin-bottom:15px;
@@ -385,7 +405,7 @@ nav{
 
 #profile_map {
     height: 100%;
-}
+}*/
 
 .inventory_item{
     margin-bottom:10px;
@@ -417,7 +437,7 @@ nav{
     height:100%;
 }
 
-#skillmap .skills-wrapper {
+/*#skillmap .skills-wrapper {
   margin-top: 10px;
   overflow: auto;
 }
@@ -454,16 +474,137 @@ nav{
   stroke: #444;
   stroke-width: 1px;
   shape-rendering: geometricPrecision;
-}
+}*/
 
+/****************** SURVIVAL GUIDE ******************/
 #map {
     position:absolute;
-    top:38px;
+    top:15px;
     bottom:0;
     margin-left: -35px;
     width:100%;
+}#legend {
+    background: white;
+    padding: 10px;
+    margin-left: 3%;
+    margin-bottom: 2%;
 }
 
+#resource_tools{
+    background-color:white;
+    position:absolute;
+    margin-top:100px;
+    z-index:10;
+    height:300px;
+    width:400px;
+}
+.controls {
+    margin-top: 10px;
+    border: 1px solid transparent;
+    border-radius: 2px 0 0 2px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    height: 32px;
+    outline: none;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+#origin-input,
+#destination-input {
+    background-color: #fff;
+    font-family: Roboto;
+    font-size: 15px;
+    font-weight: 300;
+    margin-left: 12px;
+    padding: 0 11px 0 13px;
+    text-overflow: ellipsis;
+    width: 200px;
+}
+
+#origin-input:focus,
+#destination-input:focus {
+    border-color: #4d90fe;
+}
+
+#mode-selector {
+    color: #fff;
+    background-color: #4d90fe;
+    margin-left: 12px;
+    padding: 5px 11px 0px 11px;
+}
+
+#mode-selector label {
+    font-family: Roboto;
+    font-size: 13px;
+    font-weight: 300;
+}
+
+#legend {
+    background: white;
+    padding: 10px;
+    margin-left: 3%;
+    margin-bottom: 2%;
+}
+
+#resource_tools{
+    background-color:white;
+    bottom:0;
+    right:0;
+    height:100%;
+    position:absolute;
+    z-index:10;
+    width:200px;
+}
+.legend_filter{
+    margin-bottom:5px;
+    cursor:pointer;
+    font-size:14pt;
+}
+.legend_filter:hover{
+    font-weight:bold;
+}
+.controls {
+    margin-top: 10px;
+    border: 1px solid transparent;
+    border-radius: 2px 0 0 2px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    height: 32px;
+    outline: none;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+#origin-input,
+#destination-input {
+    background-color: #fff;
+    font-family: Roboto;
+    font-size: 15px;
+    font-weight: 300;
+    margin-left: 12px;
+    padding: 0 11px 0 13px;
+    text-overflow: ellipsis;
+    width: 200px;
+}
+
+#origin-input:focus,
+#destination-input:focus {
+    border-color: #4d90fe;
+}
+
+#mode-selector {
+    color: #fff;
+    background-color: #4d90fe;
+    margin-left: 12px;
+    padding: 5px 11px 0px 11px;
+}
+
+#mode-selector label {
+    font-family: Roboto;
+    font-size: 13px;
+    font-weight: 300;
+}
+
+/****************** SURVIVAL GUIDE ******************/
 
 #survival_kit{
     background-color:#8C9FA3;
@@ -610,59 +751,30 @@ nav{
     padding-left: 10px;
 }
 
-#legend {
-    background: white;
-    padding: 10px;
-    margin-left: 3%;
-    margin-bottom: 2%;
+/****************** HELP PAGE ******************/
+#seek_help #help{
+	font-size: 25pt;
+	text-decoration: none;
+	color: #8c9fa3;
 }
 
-#resource_checklist{
-    background-color:white;
-    bottom:0;
-    right:0;
-    position:absolute;
-    z-index:10;
-    height:300px;
-    width:400px;
-}
-.controls {
-    margin-top: 10px;
-    border: 1px solid transparent;
-    border-radius: 2px 0 0 2px;
-    box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    height: 32px;
-    outline: none;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+#seek_help #help:hover{
+	font-size: 25pt;
+	text-decoration: none;
+	color: #49af59;
 }
 
-#origin-input,
-#destination-input {
-    background-color: #fff;
-    font-family: Roboto;
-    font-size: 15px;
-    font-weight: 300;
-    margin-left: 12px;
-    padding: 0 11px 0 13px;
-    text-overflow: ellipsis;
-    width: 200px;
+
+#seek_help #help:focus{
+	font-size: 25pt;
+	text-decoration: none;
+	color: #233751;
 }
 
-#origin-input:focus,
-#destination-input:focus {
-    border-color: #4d90fe;
+#seek_help .container{
+	border-top: 1px solid #e2e2e2;
 }
 
-#mode-selector {
-    color: #fff;
-    background-color: #4d90fe;
-    margin-left: 12px;
-    padding: 5px 11px 0px 11px;
-}
-
-#mode-selector label {
-    font-family: Roboto;
-    font-size: 13px;
-    font-weight: 300;
+#seek_help .find{
+	border-bottom: 1px solid #e2e2e2;
 }

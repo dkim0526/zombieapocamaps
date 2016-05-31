@@ -1,12 +1,41 @@
 var markers = [];
+var directionsDisplay = null;
 
-// Creates marker and puts it on the map based on lat and long. If
-// it is the user, do not add a click listener
-function createMarker(latlng, map, self){
-	var marker = new google.maps.Marker({
-        position: latlng,
-        map: map
-    });
+var icons = {
+  food_water: {
+    icon: '../img/foodwater.png'
+  },
+  health: {
+    icon: '../img/health.png'
+  },
+  supplies: {
+    icon: '../img/supplies.png'
+  },
+  home: {
+    icon: '../img/home.png'
+  }
+};
+
+function setMarkerLimit(array, limit){
+  var newArray = [limit];
+  if(array.length > limit){
+    for(var i = 0; i < limit; i++){
+      newArray.push(array[i]);
+    }
+
+    return newArray;
+  }
+  else{
+    return array;
+  }
+}
+
+function createMarker(latlng, map, feature, self) {
+  var marker = new google.maps.Marker({
+    position: latlng,
+    map: map,
+    icon: feature.icon
+  });
     if(!self){
     	google.maps.event.addListener(marker, 'click', function(){getRouteFromClick(map, marker);});
     	markers.push(marker);
@@ -14,7 +43,7 @@ function createMarker(latlng, map, self){
 }
 
 // This function translates the addresses into geocodes so that they can be placed on the map
-function geoCodeMarkers(addresses, map){
+function geoCodeMarkers(addresses, map, resource){
   console.log("Loading " + addresses.length + " addresses...");
   $.each(addresses, function(index, address){
         setTimeout(function(){
@@ -22,7 +51,7 @@ function geoCodeMarkers(addresses, map){
             }).done(function(data){
                  var p = data.results[0].geometry.location;
                 var latlng = new google.maps.LatLng(p.lat, p.lng);
-                createMarker(latlng, map, false);
+                createMarker(latlng, map, icons[resource], false);
             });
           if(index == this.length-1){
             console.log("DONE!");
@@ -52,16 +81,20 @@ function getUserLocation(map){
 		navigator.geolocation.getCurrentPosition(function(position){
 			var location = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 			map.setCenter(location);
-			createMarker(location, map, true);
+			createMarker(location, map, icons["home"], true);
 		});
 	}
 }
 
 // Adds click listener to markers and calculates route between user and clicked marker.
 function getRouteFromClick(map, marker){
+    // var directionsDisplay = new google.maps.DirectionsRenderer({suppressMarkers: true});
+    var dirDisplay = directionsDisplay || new google.maps.DirectionsRenderer({suppressMarkers: true});
     var directionsService = new google.maps.DirectionsService;
-    var directionsDisplay = new google.maps.DirectionsRenderer({suppressMarkers: true});
     directionsDisplay.setMap(map);
+    var rightPanel = document.getElementById('right-panel');
+    directionsDisplay.setPanel(rightPanel);
+    map.controls[google.maps.ControlPosition.TOP_CENTER].push(rightPanel);
     if(navigator.geolocation){
 		navigator.geolocation.getCurrentPosition(function(position){
 			var location = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
@@ -98,7 +131,6 @@ function sortByResource(name, map){
     case 'Health': nameStr = "health"; break;
     case 'Supplies': nameStr = "supplies"; break;
   }
-
   getDataFromDelphi(nameStr, map);
 }
 
@@ -106,8 +138,9 @@ function sortByResource(name, map){
 function getDataFromDelphi(typeOfQuery, map){
   var addresses = [];
   d3.json("/delphidata_" + typeOfQuery, function(err, data){
-    addresses = makeAddressList(data);
-        geoCodeMarkers(addresses, map);
+        addresses = setMarkerLimit(data, 20);
+        addresses = makeAddressList(addresses);
+        setTimeout(geoCodeMarkers(addresses, map, typeOfQuery), 200);
     });
 }
 
@@ -119,7 +152,7 @@ function makeAddressList(array){
     addressString = array[i]["address"] + ', ' + array[i]["city"] + ' CA';
     returnArray.push(addressString);
   }
-  console.log(returnArray);
+
   return returnArray;
 }
 
@@ -136,19 +169,19 @@ function openFindResources(){
           center: {lat: 32.8849813, lng: -117.2413856},
           styles: [{"featureType":"administrative","stylers":[{"visibility":"off"}]},{"featureType":"poi","stylers":[{"visibility":"simplified"}]},{"featureType":"road","elementType":"labels","stylers":[{"visibility":"simplified"}]},{"featureType":"water","stylers":[{"visibility":"simplified"}]},{"featureType":"transit","stylers":[{"visibility":"simplified"}]},{"featureType":"landscape","stylers":[{"visibility":"simplified"}]},{"featureType":"road.highway","stylers":[{"visibility":"off"}]},{"featureType":"road.local","stylers":[{"visibility":"on"}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"visibility":"on"}]},{"featureType":"water","stylers":[{"color":"#84afa3"},{"lightness":52}]},{"stylers":[{"saturation":-17},{"gamma":0.36}]},{"featureType":"transit.line","elementType":"geometry","stylers":[{"color":"#3f518c"}]}]
         });
-        var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
+
         var icons = {
           foodAndWater: {
             name: 'Food and Water',
-            icon: iconBase + 'info-i_maps.png'
+            icon: '../img/foodwater.png'
           },
           health: {
             name: 'Health',
-            icon: iconBase + 'info-i_maps.png'
+            icon: '../img/health.png'
           },
           supplies: {
             name: 'Supplies',
-            icon: iconBase + 'info-i_maps.png'
+            icon: '../img/supplies.png'
           }
         };
 
@@ -160,12 +193,13 @@ function openFindResources(){
       trafficLayer.setMap(map);
 
       var directionsService = new google.maps.DirectionsService;
-      var directionsDisplay = new google.maps.DirectionsRenderer;
+      directionsDisplay = new google.maps.DirectionsRenderer({suppressMarkers: true});
       directionsDisplay.setMap(map);
 
-      var origin_input = document.getElementById('origin-input');
-      var destination_input = document.getElementById('destination-input');
-      var modes = document.getElementById('mode-selector');
+			var origin_input = $('#origin-input').clone()[0];
+      var destination_input = $('#destination-input').clone()[0];
+      var modes = $('#mode-selector').clone()[0];
+
       if(origin_input)
         map.controls[google.maps.ControlPosition.TOP_LEFT].push(origin_input);
       if(destination_input){
@@ -270,7 +304,7 @@ function openFindResources(){
         var userLocation = getUserLocation(map);
         map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(legend);
 
-        getDataFromDelphi("health", map);
+        // getDataFromDelphi("health", map);
 
         google.maps.event.addDomListener(window,'resize',openFindResources);
         google.maps.event.addDomListener(window, 'load', openFindResources);

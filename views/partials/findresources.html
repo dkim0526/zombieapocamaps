@@ -1,10 +1,10 @@
 <div id="find_resources" class="main-panel container-fluid">
   <div>
     <input id="origin-input" class="controls" type="text"
-        placeholder="Enter an origin location">
+        placeholder="Enter current location">
 
     <input id="destination-input" class="controls" type="text"
-        placeholder="Enter a destination location">
+        placeholder="Enter a destination">
       </div>
 
     <div id="mode-selector" class="controls">
@@ -17,13 +17,25 @@
       <input type="radio" name="type" id="changemode-driving">
       <label for="changemode-driving">Driving</label>
     </div>
+    <!-- <div id="right-panel"></div> -->
     <div id="map"></div>
     <!--div id="legend">
       <h1>Filter your Search!</h1>
     </div-->
-    <!-- <div class="pull-right" id="resource_checklist">
-    	<label>Legend</label>
-    	<label>Checklist</label>
+    <div class="container" id="resource_tools">
+      <div id="resource_tool_directions">
+        <label>Distance:</label>
+      </div>
+      <div id="resource_tool_legend">
+      	<label>Filter By:</label>
+        <div id="resource_tool_food" class="legend_filter"><img src='../img/foodwater.png'/> Food and Water</div>
+        <div id="resource_tool_health" class="legend_filter"><img src='../img/health.png'/> Clinics</div>
+        <div id="resource_tool_supplies" class="legend_filter"><img src='../img/supplies.png'/> Supplies</div>
+      </div>
+      <div id="resource_tool_checklist">
+    	 <label>Checklist</label>
+      </div>
+
     </div>
-  </div> -->
+  </div>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDIs9DIeZYyke4NWDQ85SBeIvELwMBJLQM&libraries=places"></script>
