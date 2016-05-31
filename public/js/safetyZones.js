@@ -90,7 +90,23 @@ function displayChart(delphidata){
       classed: function (item) {return item.cities.split(" ").join("");}
     },
     plugins: [
-      {
+        {
+          name: "central-click",
+          options: {
+            text: '',
+            style: {
+              "font-size": "28px",
+              "font-family": "Source Sans Pro, sans-serif",
+              "text-anchor": "middle",
+              fill: "black"
+            },
+            attr: {dy: "65px"},
+            centralClick: function() {
+              alert("Here is more details!!");    
+            }
+          }
+        },
+        {
         name: "lines",
         options: {
           format: [
