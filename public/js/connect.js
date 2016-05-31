@@ -36,7 +36,9 @@ function openPanel(button, color){
 		$("#profile_tabs button").css("background-color", "darkgray");
 		button.addClass("active-profile-btn");
 		button.css("background-color", color);
-		$("#connect_content").css("border-color", color)
+		//$("#connect_content").css("border-color", color);
+		$("#connect_content").removeClass();
+		$("#connect_content").addClass(button.attr("id").toString().replace("_btn", ""));
 	}
 }
 
