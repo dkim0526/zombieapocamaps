@@ -564,6 +564,15 @@ nav{
 .legend_filter:hover{
     font-weight:bold;
 }
+
+#safetyzone_tool{
+    margin:0;
+    margin-left:-30px;
+    width:initial;
+    display:inline;
+    font-size: 30px;
+}
+
 #resource_tool_checklist{
     padding:10px;
     padding-right:20px;
