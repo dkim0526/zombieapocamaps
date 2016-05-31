@@ -16,6 +16,13 @@ var icons = {
   }
 };
 
+$(document).ready(function() {
+  $("#resource_tool_food").click(function(){
+      sortByResource("food_water", map);
+  });
+
+})
+
 function setMarkerLimit(array, limit){
   var newArray = [limit];
   if(array.length > limit){
@@ -92,9 +99,10 @@ function getRouteFromClick(map, marker){
     var dirDisplay = directionsDisplay || new google.maps.DirectionsRenderer({suppressMarkers: true});
     var directionsService = new google.maps.DirectionsService;
     directionsDisplay.setMap(map);
-    var rightPanel = document.getElementById('right-panel');
+    $("#resource_tool_direction_list").html("");
+    var rightPanel = document.getElementById('resource_tool_direction_list');
     directionsDisplay.setPanel(rightPanel);
-    map.controls[google.maps.ControlPosition.TOP_CENTER].push(rightPanel);
+   // map.controls[google.maps.ControlPosition.TOP_CENTER].push(rightPanel);
     if(navigator.geolocation){
 		navigator.geolocation.getCurrentPosition(function(position){
 			var location = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
@@ -127,7 +135,7 @@ function sortByResource(name, map){
   var resultArray = [];
   var nameStr = '';
   switch(name){
-    case 'Food and Water': nameStr = "food_water"; break;
+    case 'Food & Water': nameStr = "food_water"; break;
     case 'Health': nameStr = "health"; break;
     case 'Supplies': nameStr = "supplies"; break;
   }
@@ -138,7 +146,7 @@ function sortByResource(name, map){
 function getDataFromDelphi(typeOfQuery, map){
   var addresses = [];
   d3.json("/delphidata_" + typeOfQuery, function(err, data){
-        addresses = setMarkerLimit(data, 20);
+        addresses = setMarkerLimit(data, 30);
         addresses = makeAddressList(addresses);
         setTimeout(geoCodeMarkers(addresses, map, typeOfQuery), 200);
     });
@@ -165,14 +173,14 @@ function openFindResources(){
         var travel_mode = google.maps.TravelMode.WALKING;
         map = new google.maps.Map(document.getElementById('map'), {
           mapTypeControl: false,
-          zoom: 13,
-          center: {lat: 32.8849813, lng: -117.2413856},
+          zoom: 10,
+          center: {lat: 40.8849813, lng: -117.2413856},
           styles: [{"featureType":"administrative","stylers":[{"visibility":"off"}]},{"featureType":"poi","stylers":[{"visibility":"simplified"}]},{"featureType":"road","elementType":"labels","stylers":[{"visibility":"simplified"}]},{"featureType":"water","stylers":[{"visibility":"simplified"}]},{"featureType":"transit","stylers":[{"visibility":"simplified"}]},{"featureType":"landscape","stylers":[{"visibility":"simplified"}]},{"featureType":"road.highway","stylers":[{"visibility":"off"}]},{"featureType":"road.local","stylers":[{"visibility":"on"}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"visibility":"on"}]},{"featureType":"water","stylers":[{"color":"#84afa3"},{"lightness":52}]},{"stylers":[{"saturation":-17},{"gamma":0.36}]},{"featureType":"transit.line","elementType":"geometry","stylers":[{"color":"#3f518c"}]}]
         });
 
         var icons = {
           foodAndWater: {
-            name: 'Food and Water',
+            name: 'Food & Water',
             icon: '../img/foodwater.png'
           },
           health: {
@@ -273,6 +281,10 @@ function openFindResources(){
         if (!origin_place_id || !destination_place_id) {
           return;
         }
+        $("#resource_tool_direction_list").html("");
+        var rightPanel = document.getElementById('resource_tool_direction_list');
+        directionsDisplay.setPanel(rightPanel);
+
         directionsService.route({
           origin: {'placeId': origin_place_id},
           destination: {'placeId': destination_place_id},
@@ -289,22 +301,40 @@ function openFindResources(){
       var divLegend = document.createElement('div');
 		  var legend = document.getElementById('find_resources').appendChild(divLegend);
 		  legend.setAttribute("id", "legend");
-
+      $("#filter_options").html("");
         for (var key in icons) {
           var type = icons[key];
           var name = type.name;
           var icon = type.icon;
-          var div = document.createElement('div');
+          var div = document.createElement('span');
           div.name = name;
+          div.className = "legend_filter";
           console.log(legend);
-          div.addEventListener("click", function(){sortByResource(this.name, map);});
+
+          div.addEventListener("click", function(){
+            sortByResource(this.name, map);
+            $("#resource_tool_checklist li").css("background-color", "transparent");
+            $("#resource_tool_checklist li").css("color", "black");
+
+            if(this.name.toLowerCase() == "health"){
+              $(".health").css("background-color", "red");
+            }
+            else if(this.name.toLowerCase() == "supplies"){
+              $(".supplies").css("background-color", "gray");
+            }
+            else{
+              $(".food_water").css("background-color", "#009DFF");
+            }
+            $("." + this.name.toLowerCase().replace("& ", "").replace(" ", "_")).css("color", "white");
+          });
           div.innerHTML = '<img src="' + icon + '"> ' + name;
           legend.appendChild(div);
         }
         var userLocation = getUserLocation(map);
-        map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(legend);
+        $("#filter_options").append(legend);
+        // map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(legend);
 
-        // getDataFromDelphi("health", map);
+       // getDataFromDelphi("health", map);
 
         google.maps.event.addDomListener(window,'resize',openFindResources);
         google.maps.event.addDomListener(window, 'load', openFindResources);

@@ -490,14 +490,6 @@ nav{
     margin-bottom: 2%;
 }
 
-#resource_tools{
-    background-color:white;
-    position:absolute;
-    margin-top:100px;
-    z-index:10;
-    height:300px;
-    width:400px;
-}
 .controls {
     margin-top: 10px;
     border: 1px solid transparent;
@@ -553,15 +545,41 @@ nav{
     height:100%;
     position:absolute;
     z-index:10;
-    width:200px;
+    width:350px;
+    padding-top:20px;
+}
+#resource_tool_direction_list{
+    max-height:300px;
+    overflow-y:auto;
+}
+.legend_filter img{
+    width:30px;
+    height:auto;
 }
 .legend_filter{
-    margin-bottom:5px;
     cursor:pointer;
-    font-size:14pt;
+    font-size:13pt;
+    margin-left:5px;
 }
 .legend_filter:hover{
     font-weight:bold;
+}
+#resource_tool_checklist{
+    padding:10px;
+    padding-right:20px;
+}
+#resource_tool_checklist label{
+    display:block;
+}
+.checklist_list, #resource_tool_checklist .pull-right{
+    margin:0;
+    margin-left:-30px;
+   width:200px;
+   list-style:none !important;
+   display:inline;
+}
+.checklist_list li{
+   width:150px;
 }
 .controls {
     margin-top: 10px;

@@ -17,24 +17,47 @@
       <input type="radio" name="type" id="changemode-driving">
       <label for="changemode-driving">Driving</label>
     </div>
-    <!-- <div id="right-panel"></div> -->
+    <div id="right-panel"></div>
     <div id="map"></div>
-    <!--div id="legend">
-      <h1>Filter your Search!</h1>
-    </div-->
-    <div class="container" id="resource_tools">
-      <div id="resource_tool_directions">
-        <label>Distance:</label>
-      </div>
+
+    <div id="resource_tools">
       <div id="resource_tool_legend">
-      	<label>Filter By:</label>
-        <div id="resource_tool_food" class="legend_filter"><img src='../img/foodwater.png'/> Food and Water</div>
-        <div id="resource_tool_health" class="legend_filter"><img src='../img/health.png'/> Clinics</div>
-        <div id="resource_tool_supplies" class="legend_filter"><img src='../img/supplies.png'/> Supplies</div>
+        <label>Filter By:</label>
+        <center id="filter_options">
+        </center>
       </div>
+      <hr/>
       <div id="resource_tool_checklist">
-    	 <label>Checklist</label>
+       <label>Checklist</label>
+       <ul class="pull-right" class="checklist_list">
+        <br/> <!-- It's always good to take a break, right? -->
+         <li class="supplies"><input type="checkbox"/>Batteries</li>
+          <li class="supplies"><input type="checkbox"/>Utility Knife</li>
+          <li class="supplies"><input type="checkbox"/>Duct Tape</li>
+          <li class="supplies"><input type="checkbox"/>Blankets</li>
+          <li class="supplies"><input type="checkbox"/>Clothes</li>
+          <li class="supplies"><input type="checkbox"/>Passport</li>
+        </ul>
+       <ul class="checklist_list">
+        <li class="food_water"><input type="checkbox"/>Water (1 gal per person)</li>
+        <li class="food_water"><input type="checkbox"/>Food</li>
+        <li class="health"><input type="checkbox"/>Medication</li>
+        <li class="health"><input type="checkbox"/>First Aid Supplies</li>
+        <li class="health"><input type="checkbox"/>Hand Sanitizer</li>
+        <li class="health"><input type="checkbox"/>Soap</li>
+       </ul>
+
       </div>
+      <hr/>
+      <div id="resource_tool_directions">
+        <label>Directions:</label>
+        <div id="resource_tool_direction_list">
+          <center>Click Location for Directions!</center>
+        </div>
+      </div>
+
+
+
 
     </div>
   </div>
