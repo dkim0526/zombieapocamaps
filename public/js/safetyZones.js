@@ -7,6 +7,7 @@ function openSafetyZones() {
   }
 }
 
+// need to find a new formular maybe to show some equal representation
 function findRating(total){
     var returnVal = 1;
     if(total>=5072 && total < 66803)
@@ -90,7 +91,7 @@ function displayChart(delphidata){
       {
         name: "central-click",
         options: { 
-          text: '',
+          text: 'Crime Rate: 30',
           style: {
             "font-size": "12px",
             "font-style": "italic",

@@ -22,7 +22,7 @@
   d3.svg.BubbleChart = function (settings) {
     var self = this;
     var defaultViewBoxSize = settings.size;
-    var defaultInnerRadius = settings.size / 3;
+    var defaultInnerRadius = settings.size / 5;
     var defaultOuterRadius = settings.size / 2;
     var defaultRadiusMin = settings.size / 10;
     self.options = {};
@@ -38,7 +38,7 @@
     }, settings);
 
     $.extend(self.options, {
-      radiusMax: (self.options.outerRadius - self.options.innerRadius) / 1.8,
+      radiusMax: (self.options.outerRadius - self.options.innerRadius) / 1.2,
       intersectInc: self.options.intersectDelta
     }, settings);
 
@@ -137,7 +137,7 @@
       node.append("circle")
         .attr({r: function (d) {return d.r;}, cx: function (d) {return d.cx;}, cy: function (d) {return d.cy;}})
         .style("fill", function (d) {
-          return options.data.color !== undefined ? options.data.color(d.item) : fnColor(d.item.text);
+          return options.data.color !== undefined ? options.data.color(d.item) : fnColor(d.item.cities);
         })
         .attr("opacity", "0.8");
       node.sort(function (a, b) {return options.data.eval(b.item) - options.data.eval(a.item);});
