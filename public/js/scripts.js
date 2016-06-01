@@ -19,12 +19,12 @@ function openSurvivalKit(){
 }
 
 function openProfile(){
-	openTab($("#my_profile"), $("#my_profile_btn"), "My Profile");
+	openTab($("#my_profile"), $("#my_profile_btn"), "Connect");
   $(".skill_input").change(updateSkillPercent);
 }
 
 function openHelp(){
-	openTab($("#seek_help"), $("#seek_help_btn"), "Need Help?");
+	openTab($("#seek_help"), $("#seek_help_btn"), "Help Center");
 }
 
 function openTab(panel, button, title){
