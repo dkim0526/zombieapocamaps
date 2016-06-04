@@ -25,7 +25,8 @@ var db = mongoose.connection;
 var router = {
   index: require("./routes/index"),
   user: require("./routes/user"),
-  connect: require("./routes/connect")
+  connect: require("./routes/connect"),
+  check: require("./routes/updateCheckBox")
  };
 
 var parser = {
@@ -36,7 +37,7 @@ var parser = {
 var conString = process.env.DATABASE_CONNECTION_URL;
 var FacebookStrategy = require('passport-facebook').Strategy;
 
-var local_database_uri  = 'mongodb://stallen:hello@ds011258.mlab.com:11258/heroku_q93csxz1';
+var local_database_uri  = 'mongodb://steven:hello@ds053194.mongolab.com:53194/heroku_gjkl8qfv';//'mongodb://stallen:hello@ds011258.mlab.com:11258/heroku_q93csxz1';
 // Database Connection
 var db = mongoose.connection;
 mongoose.connect( process.env.MONGODB_URI || local_database_uri );
@@ -90,12 +91,28 @@ passport.use(new FacebookStrategy({
       if(err)
         return done(err);
       if(!user){
+        var checkListArray = [];
+        var json = {
+          name: String,
+          className: String,
+          isChecked: Boolean
+        };
+        var checkList = ["Water", "Food", "Medication", "First Aid Supplies", "Hand Sanitizer", "Soap", "Batteries", "Utility Knife", "Duct Tape", "Blankets", "Clothes", "Passport"];
+        var classList = ["food_water", "food_water", "health", "health", "health", "health", "supplies", "supplies", "supplies", "supplies", "supplies", "supplies"];
+        for(var i = 0; i < checkList.length; i++){
+          json = {};
+          json.name = checkList[i];
+          json.isChecked = false;
+          json.className = classList[i];
+          checkListArray.push(json);
+        }
         var newUser = new models.user({
           facebookID: profile.id,
           token: accessToken,
           username: profile.givenName + " " + profile.middleName + " " + profile.familyName,
           picture: profile.photos ? profile.photos[0].value : '/img/faces/unknown-user-pic.jpg',
-          displayName: profile.displayName
+          displayName: profile.displayName,
+          checkList: checkListArray
         });
        user = newUser;
         user.save(function(err){
@@ -111,6 +128,7 @@ passport.use(new FacebookStrategy({
         user.username = profile.givenName + " " + profile.middleName + " " + profile.familyName;
         user.picture = profile.photos ? profile.photos[0].value : '/img/faces/unknown-user-pic.jpg';
         // user.photo = profile.value;
+        //console.log(user.checkList);
         process.nextTick(function(){
           return done(null, user);
         });
@@ -142,6 +160,7 @@ app.post("/home", router.user.send);
 
 app.post("/message", router.connect.send);
 app.post("/answer", router.connect.answer);
+app.post("/checkBox", router.check.updateCheckBox);
 
 app.use(function(err, req, res, next) {
   console.error(err.stack);

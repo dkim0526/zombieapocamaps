@@ -196,9 +196,9 @@ function displayChart(delphidata){
             }
           ],
           centralFormat: [
-            {// Line #0
-              textField: "ratingString",
-              classed: {ratingString: true},
+              {// Line #0
+              textField: "cities",
+              classed: {cities: true},
               style: {
                 "font-size": "60px",
                 "font-family": "Source Sans Pro, sans-serif",
@@ -212,8 +212,8 @@ function displayChart(delphidata){
               }
             },
             {// Line #0
-              textField: "cities",
-              classed: {cities: true},
+              textField: "ratingString",
+              classed: {ratingString: true},
               style: {
                 "font-size": "60px",
                 "font-family": "Source Sans Pro, sans-serif",

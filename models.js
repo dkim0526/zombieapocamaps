@@ -6,7 +6,8 @@ var userSchema = new Schema({
     token: String,
     username: String,
     displayName: String,
-    picture: String
+    picture: String,
+    checkList: []
 });
 var answerSchema = new Schema({
 	author:String,

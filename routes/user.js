@@ -2,6 +2,8 @@ var models = require("../models");
 var mongoose = require('mongoose');
 
 exports.send = function(req, res) {
+  var first = [];
+  var second = [];
   models.user.findOne({facebookID: req.session.passport.user.facebookID}, renderUser);
 
   function renderUser(err, user){
@@ -29,8 +31,18 @@ exports.send = function(req, res) {
                   array2[counter] = messages[i];
                   counter++;
               }
+              console.log(user.checkList);
+              for(var i = 0; i < user.checkList.length; i++){
+                console.log(user.checkList[i].isChecked);
+                if(i < user.checkList.length/2){
+                  first.push(user.checkList[i]);
+                }
+                else{
+                  second.push(user.checkList[i]);
+                }
+              } 
               messages = array2;
-              res.render("home", {users: user, questions: messages });
+              res.render("home", {users: user, questions: messages, firstHalf: first, secondHalf: second});
           }
         }
   }

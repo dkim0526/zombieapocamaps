@@ -459,7 +459,6 @@ nav{
 }
 .checklist_list, #resource_tool_checklist .pull-right{
     margin:0;
-    margin-left:-30px;
    width:200px;
    list-style:none !important;
    display:inline;

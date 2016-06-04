@@ -27,10 +27,11 @@
         </center>
       </div>
       <hr/>
-      <div id="resource_tool_checklist">
+      <form id="formid" action="/checkBox" method="POST">
+      <!--div id="resource_tool_checklist">
        <label>Checklist</label>
        <ul class="pull-right" class="checklist_list">
-        <br/> <!-- It's always good to take a break, right? -->
+        <br/> 
          <li class="supplies"><input type="checkbox"/>Batteries</li>
           <li class="supplies"><input type="checkbox"/>Utility Knife</li>
           <li class="supplies"><input type="checkbox"/>Duct Tape</li>
@@ -46,8 +47,26 @@
         <li class="health"><input type="checkbox"/>Hand Sanitizer</li>
         <li class="health"><input type="checkbox"/>Soap</li>
        </ul>
-
+       <button type="button" class="btn btn-primary-outline">Primary</button>
+      </div-->
+      <div id="resource_tool_checklist">
+       <label>Checklist</label>
+       <br/> 
+       <ul class="pull-right" class="checklist_list">
+        {{#each secondHalf}}
+          <li class="{{className}}"><input type="checkbox" {{#if isChecked}}checked{{/if}} name="{{name}}"/>{{name}}</li>
+        {{/each}}  
+        </ul>
+        
+       <ul class="checklist_list" style="padding: 0 !important; margin 0">
+          {{#each firstHalf}}
+            <li class="{{className}}"><input type="checkbox" {{#if isChecked}}checked{{/if}} name="{{name}}"/>{{name}}</li>
+          {{/each}}
+       </ul>
+       <br>
+       <input type="submit" class="btn btn-secondary" value="Update"></input>
       </div>
+    </form>
       <hr/>
       <div id="resource_tool_directions">
         <label>Directions:</label>
@@ -61,4 +80,24 @@
 
     </div>
   </div>
+  <script type='text/javascript'>
+    /* attach a submit handler to the form */
+    $("#formid").submit(function(event) {
+
+      /* stop form from submitting normally */
+      event.preventDefault();
+
+      /* get the action attribute from the <form action=""> element */
+      var $form = $( this ),
+          url = $form.attr( 'action' );
+
+      /* Send the data using post with element id name and name2*/
+      var posting = $.post( url, $("#formid").serialize());
+
+      /* Alerts the results */
+      posting.done(function( data ) {
+        alert('success');
+      });
+    });
+</script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDIs9DIeZYyke4NWDQ85SBeIvELwMBJLQM&libraries=places"></script>
