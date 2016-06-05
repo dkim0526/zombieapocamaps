@@ -7,94 +7,10 @@
 	background-color:white;
 	padding:15px;
 }
-
-.connect_killing{
-	border: 10px solid #67BA75;
+#connect_content{
+	height:auto;
+	margin-top:4px;
 }
-
-.connect_resources{
-	border: 10px solid #8B816C;
-}
-
-.connect_health{
-	border: 10px solid #D6A191;
-}
-
-.connect_building{
-	border: 10px solid #715485;
-}
-
-.connect_other{
-	border: 10px solid #C3CC79;
-}
-
-
-.connect_killing #question_textarea{
-	border-bottom:3px solid #67BA75;
-}
-
-.connect_resources #question_textarea{
-	border-bottom:3px solid #8B816C;
-}
-
-.connect_health #question_textarea{
-	border-bottom:3px solid #D6A191;
-}
-
-.connect_building #question_textarea{
-	border-bottom:3px solid #715485;
-}
-
-.connect_other #question_textarea{
-	border-bottom:3px solid #C3CC79;
-}
-
-.connect_killing .btn-custom{
-	border:4px solid #67BA75;
-	color: #67BA75;
-}
-
-.connect_resources .btn-custom{
-	border:4px solid #8B816C;
-	color: #8B816C;
-}
-
-.connect_health .btn-custom{
-	border:4px solid #D6A191;
-	color: #D6A191;
-}
-
-.connect_building .btn-custom{
-	border:4px solid #715485;
-	color: #715485;
-}
-
-.connect_other .btn-custom{
-	border:4px solid #C3CC79;
-	color: #C3CC79;
-}
-
-.connect_killing .btn-custom:hover, .connect_killing .divider, .connect_killing .expand{
-	background-color: #67BA75;
-}
-
-.connect_resources .btn-custom:hover, .connect_resources .divider, .connect_resources .expand{
-	background-color: #8B816C;
-}
-
-.connect_health .btn-custom:hover, .connect_health .divider, .connect_health .expand{
-	background-color: #D6A191;
-}
-
-.connect_building .btn-custom:hover, .connect_building .divider, .connect_building .expand{
-	background-color: #715485;
-}
-
-.connect_other .btn-custom:hover, .connect_other .divider, .connect_other .expand{
-	background-color: #C3CC79;
-}
-
-
 #question_textarea{
 	resize:none;
 	width:90%;
@@ -162,6 +78,10 @@ textarea{
 .answer_textarea{
 	width: 80%;
 }
+#question_section{
+	margin-top:-20px;
+	padding-top:20px;
+}
 
 .profile_question{
 	height:100%;
@@ -169,7 +89,7 @@ textarea{
 
 .divider{
 	width:100%;
-	margin:40px 0px;
+	margin-top:10px;
 	font-size:14pt;
 	color:white;
 }
@@ -190,8 +110,9 @@ textarea{
     /*padding: 1.5vh 10vw; */
     text-decoration: none;
     color: black;
+    background-color:#D5D5D5;
 }
 
 .expand:hover{
-    color: white;
+     font-weight:bold;
 }

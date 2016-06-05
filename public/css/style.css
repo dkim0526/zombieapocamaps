@@ -337,6 +337,9 @@ nav{
     color:black;
     font-size:14pt;
     margin-bottom:-15px;
+    margin-right:10px !important;
+    border-top-left-radius: 5px !important;
+    border-top-right-radius: 5px !important;
 }
 
 .btn-profile:hover, .active-profile-btn{
@@ -638,10 +641,12 @@ nav{
     z-index:10;
     width:300px;
     overflow:auto;
+    padding-left:10px;
+    margin-top:20px;
 }
 .survival_section{
     background-color:transparent;
-    padding:10px;
+    padding:5px;
     cursor:pointer;
 }
 
