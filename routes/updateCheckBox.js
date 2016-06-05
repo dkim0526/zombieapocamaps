@@ -26,7 +26,7 @@ exports.updateCheckBox = function(req, res){
 		}
 
 
-		console.log(user.checkList);
+		///console.log(user.checkList);
 		user.markModified("checkList");
 		user.save(function(err, saved){
            /* if(err){

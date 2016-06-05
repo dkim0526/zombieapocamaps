@@ -1,18 +1,45 @@
 var firstClick = true;
+
 function openSafetyZones() {
   openTab($("#safety_zone"), $("#safety_zone_btn"), "Safe Zones");
   if(firstClick){
-    getData("safe_zones");
+    getData("safe_zones", "EAST");
     firstClick = false;
   }
 
-  $("#district1").hover(
-  function () {
-    $(".safety_zone").show();
-  }, 
-  function () {
-    $(".safety_zone").hide();
-  }
+  $("#district1").click(
+    function () {
+      //$(".safety_zone").show();
+      getData("safe_zones", "SOUTH");
+    }
+  );
+
+  $("#district2").click(
+    function () {
+      //$(".safety_zone").show();
+      getData("safe_zones", "EAST");
+    }
+  );
+
+  $("#district3").click(
+    function () {
+      //$(".safety_zone").show();
+      getData("safe_zones", "CENTRAL");
+    }
+  );
+
+  $("#district4").click(
+    function () {
+      //$(".safety_zone").show();
+      getData("safe_zones", "INLAND");
+    }
+  );
+
+  $("#district5").click(
+    function () {
+      //$(".safety_zone").show();
+      getData("safe_zones", "COASTAL");
+    }
   );
 }
 
@@ -43,68 +70,66 @@ function findRating(total){
     return returnVal;
 }
 
-function makeJsonList(array){
+function categorizeRegionName(regionFromDB){
+  var regions = ["EAST", "INLAND", "SOUTH", "COASTAL", "CENTRAL"];
+  var temp = 0;
+
+  for(var i = 0; i < regions.length; i++){
+    if(regionFromDB.includes(regions[i])){
+      temp = i;
+      break;
+    }
+  }
+
+  return regions[temp];
+}
+
+function makeJsonList(array, resultType){
+
   var jsonObj = {
     "cities": String,
     "population": Number,
     "zombies": Number,
-    "rating": Number
+    "rating": Number,
+    "region": String
   }
   var returnArray = [];
+  var regionName = "";
+
   for(var i = 0; i < array.length; i++){
-    jsonObj = {};
-    jsonObj.cities = array[i]["cities"];
-    jsonObj.population = array[i]["population_density"];
-    jsonObj.zombies = array[i]["zombie_count"];
-    jsonObj.rating = findRating(array[i]["rating"]);
-    returnArray.push(jsonObj);
+    regionName = categorizeRegionName(array[i]["RegionName"]);
+    if(resultType === regionName){
+      jsonObj = {};
+      jsonObj.cities = array[i]["cities"];
+      jsonObj.population = array[i]["population_density"];
+      jsonObj.zombies = array[i]["zombie_count"];
+      jsonObj.rating = findRating(array[i]["rating"]);
+      jsonObj.region = regionName;
+      returnArray.push(jsonObj);
+    }
   }
 
   return returnArray;
 }
 
-function getData(typeOfQuery){
-  var list = [];
+function getData(typeOfQuery, resultType){
   d3.json("/delphidata_" + typeOfQuery, function(err, data){
-      list = makeJsonList(data);
-      displayChart(list);
+      data = makeJsonList(data, resultType);
+      displayChart(data);
   });
 }
 
-var jsonObj;
-
-function displayChartArray(array){
-  var returnArray = [];
-  var json = {
-    "cities": String,
-    "population": String,
-    "zombies": String,
-    "rating": Number,
-    "ratingString": String
-  };
-  for(var i = 0; i < array.length; i++){
-    json = {};
-    json.cities = array[i]["cities"];
-    json.population = 'Population: ' + array[i]["population"];
-    json.zombies = 'Number of zombies: ' + array[i]["zombies"];
-    json.ratingString = "Safety Rating: " + array[i]["rating"];
-    json.rating = array[i]["rating"];
-    returnArray.push(json);
-  }
-  return returnArray;
-}
-
 function displayChart(delphidata){
-  delphidata = displayChartArray(delphidata);
   var margin = {top: 20, right: 20, bottom: 30, left: 40},
   width = 960 - margin.left - margin.right,
   height = 500 - margin.top - margin.bottom;
 
   //var formatPercent = d3.format(".0%");
-
+  var svg = document.getElementById("barChart");
+  svg = d3.select("#barChart").html("");
   var x = d3.scale.ordinal()
       .rangeRoundBands([0, width], .1, 1);
-
+  console.log("Hello");
   var y = d3.scale.linear()
       .range([height, 0]);
 
@@ -115,8 +140,8 @@ function displayChart(delphidata){
   var yAxis = d3.svg.axis()
       .scale(y)
       .orient("left")
-
-  var svg = d3.select("#safety_zone").append("svg")
+ 
+  svg = d3.select("#barChart").append("svg")
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + (margin.bottom+ 100))//added 
       .attr("class", "safety_zone")
