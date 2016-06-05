@@ -686,3 +686,20 @@ nav{
 #seek_help .find{
 	border-bottom: 1px solid #e2e2e2;
 }
+
+#safety_zone_districts{
+    margin-top: 10px;
+}
+#district1:hover,
+#district2:hover,
+#district3:hover,
+#district4:hover,
+#district5:hover,
+#district6:hover,
+#district7:hover,
+#district8:hover,
+#district9:hover,
+#district10:hover,
+#district11:hover{
+    opacity: 0.5;
+}
