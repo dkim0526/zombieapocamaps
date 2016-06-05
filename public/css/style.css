@@ -712,8 +712,24 @@ nav{
 
 
 #safety_zone_districts{
-    margin-top: 10px;
+    margin-top: 15px;
+    margin-left: 10px;
 }
+#district1,
+#district2,
+#district3,
+#district4,
+#district5,
+#district6,
+#district7,
+#district8,
+#district9,
+#district10,
+#district11{
+    stroke:#000000;
+    stroke-width: 3;
+}
+
 #district1:hover,
 #district2:hover,
 #district3:hover,
