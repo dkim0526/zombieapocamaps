@@ -46,7 +46,6 @@ function openPanel(button, color, secondColor, thirdColor){
 		$(".question").css("border", "2px solid " + color);
 		$("#question_wrapper").css("background-color", thirdColor);
 		var category = button.attr("id").split("_")[1];
-		console.log(category);
 		$(".category_field").val(category);
 		$(".answer").css("display", "none");
 		$(".question").css("display", "none");

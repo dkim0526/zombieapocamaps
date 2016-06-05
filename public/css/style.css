@@ -568,11 +568,6 @@ nav{
     z-index:100;
 }
 
-.survival_interaction_point:hover circle{
-    opacity:1;
-}
-
-
 .survival_interaction_tip h3{
     font-size:14pt;
     margin:0;

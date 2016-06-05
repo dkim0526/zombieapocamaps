@@ -1,4 +1,4 @@
-#my_profile{
+#connect_page{
 	padding-left:17vw;
 	height:95vh;
 }
@@ -86,7 +86,7 @@ textarea{
 #question_wrapper{
 	margin-top:-20px;
 	padding-top:20px;
-	min-height:100%;
+	min-height:250px;
 }
 
 .profile_question{
