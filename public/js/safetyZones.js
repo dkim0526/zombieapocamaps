@@ -11,12 +11,15 @@ function openSafetyZones() {
     function () {
       //$(".safety_zone").show();
       getData("safe_zones", "SOUTH");
-      var newTextBoxDiv = $("#displayDistrict")
-       .attr("id", "#zone1")
-       .attr("style", "font-size:20px; display: inline;");
-       newTextBoxDiv.append("<p> Cities: <br/> Death Rates: <br/> Crime Rates: <br/> Stuff:  <p/>")
-      $( "#safety_zone_districts" ).append(newTextBoxDiv);
-      if(newTextBoxDiv){
+      if(newTextBoxDiv == null){
+        var newTextBoxDiv = $("#displayDistrict")
+         .attr("id", "#zone1")
+         .attr("style", "font-size:20px; display: inline;");
+         newTextBoxDiv.append("<p> Cities: <br/> Death Rates: <br/> Crime Rates: <br/> Stuff:  <p/>")
+         // <---- CAN YOU PASS DATA HERE 
+        $( "#safety_zone_districts" ).append(newTextBoxDiv);
+      }
+      else if(newTextBoxDiv){
         console.log("TRUE");
       }
     }
@@ -26,6 +29,17 @@ function openSafetyZones() {
     function () {
       //$(".safety_zone").show();
       getData("safe_zones", "EAST");
+      if(newTextBoxDiv == null){
+        var newTextBoxDiv = $("#displayDistrict")
+         .attr("id", "#zone2")
+         .attr("style", "font-size:20px; display: inline;");
+         newTextBoxDiv.append("<p> Cities: <br/> Death Rates: <br/> Crime Rates: <br/> Stuff:  <p/>")
+         // <---- CAN YOU PASS DATA HERE 
+        $( "#safety_zone_districts" ).append(newTextBoxDiv);
+      }
+      else if(newTextBoxDiv){
+        console.log("TRUE");
+      }
     }
   );
 
@@ -33,6 +47,17 @@ function openSafetyZones() {
     function () {
       //$(".safety_zone").show();
       getData("safe_zones", "CENTRAL");
+      if(newTextBoxDiv == null){
+        var newTextBoxDiv = $("#displayDistrict")
+         .attr("id", "#zone3")
+         .attr("style", "font-size:20px; display: inline;");
+         newTextBoxDiv.append("<p> Cities: <br/> Death Rates: <br/> Crime Rates: <br/> Stuff:  <p/>")
+         // <---- CAN YOU PASS DATA HERE 
+        $( "#safety_zone_districts" ).append(newTextBoxDiv);
+      }
+      else if(newTextBoxDiv){
+        console.log("TRUE");
+      }
     }
   );
 
@@ -40,6 +65,17 @@ function openSafetyZones() {
     function () {
       //$(".safety_zone").show();
       getData("safe_zones", "INLAND");
+      if(newTextBoxDiv == null){
+        var newTextBoxDiv = $("#displayDistrict")
+         .attr("id", "#zone4")
+         .attr("style", "font-size:20px; display: inline;");
+         newTextBoxDiv.append("<p> Cities: <br/> Death Rates: <br/> Crime Rates: <br/> Stuff:  <p/>")
+         // <---- CAN YOU PASS DATA HERE 
+        $( "#safety_zone_districts" ).append(newTextBoxDiv);
+      }
+      else if(newTextBoxDiv){
+        console.log("TRUE");
+      }
     }
   );
 
@@ -47,6 +83,17 @@ function openSafetyZones() {
     function () {
       //$(".safety_zone").show();
       getData("safe_zones", "COASTAL");
+      if(newTextBoxDiv == null){
+        var newTextBoxDiv = $("#displayDistrict")
+         .attr("id", "#zone5")
+         .attr("style", "font-size:20px; display: inline;");
+         newTextBoxDiv.append("<p> Cities: <br/> Death Rates: <br/> Crime Rates: <br/> Stuff:  <p/>")
+         // <---- CAN YOU PASS DATA HERE 
+        $( "#safety_zone_districts" ).append(newTextBoxDiv);
+      }
+      else if(newTextBoxDiv){
+        console.log("TRUE");
+      }
     }
   );
 }
