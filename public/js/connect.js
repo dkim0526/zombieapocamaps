@@ -1,16 +1,13 @@
 $(document).ready(function() {
-	$('.skillbar').each(function(){
-		$(this).find('.skillbar-bar').animate({
-			width:$(this).attr('data-percent')
-		},100)});
-
-	$(".skill_input").change(updateSkillPercent);
 	$("#connect_killing_btn").click(openKilling);
 	$("#connect_resources_btn").click(openResources);
 	$("#connect_health_btn").click(openHealth);
 	$("#connect_building_btn").click(openBuilding);
 	$("#connect_alliance_btn").click(openAlliances);
 	$("#connect_other_btn").click(openOther);
+	$("#search_button").click(searchForum);
+	$(".expand").click(expandAnswers);
+	$("#input_location").click(addLocation);
 	openKilling();
 })
 
@@ -54,42 +51,31 @@ function openPanel(button, color, secondColor, thirdColor){
 	}
 }
 
-function getLocation(map){
-
+function searchForum(){
+	var keyword = $("#search_input_box").val().split(" ");
+    $(".question").css("display", "none");
+    for( var i = 0; i< keyword.length; i++){
+        $(".question:contains("+keyword[i]+")").css("display", "block");
+    }
 }
 
-function initMap() {
-  // Create center marker at UCSD
-  var ucsd_ltlng = {lat:32.8849813, lng:-117.2413856};
-
-  // Create a map object and specify the DOM element for display.
-  window.map = new google.maps.Map(document.getElementById('googleMaps'), {
-    center: ucsd_ltlng,
-    zoom: 15,
-    styles: [{"featureType":"administrative","stylers":[{"visibility":"off"}]},{"featureType":"poi","stylers":[{"visibility":"simplified"}]},{"featureType":"road","elementType":"labels","stylers":[{"visibility":"simplified"}]},{"featureType":"water","stylers":[{"visibility":"simplified"}]},{"featureType":"transit","stylers":[{"visibility":"simplified"}]},{"featureType":"landscape","stylers":[{"visibility":"simplified"}]},{"featureType":"road.highway","stylers":[{"visibility":"off"}]},{"featureType":"road.local","stylers":[{"visibility":"on"}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"visibility":"on"}]},{"featureType":"water","stylers":[{"color":"#84afa3"},{"lightness":52}]},{"stylers":[{"saturation":-17},{"gamma":0.36}]},{"featureType":"transit.line","elementType":"geometry","stylers":[{"color":"#3f518c"}]}]
-  });
-
-  getLocation(map);
-   map.addListener('click', function(e) {
-    placeMarkerAndPanTo(e.latLng, map);
-  });
+function expandAnswers(event){
+	var id = event.target.id.split("_")[1];
+    if($("#" + event.target.id).text().trim() == "Show Answers"){
+        $("#" + event.target.id).html("<span class='glyphicon glyphicon-chevron-down' id='togexpand_'" + id + "'></span>&nbsp;Hide Answers");
+        $("#answers_" + id).slideDown();
+    }
+    else{
+        $("#" + event.target.id).html("<span class='glyphicon glyphicon-chevron-up' id='togexpand_'" + id + "'></span>&nbsp;Show Answers");
+        $("#answers_" + id).slideUp();
+    }
 }
 
-function placeMarkerAndPanTo(latLng, map) {
-  $("#location_modal").modal("toggle");
-   window.marker = new google.maps.Marker({
-        position: latLng,
-        map: map
-      });
-  map.panTo(latLng);
-}
-
-function updateSkillPercent(event){
-	var name = event.target.id.split("_")[0];
-	var value = $("#" + event.target.id).val();
-	$("#" + name + "_bar").attr('data-percent', value + "%");
-	$("#" + name + "_percent").html(value + "%");
-	$("#" + name + "_bar").find('.skillbar-bar').animate({
-		width:$("#" + name + "_bar").attr('data-percent')// + value / 100
-	},500);
+function addLocation(){
+	if(navigator.geolocation){
+		navigator.geolocation.getCurrentPosition(function(position){
+			var location = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+			console.log(location);
+		});
+	}
 }

@@ -6,7 +6,6 @@ $(document).ready(function() {
 	$(".survival_circle").hover(enterPoint);
 	$(".survival_circle").mouseleave(exitPoint);
 	$(".survival_interaction_point").click(switchPageFromSurvival);
-	$(".survival_section").click(switchPageFromSurvival);
 })
 
 function exitPoint(){

@@ -62,7 +62,7 @@
                             <p>{{date}}</p>
                         </div>
                        <p style="color:gray;">{{author}} asked:</p>
-                        <h4><span class="stylecategory">{{category}}</span> {{question}}</h4>
+                        <h4>{{question}}</h4>
                         <div>
                             <form class="input_answer" id="answer_form" method="post" action="/answer">
                                 <input type="hidden" value="" name="category" form="answer_form" class="category_field"/>
@@ -101,23 +101,3 @@
 </div>
 
 <script src="/js/connect.js"></script>
-<script>
-    $("#search_button").click(function(){
-        var keyword = $("#search_input_box").val().split(" ");
-        $(".question").css("display", "none");
-        for( var i = 0; i< keyword.length; i++){
-            $(".question:contains("+keyword[i]+")").css("display", "block");
-        }
-    });
-    $(".expand").click(function(event){
-        var id = event.target.id.split("_")[1];
-        if($("#" + event.target.id).text().trim() == "Show Answers"){
-            $("#" + event.target.id).html("<span class='glyphicon glyphicon-chevron-down' id='togexpand_'" + id + "'></span>&nbsp;Hide Answers");
-            $("#answers_" + id).slideDown();
-        }
-        else{
-            $("#" + event.target.id).html("<span class='glyphicon glyphicon-chevron-up' id='togexpand_'" + id + "'></span>&nbsp;Show Answers");
-            $("#answers_" + id).slideUp();
-        }
-    });
-</script>
