@@ -11,6 +11,14 @@ function openSafetyZones() {
     function () {
       //$(".safety_zone").show();
       getData("safe_zones", "SOUTH");
+      var newTextBoxDiv = $("#displayDistrict")
+       .attr("id", "#zone1")
+       .attr("style", "font-size:20px; display: inline;");
+       newTextBoxDiv.append("<p> Cities: <br/> Death Rates: <br/> Crime Rates: <br/> Stuff:  <p/>")
+      $( "#safety_zone_districts" ).append(newTextBoxDiv);
+      if(newTextBoxDiv){
+        console.log("TRUE");
+      }
     }
   );
 

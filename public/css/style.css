@@ -749,3 +749,6 @@ nav{
 	list-style-type: decimal;
 }
 
+#barChart, #displayDistrict{
+    display: inline;
+}
