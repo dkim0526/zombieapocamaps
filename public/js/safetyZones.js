@@ -5,17 +5,16 @@ function openSafetyZones() {
     getData("safe_zones");
     firstClick = false;
   }
+
+  $("#district1").hover(
+  function () {
+    $(".safety_zone").show();
+  }, 
+  function () {
+    $(".safety_zone").hide();
+  }
+  );
 }
-
-
-  // $("#district1").hover(
-  // function () {
-  //   $("#bubbleChart").show();
-  // }, 
-  // function () {
-  //   $(".bubbleChart").hide();
-  // }
-  // );
 
 // need to find a new formular maybe to show some equal representation
 function findRating(total){
@@ -95,185 +94,6 @@ function displayChartArray(array){
   return returnArray;
 }
 
-// function displayChart(delphidata){ 
-//   delphidata = displayChartArray(delphidata);
-//   jsonObj = {
-//     "cities": String,
-//     "population": Number,
-//     "zombies": Number,
-//     "rating": Number
-//   }
-
-//   var bubbleChart = new d3.svg.BubbleChart({ 
-//     supportResponsive: true,
-//     //container: => use @default
-//     size: 1200,
-//     //viewBoxSize: => use @default
-//     innerRadius: 460,
-//     //outerRadius: => use @default
-//     radiusMin: 50,
-//     //radiusMax: use @default
-//     //intersectDelta: use @default
-//     //intersectInc: use @default
-//     //circleColor: use @default
-//     data: {
-//       items: delphidata,
-//       eval: function (item) {return item.rating;},
-//       classed: function (item) {return item.cities.split(" ").join("");}
-//     },
-//     plugins: [
-//         {
-//           name: "central-click",
-//           options: {
-//             text: '',
-//             style: {
-//               "font-size": "28px",
-//               "font-family": "Source Sans Pro, sans-serif",
-//               "text-anchor": "middle",
-//               fill: "black"
-//             },
-//             attr: {dy: "65px"},
-//             centralClick: function() {
-//               alert("Here is more details!!");    
-//             }
-//           }
-//         },
-//         {
-//         name: "lines",
-//         options: {
-//           format: [
-//             {// Line #0
-//               textField: "rating",
-//               classed: {rating: false},
-//               style: {
-//                 "font-size": "28px",
-//                 "font-family": "Source Sans Pro, sans-serif",
-//                 "text-anchor": "middle",
-//                 fill: "black"
-//               },
-//               attr: {
-//                 dy: "0px",
-//                 x: function (d) {return d.cx;},
-//                 y: function (d) {return d.cy;}
-//               }
-//             },
-//             {// Line #1
-//               textField: "cities",
-//               classed: {cities: false},
-//               style: {
-//                 "font-size": "14px",
-//                 "font-family": "Source Sans Pro, sans-serif",
-//                 "text-anchor": "middle",
-//                 fill: "black"
-//               },
-//               attr: {
-//                 dy: "40px",
-//                 x: function (d) {return d.cx;},
-//                 y: function (d) {return d.cy;}
-//               }
-//             },
-//             {// Line #0
-//               textField: "zombies",
-//               classed: {zombies: false},
-//               style: {
-//                 "font-size": "14px",
-//                 "font-family": "Source Sans Pro, sans-serif",
-//                 "text-anchor": "middle",
-//                 "visibility" : "hidden",
-//                 fill: "white"
-//               },
-//               attr: {
-//                 dy: "80px",
-//                 x: function (d) {return d.cx;},
-//                 y: function (d) {return d.cy;}
-//               }
-//             },
-//             {// Line #0
-//               textField: "population",
-//               classed: { pop: false},
-//               style: {
-//                 "font-size": "14px",
-//                 "font-family": "Source Sans Pro, sans-serif",
-//                 "text-anchor": "middle",
-//                 "visibility" : "hidden",
-//                 fill: "white"
-//               },
-//               attr: {
-//                 dy: "120px",
-//                 x: function (d) {return d.cx;},
-//                 y: function (d) {return d.cy;}
-//               }
-//             }
-//           ],
-//           centralFormat: [
-//               {// Line #0
-//               textField: "cities",
-//               classed: {cities: true},
-//               style: {
-//                 "font-size": "60px",
-//                 "font-family": "Source Sans Pro, sans-serif",
-//                 "text-anchor": "middle",
-//                 fill: "white"
-//               },
-//               attr: {
-//                 dy: "0px",
-//                 x: function (d) {return d.cx;},
-//                 y: function (d) {return d.cy;}
-//               }
-//             },
-//             {// Line #0
-//               textField: "ratingString",
-//               classed: {ratingString: true},
-//               style: {
-//                 "font-size": "60px",
-//                 "font-family": "Source Sans Pro, sans-serif",
-//                 "text-anchor": "middle",
-//                 fill: "white"
-//               },
-//               attr: {
-//                 dy: "60px",
-//                 x: function (d) {return d.cx;},
-//                 y: function (d) {return d.cy;}
-//               }
-//             },
-//             {// Line #0
-//               textField: "population",
-//               classed: {pop: true},
-//               style: {
-//                 "font-size": "60px",
-//                 "font-family": "Source Sans Pro, sans-serif",
-//                 "text-anchor": "middle",
-//                 "visibility" : "visible",
-//                 fill: "white"
-//               },
-//               attr: {
-//                 dy: "120px",
-//                 x: function (d) {return d.cx;},
-//                 y: function (d) {return d.cy;}
-//               }
-//             },
-//             {// Line #0
-//               textField: "zombies",
-//               classed: {zombies: true},
-//               style: {
-//                 "font-size": "60px",
-//                 "font-family": "Source Sans Pro, sans-serif",
-//                 "text-anchor": "middle",
-//                 "visibility" : "visible",
-//                 fill: "white"
-//               },
-//               attr: {
-//                 dy: "180px",
-//                 x: function (d) {return d.cx;},
-//                 y: function (d) {return d.cy;}
-//               }
-//             }
-//           ]
-//         }
-//       }]
-//   });
-// }
-
 function displayChart(delphidata){
   delphidata = displayChartArray(delphidata);
   var margin = {top: 20, right: 20, bottom: 30, left: 40},
@@ -299,6 +119,7 @@ function displayChart(delphidata){
   var svg = d3.select("#safety_zone").append("svg")
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + (margin.bottom+ 100))//added 
+      .attr("class", "safety_zone")
     .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
@@ -376,13 +197,8 @@ function displayChart(delphidata){
     d3.select("input").on("change", change);
 
 
-   /* var sortTimeout = setTimeout(function() {
-      d3.select("input").property("checked", true).each(change);
-    }, 2000);*/
 
     function change() {
-     // clearTimeout(sortTimeout);
-
       // Copy-on-write since tweens are evaluated after a delay.
       var x0 = x.domain(delphidata.sort(this.checked
           ? function(a, b) { return b.rating - a.rating; }
@@ -406,47 +222,3 @@ function displayChart(delphidata){
           .delay(delay);
     }
 }
-/*
-    {text: "Chula Vista", count: "18.5"},
-        {text: "Mira Mesa", count: "17.5"},
-        {text: "La Jolla", count: "19"},
-        {text: "Kearny Mesa", count: "18.6"},
-        {text: "Oceanside", count: "14"},
-        {text: "Carlsbad", count: "17"},
-        {text: "Del Mar", count: "19"},
-        {text: "Kearny Mesa", count: "18.6"},
-        {text: "Oceanside", count: "14"},
-        {text: "Carlsbad", count: "17"},
-        {text: "Del Mar", count: "19"},
-        {text: "Chula Vista", count: "18.5"},
-        {text: "Mira Mesa", count: "17.5"},
-        {text: "La Jolla", count: "19"},
-        {text: "Kearny Mesa", count: "18.6"},
-        {text: "Oceanside", count: "14"},
-        {text: "Carlsbad", count: "17"},
-        {text: "Del Mar", count: "19"},
-        {text: "Kearny Mesa", count: "18.6"},
-        {text: "Oceanside", count: "14"},
-        {text: "Carlsbad", count: "17"},
-        {text: "Del Mar", count: "19"},{text: "Chula Vista", count: "18.5"},
-        {text: "Mira Mesa", count: "17.5"},
-        {text: "La Jolla", count: "19"},
-        {text: "Kearny Mesa", count: "18.6"},
-        {text: "Oceanside", count: "14"},
-        {text: "Carlsbad", count: "17"},
-        {text: "Del Mar", count: "19"},
-        {text: "Kearny Mesa", count: "18.6"},
-        {text: "Oceanside", count: "14"},
-        {text: "Carlsbad", count: "17"},
-        {text: "Del Mar", count: "19"},{text: "Chula Vista", count: "18.5"},
-        {text: "Mira Mesa", count: "17.5"},
-        {text: "La Jolla", count: "19"},
-        {text: "Kearny Mesa", count: "18.6"},
-        {text: "Oceanside", count: "14"},
-        {text: "Carlsbad", count: "17"},
-        {text: "Del Mar", count: "19"},
-        {text: "Kearny Mesa", count: "18.6"},
-        {text: "Oceanside", count: "14"},
-        {text: "Carlsbad", count: "17"},
-        {text: "Del Mar", count: "19"},
-*/
