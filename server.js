@@ -97,8 +97,8 @@ passport.use(new FacebookStrategy({
           className: String,
           isChecked: Boolean
         };
-        var checkList = ["Water", "Food", "Medication", "First Aid Supplies", "Hand Sanitizer", "Soap", "Batteries", "Utility Knife", "Duct Tape", "Blankets", "Clothes", "Passport"];
-        var classList = ["food_water", "food_water", "health", "health", "health", "health", "supplies", "supplies", "supplies", "supplies", "supplies", "supplies"];
+        var checkList = ["Water", "Food", "Medication", "First Aid Supplies", "Hygiene Items", "Lighter", "Flashlight", "Gasoline", "Batteries", "Alcohol", "Utility Knife", "Duct Tape", "Blankets", "Clothes", "Passport"];
+        var classList = ["food_water", "food_water", "health", "health", "health", "supplies", "supplies", "supplies", "supplies", "supplies", "supplies", "supplies", "supplies", "supplies", "supplies"];
         for(var i = 0; i < checkList.length; i++){
           json = {};
           json.name = checkList[i];
