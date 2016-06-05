@@ -684,20 +684,20 @@ nav{
 
 /****************** HELP PAGE ******************/
 #seek_help #help{
-	font-size: 20pt;
+	font-size: 17pt;
 	text-decoration: none;
 	color: #8c9fa3;
 }
 
 #seek_help #help:hover{
-	font-size: 20pt;
+	font-size: 17pt;
 	text-decoration: none;
 	color: #49af59;
 }
 
 
 #seek_help #help:focus{
-	font-size: 20pt;
+	font-size: 17pt;
 	text-decoration: none;
 	color: #233751;
 }
@@ -708,4 +708,9 @@ nav{
 
 #seek_help .find{
 	border-bottom: 1px solid #e2e2e2;
+}
+
+#seek_help li{
+	list-style-positon: inside;
+	list-style-type: decimal;
 }
