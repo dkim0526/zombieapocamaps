@@ -31,9 +31,8 @@ exports.send = function(req, res) {
                   array2[counter] = messages[i];
                   counter++;
               }
-              console.log(user.checkList);
+
               for(var i = 0; i < user.checkList.length; i++){
-                console.log(user.checkList[i].isChecked);
                 if(i < user.checkList.length/2){
                   first.push(user.checkList[i]);
                 }

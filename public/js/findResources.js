@@ -20,7 +20,6 @@ $(document).ready(function() {
   $("#resource_tool_food").click(function(){
       sortByResource("food_water", map);
   });
-
 })
 
 function setMarkerLimit(array, limit){

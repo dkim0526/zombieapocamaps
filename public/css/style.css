@@ -106,21 +106,21 @@ body{
 	color: white;
 }
 
-}
 #learn{
-	padding-top: 200px;
-	padding-bottom: 200px;
-	background-color: #c1dad6;
+	padding-top: 10px;
+	padding-bottom: 100px;
+	/*background-color: #c1dad6;*/
+	background-color: white;
 }
 
-#learn #video{
+/*#learn #video{
 	padding-left: 200px;
 	padding-top: 60px;
 	padding-bottom: 100px;
-}
+}*/
 
 #learn #about h2{
-	padding-left: 100px;
+	/*padding-left: 100px;*/
 	padding-top: 60px;
 }
 
@@ -144,7 +144,7 @@ body{
 }
 
 #preview h1{
-	font-size: 40pt;
+	font-size: 30pt;
 }
 
 #preview #safetyzones,
@@ -182,22 +182,41 @@ body{
 }
 
 #preview #findresources .screenshot{
-	padding-left: 200px;
+	padding-left: 130px;
 }
 
 .calltoaction{
-		padding-top: 100px;
-    height:700px;
-    color:white;
     background: url('../img/footer.png') no-repeat center center scroll;
-    background-size: 100vw 100%;
-    margin-bottom:0;
-    padding-bottom:0;
+    background-size: 100vw auto;
+		height: 480px;
 }
 
-#login-btn h1{
-	font-size: 30pt;
-	margin-top: 200px;
+.calltoaction h1{
+	padding-top: 200px;
+	color: white;
+}
+
+.calltoaction-btn{
+	background-color: #043B62;
+  border: none;
+	border-radius: 10px;
+  color: white;
+  padding: 10px 27px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 23px;
+	margin: 0px 15px 0px 15px;
+	border: 2px solid #043B62;
+  box-shadow: 5px 5px 5px black;
+}
+
+
+.calltoaction-btn:hover{
+	background-color: #054572;
+	border: 2px solid #054572;
+	color: white;
+	text-decoration: none;
 }
 
 footer{
@@ -210,10 +229,6 @@ footer p{
 	padding-top: 40px;
 	color: white;
 	font-size: 15pt;
-}
-
-.footer_button{
-    box-shadow: 5px 5px 5px black;
 }
 
 /*.dropdown-toggle {
@@ -457,14 +472,22 @@ nav{
     padding:10px;
     padding-right:20px;
 }
+
+#resource_tool_legend label,
+#resource_tool_directions label{
+	padding-top: 10px;
+	padding-left: 10px;
+}
+
 #resource_tool_checklist label{
     display:block;
 }
+
 .checklist_list, #resource_tool_checklist .pull-right{
-    margin:0;
-   width:200px;
-   list-style:none !important;
-   display:inline;
+	margin:0;
+  width:200px;
+  list-style:none !important;
+  display:inline;
 }
 .checklist_list li{
    width:150px;
@@ -666,20 +689,20 @@ nav{
 
 /****************** HELP PAGE ******************/
 #seek_help #help{
-	font-size: 25pt;
+	font-size: 17pt;
 	text-decoration: none;
 	color: #8c9fa3;
 }
 
 #seek_help #help:hover{
-	font-size: 25pt;
+	font-size: 17pt;
 	text-decoration: none;
 	color: #49af59;
 }
 
 
 #seek_help #help:focus{
-	font-size: 25pt;
+	font-size: 17pt;
 	text-decoration: none;
 	color: #233751;
 }
@@ -690,4 +713,47 @@ nav{
 
 #seek_help .find{
 	border-bottom: 1px solid #e2e2e2;
+}
+
+
+#safety_zone_districts{
+    margin-top: 15px;
+    margin-left: 10px;
+}
+#district1,
+#district2,
+#district3,
+#district4,
+#district5,
+#district6,
+#district7,
+#district8,
+#district9,
+#district10,
+#district11{
+    stroke:#000000;
+    stroke-width: 3;
+}
+
+#district1:hover,
+#district2:hover,
+#district3:hover,
+#district4:hover,
+#district5:hover,
+#district6:hover,
+#district7:hover,
+#district8:hover,
+#district9:hover,
+#district10:hover,
+#district11:hover{
+    opacity: 0.5;
+}
+
+#seek_help li{
+	list-style-positon: inside;
+	list-style-type: decimal;
+}
+
+#barChart, #displayDistrict{
+    display: inline;
 }

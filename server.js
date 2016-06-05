@@ -97,8 +97,8 @@ passport.use(new FacebookStrategy({
           className: String,
           isChecked: Boolean
         };
-        var checkList = ["Water", "Food", "Medication", "First Aid Supplies", "Hand Sanitizer", "Soap", "Batteries", "Utility Knife", "Duct Tape", "Blankets", "Clothes", "Passport"];
-        var classList = ["food_water", "food_water", "health", "health", "health", "health", "supplies", "supplies", "supplies", "supplies", "supplies", "supplies"];
+        var checkList = ["Water", "Food", "Medication", "First Aid Supplies", "Hygiene Items", "Lighter", "Flashlight", "Gasoline", "Batteries", "Alcohol", "Utility Knife", "Duct Tape", "Blankets", "Clothes", "Passport"];
+        var classList = ["food_water", "food_water", "health", "health", "health", "supplies", "supplies", "supplies", "supplies", "supplies", "supplies", "supplies", "supplies", "supplies", "supplies"];
         for(var i = 0; i < checkList.length; i++){
           json = {};
           json.name = checkList[i];
@@ -170,8 +170,8 @@ app.use(function(err, req, res, next) {
 var health_query = 'SELECT HEALTH."CITY" as City, CASE WHEN HEALTH."ADDR" <> \'\' THEN HEALTH."ADDR" ELSE \'San Diego\' END AS ADDRESS FROM cogs121_16_raw.sandag_clinics_all_prj AS HEALTH';
 var food_water_query = 'SELECT CASE WHEN FOOD_WATER."ADDRESS" <> \'\' THEN FOOD_WATER."ADDRESS" ELSE \'San Diego\' END AS ADDRESS, FOOD_WATER."CITY" AS CITY FROM cogs121_16_raw.sandag_foodbeverage_business_prj AS FOOD_WATER';
 var supplies_query = 'SELECT CASE WHEN SUPPLIES."ADDRESS" <> \'\' THEN SUPPLIES."ADDRESS" ELSE \'San Diego\' END AS ADDRESS, SUPPLIES."CITY" AS CITY FROM cogs121_16_raw.sandag_foodgrocery_business_prj AS SUPPLIES'
-var safe_zones_query = 'SELECT POPULATION."Area" AS Cities, POPULATION."Total 2012 Population" AS POPULATION_DENSITY, CASE WHEN SUM(DEATHRATE."Total_Cases") IS NULL THEN 0 ELSE SUM(DEATHRATE."Total_Cases") END AS ZOMBIE_COUNT, CASE WHEN SUM(DEATHRATE."Total_Cases") IS NULL THEN POPULATION."Total 2012 Population" ELSE SUM(DEATHRATE."Total_Cases") + POPULATION."Total 2012 Population" END AS RATING FROM ' +
-'cogs121_16_raw.hhsa_san_diego_demographics_county_population_2012 AS POPULATION INNER JOIN cogs121_16_raw.hhsa_ovarian_cancer_deaths_2010_2013 AS DEATHRATE ON UPPER(DEATHRATE."Geography") = UPPER(POPULATION."Area") GROUP BY POPULATION."Area", POPULATION."Total 2012 Population" ORDER BY RATING';
+var safe_zones_query = 'SELECT DEATHRATE."RegionName", POPULATION."Area" AS Cities, POPULATION."Total 2012 Population" AS POPULATION_DENSITY, CASE WHEN SUM(DEATHRATE."Total_Cases") IS NULL THEN 0 ELSE SUM(DEATHRATE."Total_Cases") END AS ZOMBIE_COUNT, CASE WHEN SUM(DEATHRATE."Total_Cases") IS NULL THEN POPULATION."Total 2012 Population" ELSE SUM(DEATHRATE."Total_Cases") + POPULATION."Total 2012 Population" END AS RATING FROM ' +
+'cogs121_16_raw.hhsa_san_diego_demographics_county_population_2012 AS POPULATION INNER JOIN cogs121_16_raw.hhsa_ovarian_cancer_deaths_2010_2013 AS DEATHRATE ON UPPER(DEATHRATE."Geography") = UPPER(POPULATION."Area") GROUP BY DEATHRATE."RegionName", POPULATION."Area", POPULATION."Total 2012 Population" ORDER BY RATING';
 
 var pgVar = require('pg');
 
