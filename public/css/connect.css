@@ -10,6 +10,7 @@
 #connect_content{
 	height:auto;
 	margin-top:4px;
+	min-height:80vh;
 }
 #question_textarea{
 	resize:none;
@@ -34,6 +35,9 @@
 
 .question, .answer{
 	padding:20px;
+}
+#default_item_question{
+	display:none;
 }
 
 .question{
@@ -78,9 +82,11 @@ textarea{
 .answer_textarea{
 	width: 80%;
 }
-#question_section{
+
+#question_wrapper{
 	margin-top:-20px;
 	padding-top:20px;
+	min-height:100%;
 }
 
 .profile_question{

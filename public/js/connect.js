@@ -44,7 +44,14 @@ function openPanel(button, color, secondColor, thirdColor){
 		$(".btn-custom").css("color", secondColor);
 		$(".btn-custom:hover, .divider").css("background-color",secondColor);
 		$(".question").css("border", "2px solid " + color);
-		$("#question_section").css("background-color", thirdColor);
+		$("#question_wrapper").css("background-color", thirdColor);
+		var category = button.attr("id").split("_")[1];
+		console.log(category);
+		$(".category_field").val(category);
+		$(".answer").css("display", "none");
+		$(".question").css("display", "none");
+		$("." + category).css("display", "block");
+		$("#default_item_question").css("display", ($("." + category).length == 0) ? "block" : "none");
 	}
 }
 

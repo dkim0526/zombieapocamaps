@@ -1,4 +1,25 @@
 var firstClick = true;
+$(document).ready(function() {
+  var regions = ["EAST", "INLAND", "SOUTH", "COASTAL", "CENTRAL"];
+  var regionColor = ["#D6AA5E", "#6BF2E2", "#D65C93", "#3399FF", "#B491ED"];
+  for(var i = 0; i < regions.length; i++){
+    var html = '<svg width="220" height="220" class="sf_circle">'
+                + '<circle cx="105" cy="105" r="100" fill="' + regionColor[i] + '" id="'+ regions[i] +'" class="district"/>'
+                + '<text dx="65" dy="110">District '+i+': ' + regions[i] + '</text></svg>';
+    $("#safety_zone_districts").append(html);
+    $("#" + regions[i]).click(loadRegion);
+  }
+
+})
+
+function loadRegion(event){
+  var region = event.target.getAttribute("id");
+  getData("safe_zones", region);
+  console.log(region);
+    var newTextBoxDiv = "<p> Cities: " + region+ "<br/> Death Rates: <br/> Crime Rates: <br/> Stuff:  <p/>";
+     // <---- CAN YOU PASS DATA HERE
+    $( "#safe_zone_information" ).html(newTextBoxDiv);
+}
 
 function openSafetyZones() {
   openTab($("#safety_zone"), $("#safety_zone_btn"), "Safe Zones");
@@ -6,107 +27,17 @@ function openSafetyZones() {
     getData("safe_zones", "EAST");
     firstClick = false;
   }
-
-  $("#district1").click(
-    function () {
-      //$(".safety_zone").show();
-      getData("safe_zones", "SOUTH");
-      if(newTextBoxDiv == null){
-        var newTextBoxDiv = $("#displayDistrict")
-         .attr("id", "#zone1")
-         .attr("style", "font-size:20px; display: inline;");
-         newTextBoxDiv.append("<p> Cities: <br/> Death Rates: <br/> Crime Rates: <br/> Stuff:  <p/>")
-         // <---- CAN YOU PASS DATA HERE 
-        $( "#safety_zone_districts" ).append(newTextBoxDiv);
-      }
-      else if(newTextBoxDiv){
-        console.log("TRUE");
-      }
-    }
-  );
-
-  $("#district2").click(
-    function () {
-      //$(".safety_zone").show();
-      getData("safe_zones", "EAST");
-      if(newTextBoxDiv == null){
-        var newTextBoxDiv = $("#displayDistrict")
-         .attr("id", "#zone2")
-         .attr("style", "font-size:20px; display: inline;");
-         newTextBoxDiv.append("<p> Cities: <br/> Death Rates: <br/> Crime Rates: <br/> Stuff:  <p/>")
-         // <---- CAN YOU PASS DATA HERE 
-        $( "#safety_zone_districts" ).append(newTextBoxDiv);
-      }
-      else if(newTextBoxDiv){
-        console.log("TRUE");
-      }
-    }
-  );
-
-  $("#district3").click(
-    function () {
-      //$(".safety_zone").show();
-      getData("safe_zones", "CENTRAL");
-      if(newTextBoxDiv == null){
-        var newTextBoxDiv = $("#displayDistrict")
-         .attr("id", "#zone3")
-         .attr("style", "font-size:20px; display: inline;");
-         newTextBoxDiv.append("<p> Cities: <br/> Death Rates: <br/> Crime Rates: <br/> Stuff:  <p/>")
-         // <---- CAN YOU PASS DATA HERE 
-        $( "#safety_zone_districts" ).append(newTextBoxDiv);
-      }
-      else if(newTextBoxDiv){
-        console.log("TRUE");
-      }
-    }
-  );
-
-  $("#district4").click(
-    function () {
-      //$(".safety_zone").show();
-      getData("safe_zones", "INLAND");
-      if(newTextBoxDiv == null){
-        var newTextBoxDiv = $("#displayDistrict")
-         .attr("id", "#zone4")
-         .attr("style", "font-size:20px; display: inline;");
-         newTextBoxDiv.append("<p> Cities: <br/> Death Rates: <br/> Crime Rates: <br/> Stuff:  <p/>")
-         // <---- CAN YOU PASS DATA HERE 
-        $( "#safety_zone_districts" ).append(newTextBoxDiv);
-      }
-      else if(newTextBoxDiv){
-        console.log("TRUE");
-      }
-    }
-  );
-
-  $("#district5").click(
-    function () {
-      //$(".safety_zone").show();
-      getData("safe_zones", "COASTAL");
-      if(newTextBoxDiv == null){
-        var newTextBoxDiv = $("#displayDistrict")
-         .attr("id", "#zone5")
-         .attr("style", "font-size:20px; display: inline;");
-         newTextBoxDiv.append("<p> Cities: <br/> Death Rates: <br/> Crime Rates: <br/> Stuff:  <p/>")
-         // <---- CAN YOU PASS DATA HERE 
-        $( "#safety_zone_districts" ).append(newTextBoxDiv);
-      }
-      else if(newTextBoxDiv){
-        console.log("TRUE");
-      }
-    }
-  );
 }
 
 // need to find a new formular maybe to show some equal representation
 function findRating(total){
     var returnVal = 1;
     if(total>=5072 && total < 66803)
-        returnVal =  1; 
+        returnVal =  1;
     if(total>=66803 && total < 128534)
         returnVal =  2;
     if(total>=128534 && total < 190265)
-        returnVal =  3; 
+        returnVal =  3;
     if(total>=190265 && total < 251996)
         returnVal =  4;
     if(total>=251996 && total < 313727)
@@ -195,10 +126,10 @@ function displayChart(delphidata){
   var yAxis = d3.svg.axis()
       .scale(y)
       .orient("left")
- 
+
   svg = d3.select("#barChart").append("svg")
       .attr("width", width + margin.left + margin.right)
-      .attr("height", height + margin.top + (margin.bottom+ 100))//added 
+      .attr("height", height + margin.top + (margin.bottom+ 100))//added
       .attr("class", "safety_zone")
     .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
@@ -233,10 +164,10 @@ function displayChart(delphidata){
 
   svg.call(tip);
 
-   // determining bar colors 
+   // determining bar colors
   var max = d3.max(delphidata, function(d) {return d.rating;});
   // var threshold = max/3;
-  var length = delphidata.length/3; 
+  var length = delphidata.length/3;
   //console.log("length: " + array.length + " " + "division: " + Math.ceil(array.length/3));
 
   var tempData = [];
@@ -244,7 +175,7 @@ function displayChart(delphidata){
       tempData.push(d.rating);
     });
 
-    tempData.sort(); 
+    tempData.sort();
 
   var redT = tempData[Math.ceil(length)];
   var yellowT = tempData[Math.ceil(length*2)];
@@ -263,7 +194,7 @@ function displayChart(delphidata){
         .attr("height", function(d) { return height - y(d.rating); })
         .on('mouseover', tip.show)
         .on('mouseout', tip.hide)
-        .attr("fill", function(d){  
+        .attr("fill", function(d){
           if (d.rating < redT) {
             return "red";
           } else if (d.rating <= yellowT) {

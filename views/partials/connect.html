@@ -29,8 +29,9 @@
 
         <div class="container input_question" style="text-align:start">
             <form id="question_form" action="/message" method="post">
-                <input type="hidden" value="{{users.displayName}}" name="author" form="answer_form"/>
-                <input type="hidden" value="{{users.picture}}" name="photo" form="answer_form"/>
+                <input type="hidden" value="{{users.displayName}}" name="author" form="question_form"/>
+                <input type="hidden" value="{{users.picture}}" name="photo" form="question_form"/>
+                <input type="hidden" value="" name="category" form="question_form" class="category_field"/>
                 <div class="profile pull-left">
                     <img class="profile profile_pic" src="{{users.picture}}" id="imgUrl" style=""/>
                     <p class="profile_name">{{users.displayName}}</p>
@@ -51,47 +52,49 @@
                 <a class="btn btn-custom" id="search_button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a>
             </div>
         </div>
+        <div id="question_wrapper">
+            <h4 class="text-center" id="default_item_question"><em>No questions submitted for this category</em></h4>
+            <ul class="list-unstyled" id="question_section">
+                {{#each questions}}
+                    <li class="{{category}} container question">
+                        <div class="profile pull-left profile_question">
+                            <img src="{{photo}}" class="profile"/>
+                            <p>{{date}}</p>
+                        </div>
+                       <p style="color:gray;">{{author}} asked:</p>
+                        <h4><span class="stylecategory">{{category}}</span> {{question}}</h4>
+                        <div>
+                            <form class="input_answer" id="answer_form" method="post" action="/answer">
+                                <input type="hidden" value="" name="category" form="answer_form" class="category_field"/>
+                                <input value="{{id}}" name="questionid" type="hidden" form="answer_form"/>
+                                <textarea style="width:80%" class="answer_textarea" placeholder="Type answer here..." name="answer" form="answer_form"></textarea>
+                                <input type="submit" class="btn btn-custom pull-right" value="Answer"/>
+                            </form>
 
-        <ul class="list-unstyled" id="question_section">
-            {{#each questions}}
-                <li class="{{category}} container question">
-                    <div class="profile pull-left profile_question">
-                        <img src="{{photo}}" class="profile"/>
-                        <p>{{date}}</p>
-                    </div>
-                   <p style="color:gray;">{{author}} asked:</p>
-                    <h4><span class="stylecategory">{{category}}</span> {{question}}</h4>
-                    <div>
-                        <form class="input_answer" id="answer_form" method="post" action="/answer">
+                        </div>
+                        <br/>
+                        <a class="expand btn" id="expand_{{id}}"><span class="glyphicon glyphicon-chevron-up" id="togexpand_{{id}}"></span>&nbsp;Show Answers</a>
+                        <div class="answer_section" id="answers_{{id}}">
+                            <ul class="list-unstyled">
+                            {{#each this.answers}}
+                                <li class="answer">
+                                    <div class="profile pull-left">
+                                        <img src="{{photo}}" class="profile"/>
+                                        <p>{{date}}</p>
+                                    </div>
+                                    <p style="color:gray;">{{author}} answered:</p>
+                                    <h5 class="answer_text">{{answer}}</h5>
+                                </li>
+                            {{else}}No answers yet.
+                            {{/each}}
+                            </ul>
+                        </div>
+                    </li>
 
-                            <input value="{{id}}" name="questionid" type="hidden"/>
-                            <textarea style="width:80%" class="answer_textarea" placeholder="Type answer here..." name="answer" form="answer_form"></textarea>
-                            <input type="submit" class="btn btn-custom pull-right" value="Answer"/>
-                        </form>
-
-                    </div>
-                    <br/>
-                    <a class="expand btn" id="expand_{{id}}"><span class="glyphicon glyphicon-chevron-up" id="togexpand_{{id}}"></span>&nbsp;Show Answers</a>
-                    <div class="answer_section" id="answers_{{id}}">
-                        <ul class="list-unstyled">
-                        {{#each this.answers}}
-                            <li class="answer">
-                                <div class="profile pull-left">
-                                    <img src="{{photo}}" class="profile"/>
-                                    <p>{{date}}</p>
-                                </div>
-                                <p style="color:gray;">{{author}} answered:</p>
-                                <h5 class="answer_text">{{answer}}</h5>
-                            </li>
-                        {{else}}No answers yet.
-                        {{/each}}
-                        </ul>
-                    </div>
-                </li>
-
-            {{else}}<h4>No questions found</h4>
-            {{/each}}
-        </ul>
+                {{else}}<h4>No questions found</h4>
+                {{/each}}
+            </ul>
+        </div>
     </div>
 </div>
 

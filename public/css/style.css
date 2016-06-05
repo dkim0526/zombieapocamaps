@@ -720,32 +720,18 @@ nav{
     margin-top: 15px;
     margin-left: 10px;
 }
-#district1,
-#district2,
-#district3,
-#district4,
-#district5,
-#district6,
-#district7,
-#district8,
-#district9,
-#district10,
-#district11{
+.district{
     stroke:#000000;
     stroke-width: 3;
+    cursor:pointer;
 }
 
-#district1:hover,
-#district2:hover,
-#district3:hover,
-#district4:hover,
-#district5:hover,
-#district6:hover,
-#district7:hover,
-#district8:hover,
-#district9:hover,
-#district10:hover,
-#district11:hover{
+#safe_zone_information{
+    font-size:20px;
+    display: inline;
+}
+
+.district:hover{
     opacity: 0.5;
 }
 
