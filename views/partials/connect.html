@@ -29,10 +29,11 @@
 
         <div class="container input_question" style="text-align:start">
             <form id="question_form" action="/message" method="post">
-                <input type="hidden" value="{{users.displayName}}" name="author" form="question_form"/>
-                <input type="hidden" value="{{users.picture}}" name="photo" form="question_form"/>
+                <input type="hidden" value="{{users.displayName}}" id="hidden_username_field" name="author" form="question_form"/>
+                <input type="hidden" value="{{users.picture}}" id="hidden_photo_field"  name="photo" form="question_form"/>
                 <input type="hidden" value="" name="category" form="question_form" class="category_field"/>
-                <div class="profile pull-left">
+                <input value="" name="location" type="hidden" id="main_location"/>
+                <div class="connect_profile pull-left main_profile">
                     <img class="profile profile_pic" src="{{users.picture}}" id="imgUrl" style=""/>
                     <p class="profile_name">{{users.displayName}}</p>
                 </div>
@@ -40,7 +41,9 @@
                 <textarea id="question_textarea" placeholder="Type question here..." name="question" form="question_form" required></textarea>
                 <br/>
                 <div id="new_question_options">
-                    <a class="btn btn-custom" id="input_location">+ Location</a>
+                    <a class="btn btn-custom btn-location" id="main_location_button">+ Location</a>
+                    <span id="main_location_wrapper" class="location_wrapper"></span>
+                    <a id='main_location_remove' class="location_remove">X</a>
                     <input type="submit" class="btn btn-custom pull-right post-question" value="Post">
                 </div>
             </form>
@@ -57,35 +60,44 @@
             <ul class="list-unstyled" id="question_section">
                 {{#each questions}}
                     <li class="{{category}} container question">
-                        <div class="profile pull-left profile_question">
+                        <div class="connect_profile pull-left profile_question">
                             <img src="{{photo}}" class="profile"/>
                             <p>{{date}}</p>
+                            <p class="location_display"><em>{{location}}</em></p>
                         </div>
                        <p style="color:gray;">{{author}} asked:</p>
                         <h4>{{question}}</h4>
                         <div>
-                            <form class="input_answer" id="answer_form" method="post" action="/answer">
-                                <input type="hidden" value="" name="category" form="answer_form" class="category_field"/>
-                                <input value="{{id}}" name="questionid" type="hidden" form="answer_form"/>
-                                <textarea style="width:80%" class="answer_textarea" placeholder="Type answer here..." name="answer" form="answer_form"></textarea>
-                                <input type="submit" class="btn btn-custom pull-right" value="Answer"/>
+                            <form class="input_answer" id="{{id}}_answer_form" method="post" action="/answer">
+                                <input type="hidden" value="" name="category"  class="category_field" form="{{id}}_answer_form"/>
+                                <input value="{{id}}" name="questionid" type="hidden" form="{{id}}_answer_form"/>
+                                <input value="" name="location" type="hidden" id="{{id}}_location" form="{{id}}_answer_form"/>
+                                <input type="hidden" value="{{users.displayName}}" class="username_field" name="author" form="{{id}}_answer_form"/>
+                                 <input type="hidden" value="{{users.picture}}" class="photo_field" name="photo" form="{{id}}_answer_form"/>
+                                <textarea class="answer_textarea" placeholder="Type answer here..." name="answer" form="{{id}}_answer_form"></textarea>
+                                <div class="answer_options">
+                                    <a class="btn btn-custom btn-location" class="answer_input_location" id="{{id}}_location_button">+ Location</a>
+                                    <span class="location_wrapper" id="{{id}}_location_wrapper"></span>
+                                    <a class='location_remove ' id="{{id}}_location_remove">X</a>
+                                    <input type="submit" class="btn btn-custom pull-right" value="Respond"/>
+                                </div>
                             </form>
-
                         </div>
                         <br/>
-                        <a class="expand btn" id="expand_{{id}}"><span class="glyphicon glyphicon-chevron-up" id="togexpand_{{id}}"></span>&nbsp;Show Answers</a>
+                        <a class="expand btn" id="expand_{{id}}"><span class="glyphicon glyphicon-chevron-up" id="togexpand_{{id}}"></span>&nbsp;Show Responses</a>
                         <div class="answer_section" id="answers_{{id}}">
                             <ul class="list-unstyled">
                             {{#each this.answers}}
                                 <li class="answer">
-                                    <div class="profile pull-left">
-                                        <img src="{{photo}}" class="profile"/>
+                                    <div class="connect_profile pull-left profile_question">
+                                        <img src="{{photo}}" class="profile answer_profile"/>
                                         <p>{{date}}</p>
+                                        <p class="location_display"><em>{{location}}</em></p>
                                     </div>
                                     <p style="color:gray;">{{author}} answered:</p>
                                     <h5 class="answer_text">{{answer}}</h5>
                                 </li>
-                            {{else}}No answers yet.
+                            {{else}}<div class="default_no_answers">No answers yet. Be the first to respond!</div>
                             {{/each}}
                             </ul>
                         </div>

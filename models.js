@@ -14,7 +14,8 @@ var answerSchema = new Schema({
 	photo:String,
 	answer:String,
 	votes:Number,
-	date: String
+	date: String,
+	location: String
 });
 var questionSchema = new Schema({
 	author:String,
@@ -22,7 +23,8 @@ var questionSchema = new Schema({
 	question:String,
 	answers:[answerSchema],
 	date: String,
-	category:String
+	category:String,
+	location: String
 });
 
 
