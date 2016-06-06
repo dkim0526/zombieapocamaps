@@ -16,9 +16,7 @@ function loadRegion(event){
   var region = event.target.getAttribute("id");
   getData("safe_zones", region);
   console.log(region);
-    var newTextBoxDiv = "<p> Cities: " + region+ "<br/> Death Rates: <br/> Crime Rates: <br/> Stuff:  <p/>";
-     // <---- CAN YOU PASS DATA HERE
-    $( "#safe_zone_information" ).html(newTextBoxDiv);
+    
 }
 
 function openSafetyZones() {
@@ -71,7 +69,7 @@ function categorizeRegionName(regionFromDB){
 }
 
 function makeJsonList(array, resultType){
-
+  $( "#safe_zone_information" ).html("");
   var jsonObj = {
     "cities": String,
     "population": Number,
@@ -81,7 +79,7 @@ function makeJsonList(array, resultType){
   }
   var returnArray = [];
   var regionName = "";
-
+  var citiesString = "";
   for(var i = 0; i < array.length; i++){
     regionName = categorizeRegionName(array[i]["RegionName"]);
     if(resultType === regionName){
@@ -92,8 +90,12 @@ function makeJsonList(array, resultType){
       jsonObj.rating = findRating(array[i]["rating"]);
       jsonObj.region = regionName;
       returnArray.push(jsonObj);
+      var newTextBoxDiv = "<span> City: " + array[i]["cities"] + "<br/> Zombie Count: " + array[i]["zombie_count"] + "<br/> Population: " + array[i]["population_density"] + "<br/> <br/><span/>";
+      $( "#safe_zone_information" ).append(newTextBoxDiv);
     }
   }
+
+  
 
   return returnArray;
 }
@@ -196,12 +198,12 @@ function displayChart(delphidata){
         .on('mouseout', tip.hide)
         .attr("fill", function(d){
           if (d.rating < redT) {
-            return "red";
+            return "green";
           } else if (d.rating <= yellowT) {
-            return "yellow";
+            return "green";
           }
             else{
-            return "green";
+            return "red";
           }
         });
 
