@@ -37,7 +37,7 @@ var parser = {
 var conString = process.env.DATABASE_CONNECTION_URL;
 var FacebookStrategy = require('passport-facebook').Strategy;
 
-var local_database_uri  = 'mongodb://steven:hello@ds053194.mongolab.com:53194/heroku_gjkl8qfv';//'mongodb://stallen:hello@ds011258.mlab.com:11258/heroku_q93csxz1';
+var local_database_uri  = 'mongodb://<dbuser>:<dbpassword>@ds017672.mlab.com:17672/heroku_g36s48g2';//'mongodb://stallen:hello@ds011258.mlab.com:11258/heroku_q93csxz1';
 // Database Connection
 var db = mongoose.connection;
 mongoose.connect( process.env.MONGODB_URI || local_database_uri );
@@ -81,7 +81,7 @@ app.use(session_middleware);
 passport.use(new FacebookStrategy({
     clientID: process.env.FACEBOOK_APP_ID,
     clientSecret: process.env.FACEBOOK_APP_SECRET,
-    callbackURL: "http://localhost:3000/auth/facebook/callback",
+    callbackURL: "https://zombieapocamaps.herokuapp.com/auth/facebook/callback",
     profileFields: ['id', 'name','picture.type(large)', 'emails', 'displayName', 'about', 'gender'],
     auth_type: "requthenticate"
 
