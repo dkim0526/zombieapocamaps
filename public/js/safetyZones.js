@@ -4,7 +4,7 @@ $(document).ready(function() {
   var regionColor = ["#D6AA5E", "#6BF2E2", "#D65C93", "#3399FF", "#B491ED"];
   for(var i = 0; i < regions.length; i++){
     var html = '<svg width="220" height="220" class="sf_circle">'
-                + '<circle cx="105" cy="105" r="100" fill="' + regionColor[i] + '" id="'+ regions[i] +'" class="district"/>'
+                + '<circle cx="110" cy="105" r="100" fill="' + regionColor[i] + '" id="'+ regions[i] +'" class="district"/>'
                 + '<text dx="65" dy="110">District '+i+': ' + regions[i] + '</text></svg>';
     $("#safety_zone_districts").append(html);
     $("#" + regions[i]).click(loadRegion);
@@ -80,6 +80,8 @@ function makeJsonList(array, resultType){
   var returnArray = [];
   var regionName = "";
   var citiesString = "";
+  var newTextBoxDiv = "<span>" + "<strong>" + resultType + "</strong>" + "</span>" + "<br/>";
+  $( "#safe_zone_information" ).append(newTextBoxDiv);
   for(var i = 0; i < array.length; i++){
     regionName = categorizeRegionName(array[i]["RegionName"]);
     if(resultType === regionName){
@@ -90,7 +92,7 @@ function makeJsonList(array, resultType){
       jsonObj.rating = findRating(array[i]["rating"]);
       jsonObj.region = regionName;
       returnArray.push(jsonObj);
-      var newTextBoxDiv = "<span> City: " + array[i]["cities"] + "<br/> Zombie Count: " + array[i]["zombie_count"] + "<br/> Population: " + array[i]["population_density"] + "<br/> <br/><span/>";
+      newTextBoxDiv = "<span> City: " + array[i]["cities"] + "<br/> Zombie Count: " + array[i]["zombie_count"] + "<br/> Population: " + array[i]["population_density"] + "<br/> <br/><span/>";
       $( "#safe_zone_information" ).append(newTextBoxDiv);
     }
   }
