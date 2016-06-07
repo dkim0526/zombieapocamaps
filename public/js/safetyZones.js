@@ -110,6 +110,7 @@ function getData(typeOfQuery, resultType){
 }
 
 function displayChart(delphidata){
+  //d3.select("input").property("checked", false);
   var margin = {top: 20, right: 20, bottom: 30, left: 40},
   width = 960 - margin.left - margin.right,
   height = 500 - margin.top - margin.bottom;
@@ -209,31 +210,37 @@ function displayChart(delphidata){
           }
         });
 
-    d3.select("input").on("change", change);
+     d3.select("input").on("change", change);
 
 
+      var sortTimeout = setTimeout(function() {
+        d3.select("input").property("checked", true).each(change);
+      }, 2000);
 
-    function change() {
-      // Copy-on-write since tweens are evaluated after a delay.
-      var x0 = x.domain(delphidata.sort(this.checked
-          ? function(a, b) { return b.rating - a.rating; }
-          : function(a, b) { return d3.ascending(a.cities, b.cities); })
-          .map(function(d) { return d.area; }))
-          .copy();
+      function change() {
+        clearTimeout(sortTimeout);
 
-      svg.selectAll(".bar")
-          .sort(function(a, b) { return x0(a.cities) - x0(b.cities); });
+        // Copy-on-write since tweens are evaluated after a delay.
+        var x0 = x.domain(delphidata.sort(this.checked
+            ? function(a, b) { return b.rating - a.rating; }
+            : function(a, b) { return d3.ascending(a.cities, b.cities); })
+            .map(function(d) { return d.cities; }))
+            .copy();
 
-      var transition = svg.transition().duration(750),
-          delay = function(d, i) { return i * 50; };
+        svg.selectAll(".bar")
+            .sort(function(a, b) { return x0(a.cities) - x0(b.cities); });
 
-      transition.selectAll(".bar")
-          .delay(delay)
-          .attr("x", function(d) { return x0(d.cities); });
+        var transition = svg.transition().duration(750),
+            delay = function(d, i) { return i * 50; };
 
-      transition.select(".x.axis")
-          .call(xAxis)
-        .selectAll("g")
-          .delay(delay);
-    }
+        transition.selectAll(".bar")
+            .delay(delay)
+            .attr("x", function(d) { return x0(d.cities); });
+
+        transition.select(".x.axis")
+            .call(xAxis)
+          .selectAll("g")
+            .delay(delay);
+      }
+
 }
