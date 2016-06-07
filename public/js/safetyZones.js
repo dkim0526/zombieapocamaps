@@ -30,26 +30,26 @@ function openSafetyZones() {
 // need to find a new formular maybe to show some equal representation
 function findRating(total){
     var returnVal = 1;
-    if(total>=5072 && total < 66803)
-        returnVal =  1;
-    if(total>=66803 && total < 128534)
-        returnVal =  2;
-    if(total>=128534 && total < 190265)
-        returnVal =  3;
-    if(total>=190265 && total < 251996)
-        returnVal =  4;
-    if(total>=251996 && total < 313727)
-        returnVal =  5;
-    if(total>=313727 && total < 375458)
-        returnVal =  6;
-    if(total>=375458 && total < 437189)
-        returnVal =  7;
-    if(total>=437189 && total < 498920)
-        returnVal =  8;
-    if(total>=498920 && total < 560651)
-        returnVal =  9;
-    if(total >= 560651)
+    if(total>=5072 && total < 50000)
         returnVal =  10;
+    if(total>=50000 && total < 100000)
+        returnVal =  9;
+    if(total>=90000 && total < 125000)
+        returnVal =  8;
+    if(total>=125000 && total < 200000)
+        returnVal =  7;
+    if(total>=200000 && total < 220000)
+        returnVal =  6;
+    if(total>=220000 && total < 240000)
+        returnVal =  5;
+    if(total>=240000 && total < 260000)
+        returnVal =  4;
+    if(total>=260000 && total < 270000)
+        returnVal =  3;
+    if(total>=270000 && total < 280000)
+        returnVal =  2;
+    if(total >= 280000)
+        returnVal =  1;
 
     return returnVal;
 }
@@ -200,14 +200,15 @@ function displayChart(delphidata){
         .on('mouseover', tip.show)
         .on('mouseout', tip.hide)
         .attr("fill", function(d){
-          if (d.rating < redT) {
-            return "green";
-          } else if (d.rating <= yellowT) {
-            return "green";
-          }
-            else{
-            return "red";
-          }
+           if (d.rating < redT) {
+              return "red";
+            } else if (d.rating <= yellowT) {
+              return "yellow";
+            }
+              else{
+              return "green";
+            }
+
         });
 
      d3.select("input").on("change", change);
