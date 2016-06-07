@@ -683,20 +683,20 @@ nav{
 }
 
 /****************** HELP PAGE ******************/
-#seek_help #help{
+#seek_help .help{
 	font-size: 17pt;
 	text-decoration: none;
 	color: #8c9fa3;
 }
 
-#seek_help #help:hover{
+#seek_help .help:hover{
 	font-size: 17pt;
 	text-decoration: none;
 	color: #49af59;
 }
 
 
-#seek_help #help:focus{
+#seek_help .help:focus{
 	font-size: 17pt;
 	text-decoration: none;
 	color: #233751;
