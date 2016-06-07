@@ -90,7 +90,7 @@ function addLocation(event){
 			 $.ajax({
 		        type: 'GET',
 		        dataType: "json",
-		        url: "http://maps.googleapis.com/maps/api/geocode/json?latlng="+position.coords.latitude+","+position.coords.longitude+"&sensor=false",
+		        url: "https://maps.googleapis.com/maps/api/geocode/json?latlng="+position.coords.latitude+","+position.coords.longitude+"&sensor=false",
 		        data: {},
 		        success: function(data) {
 		        	var addressString = "Unknown Location";
