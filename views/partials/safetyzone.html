@@ -1,13 +1,22 @@
-<body>
-	<div id="safety_zone" class="main-panel container-fluid">
-		<h2><em>Click a region to see its safety information</em></h2>
-		<div id="safety_zone_districts">
-		</div>
+
+<div id="safety_zone" class="main-panel container-fluid">
+	<div id="safety_zone_wrapper">
+		<h3><em>Click a district to see its safety information</em></h3>
+		<center id="safety_zone_districts">
+		</center>
 		<div>
-			<div id="safe_zone_information" style="float: left"></div>
+			<div id="safe_zone_information" style="float: left">
+				<span id="safe_zone_header"></span>
+				<label class="pull-right sort_rating"><input type="checkbox"> Sort by Rating</label>
+				<div id="safe_zone_information_text"></div>
+				<hr/>
+				<p><strong>Formulas:</strong><br/>
+				Zombie Population = Death Rate<br/>
+				Safety Rating = Population Size + Zombie Population</p>
+			</div>
 			<div id="barChart" style="float: right">
 		</div>
 		</div>
 		<div id="displayDistrict"></div>
 	</div>
-</body>
+</div>

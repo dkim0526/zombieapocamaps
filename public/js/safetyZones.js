@@ -2,10 +2,10 @@ var firstClick = true;
 $(document).ready(function() {
   var regions = ["EAST", "INLAND", "SOUTH", "COASTAL", "CENTRAL"];
   var regionColor = ["#D6AA5E", "#6BF2E2", "#D65C93", "#3399FF", "#B491ED"];
+  var regionImg = ["east.jpg", "inland.jpg", "south.jpg", "coastal.jpg", "central.jpg"];
   for(var i = 0; i < regions.length; i++){
-    var html = '<svg width="220" height="220" class="sf_circle">'
-                + '<circle cx="105" cy="105" r="100" fill="' + regionColor[i] + '" id="'+ regions[i] +'" class="district"/>'
-                + '<text dx="65" dy="110">District '+i+': ' + regions[i] + '</text></svg>';
+    var html = "<div  id='" + regions[i] + "'style='background-image: url(../img/" + regionImg[i] + ");' class='sf_circle'>"
+                + "<label id='" + regions[i] + "' class='district'>" + regions[i] + "</label></div>";
     $("#safety_zone_districts").append(html);
     $("#" + regions[i]).click(loadRegion);
   }
@@ -14,42 +14,40 @@ $(document).ready(function() {
 
 function loadRegion(event){
   var region = event.target.getAttribute("id");
+  $("#safe_zone_information").css("display", "inline");
+  $(".sf_circle, .district").removeClass("active_district");
+  $("#" + region).addClass("active_district");
   getData("safe_zones", region);
-  console.log(region);
-
+  $("body").animate({ scrollTop: "100px"}, 1000);
 }
 
 function openSafetyZones() {
   openTab($("#safety_zone"), $("#safety_zone_btn"), "Safe Zones");
-  if(firstClick){
-    getData("safe_zones", "EAST");
-    firstClick = false;
-  }
 }
 
 // need to find a new formular maybe to show some equal representation
 function findRating(total){
     var returnVal = 1;
-    if(total>=5072 && total < 66803)
-        returnVal =  1;
-    if(total>=66803 && total < 128534)
-        returnVal =  2;
-    if(total>=128534 && total < 190265)
-        returnVal =  3;
-    if(total>=190265 && total < 251996)
-        returnVal =  4;
-    if(total>=251996 && total < 313727)
-        returnVal =  5;
-    if(total>=313727 && total < 375458)
-        returnVal =  6;
-    if(total>=375458 && total < 437189)
-        returnVal =  7;
-    if(total>=437189 && total < 498920)
-        returnVal =  8;
-    if(total>=498920 && total < 560651)
-        returnVal =  9;
-    if(total >= 560651)
+    if(total>=5072 && total < 50000)
         returnVal =  10;
+    if(total>=50000 && total < 100000)
+        returnVal =  9;
+    if(total>=90000 && total < 125000)
+        returnVal =  8;
+    if(total>=125000 && total < 200000)
+        returnVal =  7;
+    if(total>=200000 && total < 220000)
+        returnVal =  6;
+    if(total>=220000 && total < 240000)
+        returnVal =  5;
+    if(total>=240000 && total < 260000)
+        returnVal =  4;
+    if(total>=260000 && total < 270000)
+        returnVal =  3;
+    if(total>=270000 && total < 280000)
+        returnVal =  2;
+    if(total >= 280000)
+        returnVal =  1;
 
     return returnVal;
 }
@@ -69,7 +67,6 @@ function categorizeRegionName(regionFromDB){
 }
 
 function makeJsonList(array, resultType){
-  $( "#safe_zone_information" ).html("");
   var jsonObj = {
     "cities": String,
     "population": Number,
@@ -84,6 +81,8 @@ function makeJsonList(array, resultType){
   var totalPopulation = 0;
   var totalZombies = 0;
   var totalCount = 0;
+  var newTextBoxDiv = "";
+  $( "#safe_zone_header" ).html(newTextBoxDiv);
   for(var i = 0; i < array.length; i++){
     regionName = categorizeRegionName(array[i]["RegionName"]);
 
@@ -103,12 +102,12 @@ function makeJsonList(array, resultType){
     }
   }
   averageRating = (averageRating/totalCount).toFixed(2);
-  var newTextBoxDiv = "<h2>" + regionName +"</h2>"
+  var newTextBoxDiv = "<h2><strong>" + resultType + "</strong></h2>"
                       + "<h4>Average Rating: " + averageRating + "</h4>"
                       + "<h4>Total Cities: " + totalCount + "</h4>"
                       + "<h4>Total Zombies: " + totalZombies + "</h4>"
                       + "<h4>Total Population: " + totalPopulation + "</h4>";
-  $( "#safe_zone_information" ).append(newTextBoxDiv);
+  $( "#safe_zone_information_text" ).html(newTextBoxDiv);
   return returnArray;
 }
 
@@ -120,16 +119,16 @@ function getData(typeOfQuery, resultType){
 }
 
 function displayChart(delphidata){
-  var margin = {top: 20, right: 20, bottom: 30, left: 40},
+  //d3.select("input").property("checked", false);
+  var margin = {top: 20, right: 20, bottom: 40, left: 30},
   width = 960 - margin.left - margin.right,
-  height = 500 - margin.top - margin.bottom;
+  height = 300 - margin.top - margin.bottom;
 
   //var formatPercent = d3.format(".0%");
   var svg = document.getElementById("barChart");
   svg = d3.select("#barChart").html("");
   var x = d3.scale.ordinal()
       .rangeRoundBands([0, width], .1, 1);
-  console.log("Hello");
   var y = d3.scale.linear()
       .range([height, 0]);
 
@@ -223,31 +222,37 @@ function displayChart(delphidata){
           }
         });
 
-    d3.select("input").on("change", change);
+     d3.select("input").on("change", change);
 
 
+      var sortTimeout = setTimeout(function() {
+        d3.select("input").property("checked", true).each(change);
+      }, 2000);
 
-    function change() {
-      // Copy-on-write since tweens are evaluated after a delay.
-      var x0 = x.domain(delphidata.sort(this.checked
-          ? function(a, b) { return b.rating - a.rating; }
-          : function(a, b) { return d3.ascending(a.cities, b.cities); })
-          .map(function(d) { return d.area; }))
-          .copy();
+      function change() {
+        clearTimeout(sortTimeout);
 
-      svg.selectAll(".bar")
-          .sort(function(a, b) { return x0(a.cities) - x0(b.cities); });
+        // Copy-on-write since tweens are evaluated after a delay.
+        var x0 = x.domain(delphidata.sort(this.checked
+            ? function(a, b) { return b.rating - a.rating; }
+            : function(a, b) { return d3.ascending(a.cities, b.cities); })
+            .map(function(d) { return d.cities; }))
+            .copy();
 
-      var transition = svg.transition().duration(750),
-          delay = function(d, i) { return i * 50; };
+        svg.selectAll(".bar")
+            .sort(function(a, b) { return x0(a.cities) - x0(b.cities); });
 
-      transition.selectAll(".bar")
-          .delay(delay)
-          .attr("x", function(d) { return x0(d.cities); });
+        var transition = svg.transition().duration(750),
+            delay = function(d, i) { return i * 50; };
 
-      transition.select(".x.axis")
-          .call(xAxis)
-        .selectAll("g")
-          .delay(delay);
-    }
+        transition.selectAll(".bar")
+            .delay(delay)
+            .attr("x", function(d) { return x0(d.cities); });
+
+        transition.select(".x.axis")
+            .call(xAxis)
+          .selectAll("g")
+            .delay(delay);
+      }
+
 }

@@ -714,16 +714,19 @@ nav{
 #safety_zone_districts{
     margin-top: 15px;
     margin-left: 10px;
+    margin-bottom:50px;
 }
-.district{
-    stroke:#000000;
-    stroke-width: 3;
-    cursor:pointer;
-}
+
 
 #safe_zone_information{
     font-size:20px;
     display: inline;
+    background-color:#CCE2EC;
+    padding:10px 20px;
+    height:100%;
+    width:18vw;
+    margin-right:-20px;
+    display:none;
 }
 
 .district:hover{
@@ -767,4 +770,48 @@ nav{
   margin: -1px 0 0 0;
   top: 100%;
   left: 0;
+}
+
+.sf_circle{
+    border-radius:150px;
+    height:150px;
+    width:150px;
+    background-size: 150px 150px;
+    display:inline-block;
+    margin:10px 20px;
+    text-align: center;
+    cursor:pointer;
+    border:3px solid black;
+}
+
+.district{
+    margin-top:40%;
+    cursor:pointer;
+    background-color:black;
+    color:white;
+    padding:10px;
+    font-size:12pt;
+}
+.sf_circle:hover, .district:hover{
+    opacity:1;
+}
+
+.sf_circle:hover .district, .district:hover{
+    background-color: white;
+    color:black;
+}
+
+.active_district{
+    border:10px solid #67BA75;
+}
+#safety_zone_wrapper{
+    padding:20px;
+}
+
+.sort_rating{
+    font-size:12pt;
+}
+
+#safe_zone_information p{
+    font-size:9pt;
 }
