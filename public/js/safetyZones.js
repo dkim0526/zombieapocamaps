@@ -103,7 +103,7 @@ function makeJsonList(array, resultType){
   }
   averageRating = (averageRating/totalCount).toFixed(2);
   var newTextBoxDiv = "<h2><strong>" + resultType + "</strong></h2>"
-                      + "<h4>Average Rating: " + averageRating + "</h4>"
+                      + "<h4>Average Rating: <strong>" + averageRating + "</strong></h4>"
                       + "<h4>Total Cities: " + totalCount + "</h4>"
                       + "<h4>Total Zombies: " + formatNumber(totalZombies) + "</h4>"
                       + "<h4>Total Population: " + formatNumber(totalPopulation) + "</h4>";

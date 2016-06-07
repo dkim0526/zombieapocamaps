@@ -1,8 +1,7 @@
 <div id="seek_help" class="main-panel container-fluid">
-
 	<!-- start account-->
 	<div class="container signup">
-		<a href="#signup" data-toggle="collapse" id="help"><span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span> Signing Up/Logging In</a>
+		<a href="#signup" data-toggle="collapse" class="help"><span class="glyphicon glyphicon-chevron-right" style="font-size: 15px;" aria-hidden="true"></span> Signing Up/Logging In</a>
 		<div id="signup" class="collapse">
 			<p>In order to start using Zombie ApocaMaps, you must have a Facebook account. Sign in or create an account with <a href="facebook.com">Facebook</a>.
 				<br>
@@ -20,28 +19,46 @@
 
 	<!-- start of connect -->
 	<div class="container connect">
-		<a href="#connect" data-toggle="collapse" id="help"><span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span> Connecting with others</a>
+		<a href="#connect" data-toggle="collapse" class="help"><span class="glyphicon glyphicon-chevron-right" data-swap="glyphicon glyphicon-chevron-down" style="font-size: 15px;" aria-hidden="true"></span> Connecting with others</a>
 		<div id="connect" class="collapse">
-			<p>This tab will let you see all the available resources near you. We will provide data on places with the most
-				water, food, transportation, etc. Users will be able to filter through our data and find what they need.</p>
+			<p>
+				On this page, you can talk to others about how to better prepare for the disaster.
+				<br>
+				To post a question:
+				<ul>
+					<li>Choose the topic you want your discussion to be about. Type in your question in the provided field and click on <strong>Post</strong>.
+					If you want to include your location to better connect with people around your area, click on <strong>Location</strong>, which will
+					automatically select your current location.</li>
+					<img src="../../img/connect-1.png" height="300" width="500" style="padding: 1px; border: 1px solid black;">
+				</ul>
+				<br>
+				To post a comment:
+				<ul>
+					<li>Browse through the forum, and when you find a discussion that interests you, type in your response in the provided field. Click on
+						<strong>Respond</strong>. If you want to include your location to better connect with people around your area, click on <strong>Location </strong>,
+						which will automatically select your current location.</li>
+						<img src="../../img/connect-2.png" height="200" width="600" style="padding: 1px; border: 1px solid black;">
+				</ul>
 			</div>
 		</div> <!-- end of connect -->
 
 		<div class="container survive">
-		  <a href="#survivalguide" data-toggle="collapse" id="help"><span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span> Understanding the Survival Guide</a>
+		  <a href="#survivalguide" data-toggle="collapse" class="help"><span class="glyphicon glyphicon-chevron-right" data-swap="glyphicon glyphicon-chevron-down" style="font-size: 15px;" aria-hidden="true"></span> Understanding the Survival Guide</a>
 		  <div id="survivalguide" class="collapse">
 				<p> The Survival Guide will help you figure out how to better prepare for a zombie apocalypse. It provides helpful hints and tips to survive the zombie apocalypse and possibly natural disasters like earthquakes, floods, and hurricanes.
 				<br>
 				There are two ways to explore the room to find the survival tips:
 				<ul>
-					<li>Click on the names of the survival tips on the sidebar on the right to reveal more information about that tip.</li>
 					<li>Click on the colored circles on the items lying around in the room to reveal more information about the survival tip associated with that item.</li>
+					<img src="../../img/survival-1.png" height="300" width="500" style="padding: 1px; border: 1px solid black;">
+					<li>Click on the names of the survival tips on the sidebar on the right to reveal more information about that tip.</li>
+					<img src="../../img/survival-2.png" height="300" width="500" style="padding: 1px; border: 1px solid black;">
 				</ul>
 		  </div>
 		</div> <!-- end of container survive -->
 
 		<div class="container safe">
-		  <a href="#safezones" data-toggle="collapse" id="help"><span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span> Searching for safe zones in San Diego</a>
+		  <a href="#safezones" data-toggle="collapse" class="help"><span class="glyphicon glyphicon-chevron-right" data-swap="glyphicon glyphicon-chevron-down" style="font-size: 15px;" aria-hidden="true"></span> Searching for safe zones in San Diego</a>
 		  <div id="safezones" class="collapse">
 				<p>This tab will help you find the safest areas to go in the case of a zombie apocalypse.
 					How do we determine this? <strong>Answer</strong> We use a formula based off of these factors:
@@ -58,7 +75,7 @@
 		</div>
 
 		<div class="container find">
-		  <a href="#findresources" data-toggle="collapse" id="help"><span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span> Finding nearby resources</a>
+		  <a href="#findresources" data-toggle="collapse" class="help"><span class="glyphicon glyphicon-chevron-right" data-swap="glyphicon glyphicon-chevron-down" style="font-size: 15px;" aria-hidden="true"></span> Finding nearby resources</a>
 		  <div id="findresources" class="collapse">
 				<p>To find directions between two locations:
 					<ul>
@@ -83,7 +100,17 @@
 						<img src="../../img/help-3-2.png" height="350" width="200" style="padding: 1px; border: 1px solid black">
 					</ul>
 				</p>
-				</div>
-			</div> <!-- end container find -->
+			</div>
+		</div> <!-- end container find -->
+	</div><!-- seek_help -->
 
-</div><!-- seek_help -->
+<!-- Toggles chevron of collapse -->
+<script>
+	$(".help").click(function(){
+		console.log("hello");
+		var _this = $(this);
+		// var curr = $(this).find("span").attr("class");
+		// var swap = $(this).find("span").attr("data-swap");
+		_this.find("span").toggleClass("glyphicon-chevron-right glyphicon-chevron-up");
+	});
+</script>

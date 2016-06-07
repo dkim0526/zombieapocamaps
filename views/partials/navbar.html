@@ -4,7 +4,14 @@
 
     <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="nav navbar-nav navbar-right">
-          <a href="/">Logout</a>
+          <a href="/" id="logout">Logout</a>
       </div>
 </nav>
 <br>
+
+<script>
+  $("#logout").click(function(){
+    return confirm("Are you sure you want to log out?");
+  })
+
+</script>
