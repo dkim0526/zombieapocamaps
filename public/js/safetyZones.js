@@ -105,10 +105,14 @@ function makeJsonList(array, resultType){
   var newTextBoxDiv = "<h2><strong>" + resultType + "</strong></h2>"
                       + "<h4>Average Rating: " + averageRating + "</h4>"
                       + "<h4>Total Cities: " + totalCount + "</h4>"
-                      + "<h4>Total Zombies: " + totalZombies + "</h4>"
-                      + "<h4>Total Population: " + totalPopulation + "</h4>";
+                      + "<h4>Total Zombies: " + formatNumber(totalZombies) + "</h4>"
+                      + "<h4>Total Population: " + formatNumber(totalPopulation) + "</h4>";
   $( "#safe_zone_information_text" ).html(newTextBoxDiv);
   return returnArray;
+}
+
+function formatNumber(number){
+  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
 function getData(typeOfQuery, resultType){
@@ -175,8 +179,8 @@ function displayChart(delphidata){
     .offset([-10, 0])
     .html(function(d){
       return "<h4>" + d.cities + " - " + d.rating + "</h4>"
-              + "<p>Zombie Count: "+ d.zombies +"</p>"
-              + "<p>Population: " + d.population + "</p>";
+              + "<p>Zombie Count: "+ formatNumber(d.zombies) +"</p>"
+              + "<p>Population: " + formatNumber(d.population) + "</p>";
     });
 
   svg.call(tip);
@@ -186,20 +190,6 @@ function displayChart(delphidata){
   // var threshold = max/3;
   var length = delphidata.length/3;
   //console.log("length: " + array.length + " " + "division: " + Math.ceil(array.length/3));
-
-  var tempData = [];
-    delphidata.forEach(function(d){
-      tempData.push(d.rating);
-    });
-
-    tempData.sort();
-
-  var redT = tempData[Math.ceil(length)];
-  var yellowT = tempData[Math.ceil(length*2)];
-
-  d3.select("#red-text").text("(" + tempData[0] + " - " + redT + ")");
-  d3.select("#yellow-text").text("(" + redT + " - " + yellowT + ")");
-  d3.select("#green-text").text("(" + yellowT + " - " + tempData[tempData.length - 1] + ")");
 
     svg.selectAll(".bar")
         .data(delphidata)
@@ -212,13 +202,13 @@ function displayChart(delphidata){
         .on('mouseover', tip.show)
         .on('mouseout', tip.hide)
         .attr("fill", function(d){
-          if (d.rating < redT) {
-            return "green";
-          } else if (d.rating <= yellowT) {
-            return "green";
+          if (d.rating < 4) {
+            return "#AD5152";
+          } else if (d.rating <= 8) {
+            return "#E6B35A";
           }
             else{
-            return "red";
+            return "#648C67";
           }
         });
 

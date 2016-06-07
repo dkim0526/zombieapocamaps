@@ -815,3 +815,13 @@ nav{
 #safe_zone_information p{
     font-size:9pt;
 }
+
+#sz_rating_description{
+    font-size:11pt;
+}
+
+.rating_key{
+    width:30px;
+    height:10px;
+    display:inline-block;
+}
