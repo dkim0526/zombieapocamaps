@@ -16,7 +16,7 @@ function loadRegion(event){
   var region = event.target.getAttribute("id");
   getData("safe_zones", region);
   console.log(region);
-    
+
 }
 
 function openSafetyZones() {
@@ -80,9 +80,15 @@ function makeJsonList(array, resultType){
   var returnArray = [];
   var regionName = "";
   var citiesString = "";
+  var averageRating = 0;
+  var totalPopulation = 0;
+  var totalZombies = 0;
+  var totalCount = 0;
   for(var i = 0; i < array.length; i++){
     regionName = categorizeRegionName(array[i]["RegionName"]);
+
     if(resultType === regionName){
+      console.log(regionName);
       jsonObj = {};
       jsonObj.cities = array[i]["cities"];
       jsonObj.population = array[i]["population_density"];
@@ -90,13 +96,19 @@ function makeJsonList(array, resultType){
       jsonObj.rating = findRating(array[i]["rating"]);
       jsonObj.region = regionName;
       returnArray.push(jsonObj);
-      var newTextBoxDiv = "<span> City: " + array[i]["cities"] + "<br/> Zombie Count: " + array[i]["zombie_count"] + "<br/> Population: " + array[i]["population_density"] + "<br/> <br/><span/>";
-      $( "#safe_zone_information" ).append(newTextBoxDiv);
+      totalCount++;
+      averageRating += Number(jsonObj.rating);
+      totalPopulation += Number(jsonObj.population);
+      totalZombies += Number(jsonObj.zombies);
     }
   }
-
-  
-
+  averageRating = (averageRating/totalCount).toFixed(2);
+  var newTextBoxDiv = "<h2>" + regionName +"</h2>"
+                      + "<h4>Average Rating: " + averageRating + "</h4>"
+                      + "<h4>Total Cities: " + totalCount + "</h4>"
+                      + "<h4>Total Zombies: " + totalZombies + "</h4>"
+                      + "<h4>Total Population: " + totalPopulation + "</h4>";
+  $( "#safe_zone_information" ).append(newTextBoxDiv);
   return returnArray;
 }
 
@@ -162,7 +174,11 @@ function displayChart(delphidata){
   var tip = d3.tip()
     .attr('class', 'd3-tip')
     .offset([-10, 0])
-    .html(function(d){ return "<span style='color: #f0027f>Hello</span>" });
+    .html(function(d){
+      return "<h4>" + d.cities + " - " + d.rating + "</h4>"
+              + "<p>Zombie Count: "+ d.zombies +"</p>"
+              + "<p>Population: " + d.population + "</p>";
+    });
 
   svg.call(tip);
 
